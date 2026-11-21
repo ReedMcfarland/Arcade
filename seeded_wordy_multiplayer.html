@@ -297,6 +297,7 @@ h1, h2, h3, p { margin: 0; }
 .say { background: #0b1619; border: 3px dashed var(--gold); border-radius: 12px; padding: 12px 14px; font-size: 21px; line-height: 1.25; }
 .say .lbl { color: var(--gold); margin-bottom: 6px; }
 .warn { background: rgba(254,95,85,.14); border: 2px solid var(--red); border-radius: 10px; padding: 10px 12px; font-size: 16px; }
+.okbox { background: rgba(79,208,154,.14); border: 2px solid var(--green); border-radius: 10px; padding: 10px 12px; font-size: 16px; }
 .grid { display: grid; gap: 8px; grid-template-columns: repeat(6, 1fr); }
 .grid.g3 { grid-template-columns: repeat(3, 1fr); }
 .grid.g2 { grid-template-columns: repeat(2, 1fr); }
@@ -394,7 +395,9 @@ const ui = {
   mpSub: 'host',     /* 'host' | 'join' on online screen */
   busy: false,
   reqId: null,       /* currently open incoming request ID */
-  reqAns: {}         /* draft answer for incoming request */
+  reqAns: {},        /* draft answer for incoming request */
+  dictQ: '',         /* dictionary lookup input */
+  dictRes: null      /* { word, ok } result for dictionary sheet */
 };
 let peekTimer = null;
 
@@ -645,7 +648,8 @@ function syncMyStats() {
     wrong: S.wrong,
     clues: clueN,
     done: S.done || null,
-    revealed: S.myRev
+    revealed: S.myRev,
+    log: S.log
   }).catch(function () {});
 }
 
@@ -657,7 +661,7 @@ function applyOnlineAnswer(req) {
     case 'rhyme': d = { text: ans.text || '' }; break;
     case 'vowel': d = { letter: ans.letter || null }; break;
     case 'give': d = { mine: req.payload.mine, theirs: ans.letter || null }; break;
-    case 'super': d = { letter: req.payload.letter, yes: true, pos: ans.pos }; break;
+    case 'super': d = { letter: req.payload.letter, yes: !!ans.yes, pos: ans.yes ? ans.pos : null }; break;
   }
   S.log.push({ id: id, cost: req.cost || 0, d: d });
   if (S.flow && S.flow.reqId === req._k) {
@@ -767,30 +771,15 @@ async function executeOnlineClue(f) {
       const L = fl(f);
       const posList = [];
       for (let i = 0; i < oppWord.length; i++) if (oppWord[i] === L) posList.push(i + 1);
-      if (posList.length === 0) d = { letter: L, yes: false, pos: null };
-      else if (posList.length === 1) d = { letter: L, yes: true, pos: posList[0] };
-      else { needsOpp = true; reqPayload = { letter: L, positions: posList }; }
+      /* Always require human input so response timing never leaks copy count or hit/miss */
+      needsOpp = true;
+      reqPayload = { letter: L, positions: posList };
       break;
     }
     case 'vowel': {
-      const unrevVow = [];
-      for (let i = 0; i < oppWord.length; i++) {
-        if (isVowelChar(oppWord[i]) && oppRev.indexOf(i) < 0) unrevVow.push({ i: i, ch: oppWord[i] });
-      }
-      if (unrevVow.length === 0) {
-        d = { letter: null };
-      } else {
-        const uniqCh = uniq(unrevVow.map(function (x) { return x.ch; }));
-        if (uniqCh.length === 1) {
-          /* Auto-reveal the only choice */
-          oppRev.push(unrevVow[0].i);
-          update(ref(db, 'rooms/' + S.room + '/players/' + oppRole()), { revealed: oppRev }).catch(function () {});
-          d = { letter: uniqCh[0] };
-        } else {
-          needsOpp = true;
-          reqPayload = {};
-        }
-      }
+      /* Always require human input so response timing never leaks remaining vowel count */
+      needsOpp = true;
+      reqPayload = {};
       break;
     }
     case 'give': {
@@ -801,24 +790,9 @@ async function executeOnlineClue(f) {
         id: 'give',
         d: { mine: '—', theirs: myCh }
       }).catch(function () {});
-
-      const unrevAll = [];
-      for (let i = 0; i < oppWord.length; i++) {
-        if (oppRev.indexOf(i) < 0) unrevAll.push({ i: i, ch: oppWord[i] });
-      }
-      if (unrevAll.length === 0) {
-        d = { mine: myCh, theirs: null };
-      } else {
-        const uniqCh = uniq(unrevAll.map(function (x) { return x.ch; }));
-        if (uniqCh.length === 1) {
-          oppRev.push(unrevAll[0].i);
-          update(ref(db, 'rooms/' + S.room + '/players/' + oppRole()), { revealed: oppRev }).catch(function () {});
-          d = { mine: myCh, theirs: uniqCh[0] };
-        } else {
-          needsOpp = true;
-          reqPayload = { mine: myCh };
-        }
-      }
+      /* Always require human input so response timing never leaks unrevealed tile count */
+      needsOpp = true;
+      reqPayload = { mine: myCh };
       break;
     }
     case 'rhyme': {
@@ -862,13 +836,14 @@ async function executeOnlineClue(f) {
 }
 
 /* ---------- Deduction from the log ---------- */
-function deduce() {
+function deduce(logArr) {
+  const list = Array.isArray(logArr) ? logArr : S.log;
   const D = { len: null, lo: 1, hi: 11, vow: null, con: null, first: null, last: null, L: {}, pos: [], rhyme: [] };
   function g(ch) { return D.L[ch] || (D.L[ch] = { min: 0, max: null }); }
   function isIn(ch, n) { const s = g(ch); s.min = Math.max(s.min, n || 1); }
   function isOut(ch) { g(ch).max = 0; }
   function exact(ch, n) { const s = g(ch); s.min = n; s.max = n; }
-  S.log.forEach(function (e) {
+  list.forEach(function (e) {
     const d = e.d || {};
     switch (e.id) {
       case 'first': D.first = d.letter; isIn(d.letter); break;
@@ -1056,7 +1031,7 @@ function viewBuild() {
   if (ui.lock) {
     h += '<div class="panel"><div class="lbl">Lock it in?</div><p style="font-size:22px;margin-bottom:6px">' + esc(w) + '</p><p class="sub">You can look at it later, but you can not change it. Check the spelling first.</p><div class="row" style="margin-top:14px"><button type="button" class="btn grey" data-act="lockno">Keep editing</button><button type="button" class="btn green" data-act="lockok">Lock it in</button></div></div>';
   } else {
-    h += '<button type="button" class="btn wide" data-act="lock"' + (d.length ? '' : ' disabled') + '>Lock in word</button>';
+    h += '<div class="row"><button type="button" class="btn grey" data-act="opendict">Dictionary</button><button type="button" class="btn" style="flex:2" data-act="lock"' + (d.length ? '' : ' disabled') + '>Lock in word</button></div>';
   }
   return h;
 }
@@ -1101,9 +1076,9 @@ function viewPlay() {
         ? 'Friend SOLVED yours! (' + (opp.given || 0) + ' berries)'
         : 'Friend FORFEITED!';
     } else if (opp) {
-      oppStatus = 'Friend: ' + (opp.given || 0) + ' berries given';
+      oppStatus = 'Friend: ' + (opp.given || 0) + ' berries · ' + (opp.clues || 0) + ' clues';
     }
-    h += '<div class="mp-bar"><span><span class="mp-dot"></span>' + oppStatus + '</span><span class="sub" style="font-size:13px">' + (S.role === 'p1' ? 'P1' : 'P2') + '</span></div>';
+    h += '<div class="mp-bar"><span><span class="mp-dot"></span>' + oppStatus + '</span><button type="button" class="btn grey sm" style="min-height:34px;padding:4px 10px;font-size:12px" data-act="oppstatus">Friend Intel</button></div>';
 
     const pend = getPendingReqsForMe();
     if (pend.length) {
@@ -1127,13 +1102,14 @@ function viewPlay() {
   h += '<div><div class="lbl">Vanilla clues</div>' + (vCards.length ? '<div class="hand">' + vCards.map(card).join('') + '</div>' : '<p class="empty-note">No Vanilla clues enabled in pool.</p>') + '</div>';
   h += '<div><div class="lbl">Spicy clues</div>' + (sCards.length ? '<div class="hand">' + sCards.map(function (id, i) { return card(id, i + 4); }).join('') + '</div>' : '<p class="empty-note">No Spicy clues enabled in pool.</p>') + '</div>';
   h += '<div class="panel"><div class="lbl">Notebook</div>' + logHTML() + '</div>';
-  h += '<div class="bar"><div class="bar-in"><button type="button" class="btn gold" data-act="mword">My word</button><button type="button" class="btn big" data-act="guess">Guess word</button></div></div>';
+  h += '<div class="bar"><div class="bar-in"><button type="button" class="btn gold" data-act="mword">My word</button><button type="button" class="btn grey" data-act="opendict">Dict</button><button type="button" class="btn big" data-act="guess">Guess word</button></div></div>';
   return h;
 }
 
-function logHTML() {
-  if (!S.log.length) return '<p class="empty-note">Nothing asked yet. Pick a clue card.</p>';
-  return '<ul class="log">' + S.log.slice().reverse().map(function (e) {
+function logHTML(logArr, emptyMsg) {
+  const list = Array.isArray(logArr) ? logArr : S.log;
+  if (!list.length) return '<p class="empty-note">' + esc(emptyMsg || 'Nothing asked yet. Pick a clue card.') + '</p>';
+  return '<ul class="log">' + list.slice().reverse().map(function (e) {
     const name = e.id === 'guess' ? 'Guess' : (e.fromOpp ? 'Friend: ' : '') + CL[e.id].name;
     return '<li><span class="lc' + (e.cost ? '' : ' z') + '">' + (e.cost ? '+' + e.cost : '0') + '</span><div><b>' + esc(name) + '</b><span class="t">' + esc(sum(e)) + '</span></div></li>';
   }).join('') + '</ul>';
@@ -1357,22 +1333,69 @@ function sheetView() {
       } else if (req.clueId === 'super') {
         const L = req.payload.letter;
         const posList = req.payload.positions || [];
-        body = '<p class="rule">Your friend used Super Strike on <b>' + esc(L) + '</b>. You have multiple copies—pick which position to reveal:</p>' +
-          '<div class="grid g3">' + posList.map(function (p) { return chip(ui.reqAns.pos === p, 'req-pos', { v: p }, 'Pos ' + p, 'sm'); }).join('') + '</div>';
-        canSend = !!ui.reqAns.pos;
+        if (posList.length === 0) {
+          body = '<p class="rule">Your friend used Super Strike on <b>' + esc(L) + '</b>. Your word does not contain <b>' + esc(L) + '</b>.</p>';
+          canSend = true;
+        } else {
+          const picked = ui.reqAns.pos || (posList.length === 1 ? posList[0] : null);
+          body = '<p class="rule">Your friend used Super Strike on <b>' + esc(L) + '</b>. ' + (posList.length === 1 ? 'Confirm the position to reveal:' : 'You have multiple copies—pick which position to reveal:') + '</p>' +
+            '<div class="grid g3">' + posList.map(function (p) { return chip(picked === p, 'req-pos', { v: p }, 'Pos ' + p, 'sm'); }).join('') + '</div>';
+          canSend = !!picked;
+        }
       } else if (req.clueId === 'vowel' || req.clueId === 'give') {
         const onlyVow = req.clueId === 'vowel';
         const opts = S.word.map(function (id, i) { return { i: i, t: mts[id] }; }).filter(function (x) {
           return S.myRev.indexOf(x.i) < 0 && (!onlyVow || x.t.v);
         });
-        body = '<p class="rule">' + (onlyVow ? 'Pick one unrevealed vowel from your word to show your friend:' : 'Your friend revealed a <b>' + esc(req.payload.mine) + '</b>. Pick one unrevealed tile from your word to show them:') + '</p>' +
-          '<div class="flips">' + opts.map(function (x) {
-            return '<button type="button" class="tile ' + (x.t.v ? 'vow' : 'con') + (ui.reqAns.idx === x.i ? ' on' : '') + '" data-act="req-tile" data-i="' + x.i + '">' + x.t.ch + '</button>';
-          }).join('') + '</div>';
-        canSend = ui.reqAns.idx != null;
+        if (!opts.length) {
+          body = '<p class="rule">' + (onlyVow ? 'Your friend played Buy a Vowel, but you have no unrevealed vowels left.' : 'Your friend revealed a <b>' + esc(req.payload.mine) + '</b>, but all tiles in your word are already revealed.') + '</p>';
+          canSend = true;
+        } else {
+          body = '<p class="rule">' + (onlyVow ? 'Pick one unrevealed vowel from your word to show your friend:' : 'Your friend revealed a <b>' + esc(req.payload.mine) + '</b>. Pick one unrevealed tile from your word to show them:') + '</p>' +
+            '<div class="flips">' + opts.map(function (x) {
+              return '<button type="button" class="tile ' + (x.t.v ? 'vow' : 'con') + (ui.reqAns.idx === x.i ? ' on' : '') + '" data-act="req-tile" data-i="' + x.i + '">' + x.t.ch + '</button>';
+            }).join('') + '</div>';
+          canSend = ui.reqAns.idx != null;
+        }
       }
       foot = '<button type="button" class="btn grey" data-act="close">Later</button><button type="button" class="btn green big" id="sendReqBtn" data-act="sendreq"' + (canSend ? '' : ' disabled') + '>Send Answer</button>';
     }
+  } else if (ui.sheet === 'opp') {
+    const opp = oppPlayer() || {};
+    const oppLog = Array.isArray(opp.log) ? opp.log : [];
+    const OD = deduce(oppLog);
+    const lenTxt = OD.len != null ? OD.len : ((OD.lo > 1 || OD.hi < 11) ? OD.lo + '-' + OD.hi : null);
+    function opill(k, v) { return '<div class="pill"><span>' + k + '</span><b' + (v == null ? ' class="q"' : '') + '>' + (v == null ? '?' : v) + '</b></div>'; }
+    const knownIn = Object.keys(OD.L).filter(function (ch) { return OD.L[ch].min >= 1; }).sort();
+    const knownOut = Object.keys(OD.L).filter(function (ch) { return OD.L[ch].max === 0; }).sort();
+    t = 'Friend Status & Intel';
+    sub = '<p class="sub">' + (opp.done ? (opp.done.kind === 'solved' ? 'Status: Solved your word!' : 'Status: Forfeited') : 'Status: Currently guessing your word') + '</p>';
+    body = '<div class="score">' +
+      '<div class="sbox r"><div class="k">Berries given</div><div class="n">' + (opp.given || 0) + '</div></div>' +
+      '<div class="sbox b"><div class="k">Clues</div><div class="n">' + (opp.clues || 0) + '</div></div>' +
+      '<div class="sbox g"><div class="k">Misses</div><div class="n">' + (opp.wrong || 0) + '</div></div>' +
+    '</div>';
+    body += '<div><div class="lbl">What they know about your word</div><div class="pills">' +
+      opill('LEN', lenTxt) + opill('VOW', OD.vow) + opill('CON', OD.con) + opill('1ST', OD.first) + opill('LST', OD.last) +
+    '</div>';
+    if (knownIn.length) body += '<div class="note">Confirmed IN: <b>' + knownIn.join(', ') + '</b></div>';
+    if (knownOut.length) body += '<div class="note">Confirmed OUT: <b>' + knownOut.join(', ') + '</b></div>';
+    if (OD.pos.length) body += '<div class="note">Positions known: ' + OD.pos.map(function (p) { return '<b>' + p.ch + '</b> at ' + p.pos; }).join(', ') + '</div>';
+    if (OD.rhyme.length) body += '<div class="note">Rhymes given: <b>' + OD.rhyme.map(esc).join(', ') + '</b></div>';
+    body += '</div>';
+    body += '<div><div class="lbl">Their Clues &amp; Guesses (' + oppLog.length + ')</div>' + logHTML(oppLog, 'Your friend has not asked any clues yet.') + '</div>';
+    foot = '<button type="button" class="btn grey wide" data-act="close">Close</button>';
+  } else if (ui.sheet === 'dict') {
+    t = 'Dictionary Check';
+    sub = '<p class="sub">' + (dictState === 'ready' ? 'Loaded Words.txt (' + dict.size.toLocaleString() + ' words).' : dictState === 'loading' ? 'Loading Words.txt...' : 'Words.txt could not be loaded.') + '</p>';
+    body = '<p class="rule">Type any word to verify if it is accepted in Words.txt.</p>' +
+      '<input class="txt" id="dictIn" type="text" maxlength="24" placeholder="Type a word..." value="' + esc(ui.dictQ || '') + '" autocomplete="off" autocapitalize="off" spellcheck="false">';
+    if (ui.dictRes) {
+      body += ui.dictRes.ok
+        ? '<div class="okbox"><b>' + esc(ui.dictRes.word) + '</b> is a valid word!</div>'
+        : '<div class="warn"><b>' + esc(ui.dictRes.word) + '</b> is not in Words.txt.</div>';
+    }
+    foot = '<button type="button" class="btn grey" data-act="close">Close</button><button type="button" class="btn big" data-act="checkdict">Check Word</button>';
   } else if (ui.sheet === 'word') {
     t = 'My word'; sub = '<p class="sub">Tap Show to see it. Tap a tile while it is showing to mark it as revealed to your friend.</p>';
     const shown = ui.peek, mts = myTileSet();
@@ -1770,6 +1793,27 @@ document.addEventListener('click', async function (e) {
       ui.reqAns = {};
       ui.sheet = 'ansreq';
       break;
+    case 'oppstatus':
+      ui.sheet = 'opp';
+      break;
+    case 'opendict':
+      ui.dictRes = null;
+      ui.sheet = 'dict';
+      refresh();
+      { const di = $('#dictIn'); if (di) di.focus(); }
+      return;
+    case 'checkdict': {
+      const di = $('#dictIn');
+      const rawW = (di ? di.value : ui.dictQ || '').trim().toUpperCase();
+      ui.dictQ = rawW;
+      if (!rawW) { ui.dictRes = null; renderSheet(); if (di) di.focus(); return; }
+      if (dictState === 'loading') { toast('Loading Words.txt, try again...'); return; }
+      if (dictState === 'error') { toast('Words.txt not loaded.'); return; }
+      ui.dictRes = { word: rawW, ok: dict.has(rawW) };
+      renderSheet();
+      { const di2 = $('#dictIn'); if (di2) di2.focus(); }
+      return;
+    }
     case 'req-pos':
       ui.reqAns.pos = +v;
       break;
@@ -1783,12 +1827,23 @@ document.addEventListener('click', async function (e) {
       if (req.clueId === 'rhyme') {
         answer.text = (ui.reqAns.text || '').trim();
       } else if (req.clueId === 'super') {
-        answer.pos = ui.reqAns.pos;
+        const posList = (req.payload && req.payload.positions) || [];
+        if (posList.length === 0) {
+          answer.yes = false;
+          answer.pos = null;
+        } else {
+          answer.yes = true;
+          answer.pos = ui.reqAns.pos || posList[0];
+        }
       } else if (req.clueId === 'vowel' || req.clueId === 'give') {
-        const idx = ui.reqAns.idx;
-        if (S.myRev.indexOf(idx) < 0) S.myRev.push(idx);
-        answer.letter = myWord()[idx];
-        syncMyStats();
+        if (ui.reqAns.idx != null) {
+          const idx = ui.reqAns.idx;
+          if (S.myRev.indexOf(idx) < 0) S.myRev.push(idx);
+          answer.letter = myWord()[idx];
+          syncMyStats();
+        } else {
+          answer.letter = null;
+        }
       }
       await update(ref(db, 'rooms/' + S.room + '/reqs/' + req._k), {
         status: 'answered',
@@ -1883,11 +1938,18 @@ document.addEventListener('input', function (e) {
     ui.reqAns.text = e.target.value;
     const b = $('#sendReqBtn'); if (b) b.disabled = !ui.reqAns.text.trim();
   }
+  if (e.target && e.target.id === 'dictIn') {
+    ui.dictQ = e.target.value;
+  }
 });
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && ui.sheet) { const c = $('[data-act="close"]'); if (c) c.click(); }
   if (e.key === 'Enter' && e.target && e.target.id === 'seedIn') {
     const btn = document.querySelector('[data-act="hostroom"], [data-act="joinroom"], [data-act="deal"]');
+    if (btn) btn.click();
+  }
+  if (e.key === 'Enter' && e.target && e.target.id === 'dictIn') {
+    const btn = document.querySelector('[data-act="checkdict"]');
     if (btn) btn.click();
   }
 });
