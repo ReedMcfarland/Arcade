@@ -348,6 +348,44 @@ var S = null;
 var ui = { sheet: null, peek: false, lock: false, bump: false, enter: false, confirm: null };
 var peekTimer = null;
 
+/* ---------- Dictionary (Words.txt) ---------- */
+var dict = null;
+var dictState = 'loading'; // 'loading' | 'ready' | 'error'
+
+fetch('./Words.txt')
+  .then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  })
+  .then(function (txt) {
+    dict = new Set();
+    txt.split(/\r?\n/).forEach(function (line) {
+      var w = line.trim().toUpperCase();
+      if (w) dict.add(w);
+    });
+    dictState = 'ready';
+  })
+  .catch(function () {
+    dictState = 'error';
+  });
+
+function checkWord(word) {
+  if (dictState === 'loading') {
+    toast('Loading Words.txt, try again...');
+    return false;
+  }
+  if (dictState === 'error') {
+    toast('Words.txt not loaded (check skipped)');
+    return true;
+  }
+  var w = String(word || '').trim().toUpperCase();
+  if (!dict.has(w)) {
+    toast('"' + w + '" is not a real word!');
+    return false;
+  }
+  return true;
+}
+
 function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
 function $(s) { return document.querySelector(s); }
@@ -1037,9 +1075,12 @@ document.addEventListener('click', function (e) {
       S.pool = defaultPool();
       ui.enter = true; ui.lock = false; refresh(); return;
     }
-    case 'lock': ui.lock = true; render(); return;
+    case 'lock':
+      if (!checkWord(wordOf(S.draft))) return;
+      ui.lock = true; render(); return;
     case 'lockno': ui.lock = false; render(); return;
     case 'lockok':
+      if (!checkWord(wordOf(S.draft))) { ui.lock = false; render(); return; }
       S.word = S.draft.slice();
       if (S.theirTiles && S.theirTiles.length === 11) S.tiles = S.theirTiles;
       S.pool = defaultPool();
@@ -1053,11 +1094,14 @@ document.addEventListener('click', function (e) {
       ui.sheet = null; ui.confirm = null; clearTimeout(peekTimer); ui.peek = false; break;
     case 'ask':
       if (!f || !canAsk(f)) return;
+      if (CL[f.id].inp === 'word' && !checkWord(wordOf(f.ids))) return;
       f.step = 'ans'; f.a = { fl: f.ids.map(function () { return false; }) };
       if (typeof CL[f.id].cost === 'number') { f.paid = CL[f.id].cost; S.given += f.paid; ui.bump = true; }
       break;
     case 'undo': S.given -= f.paid; f.paid = 0; f.step = 'in'; f.a = {}; break;
-    case 'gask': f.step = 'ans'; break;
+    case 'gask':
+      if (!checkWord(wordOf(f.ids))) return;
+      f.step = 'ans'; break;
     case 'gedit': f.step = 'in'; break;
     case 'gok': finishGuess(true); break;
     case 'gbad': finishGuess(false); break;
