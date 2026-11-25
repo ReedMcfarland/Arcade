@@ -69,10 +69,36 @@ export function checkIsHost() {
   return isHost;
 }
 
+const STALE_ROOM_TTL_MS = 24 * 60 * 60 * 1000;
+
+async function pruneStaleRooms() {
+  if (!firebaseDb) return;
+  try {
+    const snap = await firebaseDb.ref('carcassonne_rooms').once('value');
+    if (!snap.exists()) return;
+    const now = Date.now();
+    const removals = [];
+    snap.forEach((child) => {
+      const val = child.val() || {};
+      const lastActive = val.last_updated || val.created_at || 0;
+      if (now - lastActive > STALE_ROOM_TTL_MS) {
+        removals.push(child.ref.remove());
+      }
+    });
+    if (removals.length > 0) {
+      await Promise.all(removals);
+    }
+  } catch (err) {
+    console.warn('Stale room cleanup skipped:', err);
+  }
+}
+
 export async function createRoom(roomId, initialGameState, playerConfig) {
   if (!firebaseDb) {
     throw new Error('Firebase Database not initialized. Please configure Firebase settings.');
   }
+  await pruneStaleRooms();
+
   currentRoomId = roomId.toUpperCase();
   isHost = true;
   myPlayerId = playerConfig.id;
@@ -80,6 +106,7 @@ export async function createRoom(roomId, initialGameState, playerConfig) {
   const roomRef = firebaseDb.ref(`carcassonne_rooms/${currentRoomId}`);
   await roomRef.set({
     created_at: Date.now(),
+    last_updated: Date.now(),
     host_id: myPlayerId,
     state_json: JSON.stringify(initialGameState),
     players: {
@@ -93,7 +120,7 @@ export async function createRoom(roomId, initialGameState, playerConfig) {
     }
   });
 
-  setupPresence(currentRoomId, myPlayerId);
+  setupPresence(currentRoomId, myPlayerId, true);
   return currentRoomId;
 }
 
@@ -120,7 +147,7 @@ export async function joinRoom(roomId, playerConfig) {
     last_seen: Date.now()
   });
 
-  setupPresence(currentRoomId, myPlayerId);
+  setupPresence(currentRoomId, myPlayerId, false);
   return roomData;
 }
 
@@ -165,29 +192,59 @@ export async function broadcastState(gameState) {
   }
 }
 
-export function leaveRoom() {
-  if (firebaseDb && currentRoomId) {
+export async function leaveRoom() {
+  const db = firebaseDb;
+  const roomId = currentRoomId;
+  const playerId = myPlayerId;
+  const wasHost = isHost;
+
+  if (db && roomId) {
+    const roomRef = db.ref(`carcassonne_rooms/${roomId}`);
     if (roomStateListener) {
-      firebaseDb.ref(`carcassonne_rooms/${currentRoomId}`).off('value', roomStateListener);
+      roomRef.off('value', roomStateListener);
       roomStateListener = null;
     }
-    if (myPlayerId) {
-      firebaseDb.ref(`carcassonne_rooms/${currentRoomId}/players/${myPlayerId}/connected`).set(false);
+
+    currentRoomId = null;
+    myPlayerId = null;
+    isHost = false;
+
+    try {
+      if (wasHost) {
+        await roomRef.remove();
+      } else if (playerId) {
+        await roomRef.child(`players/${playerId}/connected`).set(false);
+        const playersSnap = await roomRef.child('players').once('value');
+        const players = playersSnap.val() || {};
+        const anyConnected = Object.values(players).some((p) => p && p.connected === true);
+        if (!anyConnected) {
+          await roomRef.remove();
+        }
+      }
+    } catch (err) {
+      console.warn('Error closing/leaving room:', err);
     }
+    return;
   }
+
   currentRoomId = null;
   myPlayerId = null;
   isHost = false;
 }
 
-function setupPresence(roomId, playerId) {
+function setupPresence(roomId, playerId, host) {
   if (!firebaseDb) return;
   const connectedRef = firebaseDb.ref('.info/connected');
-  const myPresenceRef = firebaseDb.ref(`carcassonne_rooms/${roomId}/players/${playerId}/connected`);
+  const roomRef = firebaseDb.ref(`carcassonne_rooms/${roomId}`);
+  const myPresenceRef = roomRef.child(`players/${playerId}/connected`);
 
   connectedRef.on('value', (snap) => {
     if (snap.val() === true) {
-      myPresenceRef.onDisconnect().set(false);
+      if (host) {
+        roomRef.onDisconnect().remove();
+      } else {
+        myPresenceRef.onDisconnect().set(false);
+      }
       myPresenceRef.set(true);
     }
   });
