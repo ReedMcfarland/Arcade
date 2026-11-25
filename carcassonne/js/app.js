@@ -1,11 +1,12 @@
-import initWasm, { CarcassonneEngineWasm } from '../pkg/carcassonne_engine.js?v=2.5.0';
-import { playSound, isSoundEnabled, setSoundEnabled } from './audio.js';
+import initWasm, { CarcassonneEngineWasm } from '../pkg/carcassonne_engine.js?v=2.7.0';
+import { playSound, isSoundEnabled, setSoundEnabled } from './audio.js?v=2.7.0';
 import {
   initFirebase,
   getSavedFirebaseConfig,
   saveFirebaseConfig,
   createRoom,
   joinRoom,
+  updatePlayerName,
   startRoomGame,
   listenToRoom,
   broadcastState,
@@ -14,7 +15,7 @@ import {
   getCurrentRoomId,
   getMyPlayerId,
   checkIsHost
-} from './firebase-sync.js';
+} from './firebase-sync.js?v=2.7.0';
 
 const TILE_SIZE = 100;
 const DRAG_THRESHOLD = 8;
@@ -853,7 +854,12 @@ function renderActivePlayerHUD() {
   const builderBadge = document.getElementById('builder-bonus-badge');
 
   dot.style.backgroundColor = player.hex;
-  name.textContent = player.name;
+  if (isInOnlineRoom()) {
+    const myId = getMyPlayerId() || window.myCurrentPlayerId;
+    name.textContent = player.id === myId ? `${player.name} (Your Turn)` : `${player.name}'s Turn`;
+  } else {
+    name.textContent = player.name;
+  }
   score.textContent = `${player.score} pts`;
   meeples.innerHTML = `<span class="w-3.5 h-3.5 inline-block opacity-90">${renderMeepleSvg(player.hex, 'w-full h-full')}</span> ${player.meeples}`;
 
@@ -1366,6 +1372,23 @@ function setupEventListeners() {
   document.getElementById('btn-host-room').addEventListener('click', handleHostRoom);
   document.getElementById('btn-join-room').addEventListener('click', handleJoinRoom);
   document.getElementById('btn-lobby-start').addEventListener('click', handleStartOnlineMatch);
+  const saveLobbyName = async () => {
+    const input = document.getElementById('lobby-my-name');
+    const newName = input?.value.trim();
+    if (!newName) {
+      showToast('Please enter a name', 'warn');
+      return;
+    }
+    savePlayerName(newName);
+    const mpInput = document.getElementById('mp-player-name');
+    if (mpInput) mpInput.value = newName;
+    await updatePlayerName(newName);
+    showToast(`Name updated to "${newName}"`, 'score');
+  };
+  document.getElementById('btn-lobby-save-name').addEventListener('click', saveLobbyName);
+  document.getElementById('lobby-my-name').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') saveLobbyName();
+  });
   document.getElementById('btn-lobby-leave').addEventListener('click', async () => {
     await leaveRoom();
     latestRoomData = null;
@@ -1546,6 +1569,12 @@ function renderLobbyModal(roomData) {
   if (countEl) countEl.textContent = String(players.length);
 
   const myId = getMyPlayerId() || window.myCurrentPlayerId;
+  const myNameInput = document.getElementById('lobby-my-name');
+  if (myNameInput && document.activeElement !== myNameInput) {
+    const me = players.find((p) => p.id === myId);
+    if (me) myNameInput.value = me.name;
+  }
+
   if (listEl) {
     listEl.innerHTML = '';
     for (const p of players) {
@@ -1637,7 +1666,12 @@ function handleRoomUpdate(roomData) {
 
 async function handleStartOnlineMatch() {
   if (!checkIsHost() || !latestRoomData) return;
+  const startBtn = document.getElementById('btn-lobby-start');
   try {
+    if (startBtn) {
+      startBtn.disabled = true;
+      startBtn.textContent = 'Starting Match...';
+    }
     const rawPlayers = Object.values(latestRoomData.players || {})
       .filter((p) => p && p.connected !== false)
       .sort((a, b) => (a.joined_at || 0) - (b.joined_at || 0))
@@ -1645,6 +1679,7 @@ async function handleStartOnlineMatch() {
 
     if (rawPlayers.length === 0) {
       showToast('No players in lobby!', 'warn');
+      if (startBtn) startBtn.disabled = false;
       return;
     }
 
@@ -1670,7 +1705,12 @@ async function handleStartOnlineMatch() {
     const stateJson = wasmEngine.serialize_state();
     await startRoomGame(stateJson);
   } catch (err) {
-    showToast(err.message || 'Failed to start match', 'warn');
+    console.error('Failed to start online match:', err);
+    showToast(err?.message || String(err) || 'Failed to start match', 'warn');
+    if (startBtn) {
+      startBtn.disabled = false;
+      startBtn.textContent = 'Start Match';
+    }
   }
 }
 
