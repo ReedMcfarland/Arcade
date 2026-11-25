@@ -1,0 +1,19 @@
+{
+  "name": "carcassonne-engine",
+  "type": "module",
+  "collaborators": [
+    "Carcassonne Team"
+  ],
+  "description": "WebAssembly-ready Carcassonne board game topological engine and rules validator",
+  "version": "0.1.0",
+  "files": [
+    "carcassonne_engine_bg.wasm",
+    "carcassonne_engine.js",
+    "carcassonne_engine.d.ts"
+  ],
+  "main": "carcassonne_engine.js",
+  "types": "carcassonne_engine.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
