@@ -1,0 +1,381 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Soft Tabletop Ground Shadow -->
+    <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#100501" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#100501" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#100501" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Main Leather Radial Body Gradient -->
+    <radialGradient id="leatherBody" cx="36%" cy="52%" r="56%" fx="32%" fy="46%">
+      <stop offset="0%" stop-color="#b8642a"/>
+      <stop offset="20%" stop-color="#8b4513"/>
+      <stop offset="50%" stop-color="#74300e"/>
+      <stop offset="78%" stop-color="#5c2c16"/>
+      <stop offset="100%" stop-color="#270b02"/>
+    </radialGradient>
+
+    <!-- Deep Leather Cavity & Crease -->
+    <linearGradient id="cavityGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#361205"/>
+      <stop offset="60%" stop-color="#1a0601"/>
+      <stop offset="100%" stop-color="#080200"/>
+    </linearGradient>
+
+    <!-- Collar Ruffle Gradients -->
+    <linearGradient id="ruffleGrad1" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#aa5520"/>
+      <stop offset="55%" stop-color="#8b4513"/>
+      <stop offset="100%" stop-color="#3a1304"/>
+    </linearGradient>
+    <linearGradient id="ruffleGrad2" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#c97339"/>
+      <stop offset="50%" stop-color="#944117"/>
+      <stop offset="100%" stop-color="#5c2c16"/>
+    </linearGradient>
+    <linearGradient id="ruffleGrad3" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#ba642b"/>
+      <stop offset="55%" stop-color="#8b4513"/>
+      <stop offset="100%" stop-color="#401705"/>
+    </linearGradient>
+    <linearGradient id="ruffleGrad4" x1="40%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#ad5924"/>
+      <stop offset="55%" stop-color="#752f0d"/>
+      <stop offset="100%" stop-color="#5c2c16"/>
+    </linearGradient>
+    <linearGradient id="ruffleGrad5" x1="70%" y1="0%" x2="30%" y2="100%">
+      <stop offset="0%" stop-color="#9e4c1c"/>
+      <stop offset="55%" stop-color="#682607"/>
+      <stop offset="100%" stop-color="#2e0b02"/>
+    </linearGradient>
+    <linearGradient id="ruffleRear" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#5c2c16"/>
+      <stop offset="70%" stop-color="#240c03"/>
+      <stop offset="100%" stop-color="#0e0301"/>
+    </linearGradient>
+
+    <!-- Fold Valley Shadow Gradients (Vertical fade) -->
+    <linearGradient id="foldValley" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#160501" stop-opacity="0.85"/>
+      <stop offset="65%" stop-color="#160501" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#160501" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Fold Ridge Highlight Gradients -->
+    <linearGradient id="foldRidge1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d88145" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#d88145" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#d88145" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="foldRidge2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f3ab75" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#f3ab75" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f3ab75" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Gold Cord Metallic Gradient -->
+    <linearGradient id="cordTwist" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff6be"/>
+      <stop offset="30%" stop-color="#eab733"/>
+      <stop offset="70%" stop-color="#94640d"/>
+      <stop offset="100%" stop-color="#4e3303"/>
+    </linearGradient>
+
+    <!-- Brass Aglet Metallic Gradient -->
+    <linearGradient id="brassAglet" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5f4105"/>
+      <stop offset="16%" stop-color="#ffd863"/>
+      <stop offset="38%" stop-color="#fffde8"/>
+      <stop offset="60%" stop-color="#e0aa28"/>
+      <stop offset="85%" stop-color="#885d0d"/>
+      <stop offset="100%" stop-color="#452e03"/>
+    </linearGradient>
+
+    <!-- Gold Medallion Gradient -->
+    <linearGradient id="goldEmblem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff7c4"/>
+      <stop offset="22%" stop-color="#f8d259"/>
+      <stop offset="55%" stop-color="#c9941a"/>
+      <stop offset="82%" stop-color="#7e5406"/>
+      <stop offset="100%" stop-color="#ffd866"/>
+    </linearGradient>
+
+    <radialGradient id="medallionBg" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#5c2c16"/>
+      <stop offset="65%" stop-color="#300f03"/>
+      <stop offset="100%" stop-color="#160501"/>
+    </radialGradient>
+
+    <!-- Leather Surface Sheen -->
+    <radialGradient id="softSheen" cx="30%" cy="48%" r="38%">
+      <stop offset="0%" stop-color="#f7bc88" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#d07033" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#8b4513" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="dropShadowFilter" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.2"/>
+      <feOffset dx="0.6" dy="1.4"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.55"/></feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="0.4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- 1. Ambient Tabletop Shadow -->
+  <ellipse cx="50" cy="90" rx="35" ry="5.2" fill="url(#groundShadow)"/>
+  <ellipse cx="49" cy="89.6" rx="22" ry="3" fill="#100401" opacity="0.6"/>
+
+  <!-- 2. Collar & Interior Rim (Behind Cinch) -->
+  <g id="collar-back">
+    <!-- Rear Collar Pleats -->
+    <path d="M 32 38 C 29 28 29 19 35 15 C 40 11 44 17 45 38 Z" fill="url(#ruffleRear)"/>
+    <path d="M 55 38 C 56 17 60 11 65 15 C 71 19 70 28 68 38 Z" fill="url(#ruffleRear)"/>
+    <path d="M 43 38 C 44 19 47 12 50 12 C 53 12 56 19 57 38 Z" fill="#1c0701"/>
+
+    <!-- Interior Cavity Dark Hollow -->
+    <path d="M 34 29 C 39 22.5 44 19.5 50 19.5 C 56 19.5 61 22.5 66 29 C 61 34.5 56 36.5 50 36.5 C 44 36.5 39 34.5 34 29 Z" fill="url(#cavityGrad)"/>
+    <ellipse cx="50" cy="27.5" rx="13" ry="4" fill="#050100"/>
+  </g>
+
+  <!-- 3. Main Pouch Body -->
+  <g id="pouch-body">
+    <!-- Main Body Outer Shape -->
+    <path d="M 31.5 38.5 C 20 41.5 13.5 53.5 13.5 66 C 13.5 78.5 22 89 40 91.2 C 46 91.7 54 91.7 60 91.2 C 78 89 86.5 78.5 86.5 66 C 86.5 53.5 80 41.5 68.5 38.5 C 59 42 41 42 31.5 38.5 Z" 
+          fill="url(#leatherBody)"/>
+
+    <!-- Bottom Saddle Shadow Overlay -->
+    <path d="M 13.5 66 C 13.5 78.5 22 89 40 91.2 C 46 91.7 54 91.7 60 91.2 C 78 89 86.5 78.5 86.5 66 C 86.5 76.5 76 87.5 60 89.8 C 54 90.5 46 90.5 40 89.8 C 24 87.5 13.5 76.5 13.5 66 Z" 
+          fill="#120401" opacity="0.65"/>
+
+    <!-- Subtle Right-side Bounce Light -->
+    <path d="M 86.5 64 C 86.5 74 81 84 70 88.5" fill="none" stroke="#d07238" stroke-width="1.2" opacity="0.2"/>
+
+    <!-- Leather Surface Sheen -->
+    <ellipse cx="32" cy="53" rx="14" ry="18" transform="rotate(-18 32 53)" fill="url(#softSheen)"/>
+
+    <!-- Stitched Flank Seams (Medieval Saddlery Details) -->
+    <!-- Left Flank Seam -->
+    <path d="M 23 48 C 17.2 60 18.2 73 26 83.5" fill="none" stroke="#190601" stroke-width="1.4" opacity="0.8"/>
+    <path d="M 23 48 C 17.2 60 18.2 73 26 83.5" fill="none" stroke="#e8bc74" stroke-width="0.65" stroke-dasharray="1.4, 1.8" opacity="0.8"/>
+
+    <!-- Right Flank Seam -->
+    <path d="M 77 48 C 82.8 60 81.8 73 74 83.5" fill="none" stroke="#190601" stroke-width="1.4" opacity="0.8"/>
+    <path d="M 77 48 C 82.8 60 81.8 73 74 83.5" fill="none" stroke="#e8bc74" stroke-width="0.65" stroke-dasharray="1.4, 1.8" opacity="0.8"/>
+
+    <!-- Bottom Perimeter Hem Stitches -->
+    <path d="M 30 88 C 42 90.8 58 90.8 70 88" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1.5, 2" opacity="0.4"/>
+  </g>
+
+  <!-- 4. Soft Sculpted Leather Pleats & Folds (Radiating from under drawstring) -->
+  <g id="sculpted-folds">
+    <!-- Valley Shadows (Soft tapered gradients) -->
+    <path d="M 31.5 39.5 C 29 46 25 52 23 57 C 24.5 57.5 26.5 57 28 52 C 30 47 33 41 33 39.5 Z" fill="url(#foldValley)"/>
+    <path d="M 38 41 C 36 49 33 55 31 61 C 32.5 61.5 34.5 61 36.5 55 C 38.5 49 41 42 41 41 Z" fill="url(#foldValley)"/>
+    <path d="M 45 42 C 44 49 42 54 41 58.5 C 42 59 43.5 58.8 45 54 C 46 49 47 42.5 47 42 Z" fill="url(#foldValley)"/>
+    <path d="M 53 42 C 54 48 55.5 54 57 58 C 58 57.8 59 57.2 58 53 C 56.5 48 54.5 42.5 54.5 42 Z" fill="url(#foldValley)"/>
+    <path d="M 60 41 C 62 48 65 55 68 60.5 C 69.5 59.8 70 59 67.5 53.5 C 65 48 62 41.5 62 41 Z" fill="url(#foldValley)"/>
+    <path d="M 66 39.5 C 69 46 72 51 75 55.5 C 76.5 54.8 76.8 54 74 49 C 71 44 68 40 68 39.5 Z" fill="url(#foldValley)"/>
+
+    <!-- Ridge Highlights -->
+    <path d="M 35 40.5 Q 32 48 28 56" fill="none" stroke="url(#foldRidge1)" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M 42 41.5 Q 39.5 50 35 60.5" fill="none" stroke="url(#foldRidge2)" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M 42 41.5 Q 39.5 50 35 60.5" fill="none" stroke="#fff1e0" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 49 42 Q 49 50 47.5 59" fill="none" stroke="url(#foldRidge1)" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M 56 41.8 Q 58 50 61.5 59.5" fill="none" stroke="url(#foldRidge1)" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M 63 40.5 Q 65 47 69 55" fill="none" stroke="url(#foldRidge1)" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- 5. Front Collar 5 Overlapping Pleated Ruffle Folds -->
+  <g id="collar-front">
+    <!-- 1. Far Left Fold -->
+    <path d="M 31.5 38.5 C 25 33 21 25 22 18 C 23 14 28 14 33 18 C 38 22 37 32 34 38.5 Z" 
+          fill="url(#ruffleGrad1)"/>
+    <path d="M 22.5 18 C 24 15 28 15 32.5 18.5" fill="none" stroke="#f8caa1" stroke-width="0.6" opacity="0.65"/>
+    <path d="M 23 19 C 25 16.5 28 16.5 32 19.5" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1, 1" opacity="0.85"/>
+
+    <!-- 5. Far Right Fold -->
+    <path d="M 59 38.8 C 61 31 63 21 68 17 C 73 13.5 78 16 77 22 C 76 28 72 33 67 38.5 Z" 
+          fill="url(#ruffleGrad5)"/>
+    <path d="M 68 17 C 72 14.5 77 16.5 76.5 22" fill="none" stroke="#e5a072" stroke-width="0.6" opacity="0.55"/>
+    <path d="M 68.5 18 C 72 16 76 17.5 75.5 22" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1, 1" opacity="0.8"/>
+
+    <!-- 4. Mid-Right Fold -->
+    <path d="M 49 39.5 C 50 30 52 18 58 15 C 64 13 67 18 66 27 C 65 33 63 37.5 58 39.2 Z" 
+          fill="url(#ruffleGrad4)"/>
+    <path d="M 58 15 C 63 13.5 66.5 17.5 65.5 26" fill="none" stroke="#f7caa0" stroke-width="0.65" opacity="0.7"/>
+    <path d="M 58.5 16 C 62.5 14.5 65.5 18 64.8 26" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1, 1" opacity="0.85"/>
+    <path d="M 66 27 C 65 33 63 37.5 58 39.2" stroke="#1c0702" stroke-width="1.6" opacity="0.55" fill="none"/>
+
+    <!-- 2. Mid-Left Fold -->
+    <path d="M 31.5 39 C 27 29 29 19 35 14.5 C 41 11 47 16 46 26 C 45 32 42 38 38 39.5 Z" 
+          fill="url(#ruffleGrad2)"/>
+    <path d="M 35 14.5 C 40 11.5 45.5 16 45 24" fill="none" stroke="#fedbb8" stroke-width="0.7" opacity="0.85"/>
+    <path d="M 35.5 15.5 C 40 13 44.5 17 44 24.5" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1, 1" opacity="0.9"/>
+    <path d="M 45 26 C 44 32 41 38 38 39.5" stroke="#1c0702" stroke-width="1.8" opacity="0.5" fill="none"/>
+
+    <!-- 3. Center Fold -->
+    <path d="M 39 39.5 C 40 28 43 14 50 13 C 56 12 60 17 59 27 C 58 33 55 38.5 49 39.5 Z" 
+          fill="url(#ruffleGrad3)"/>
+    <path d="M 50 13 C 55.5 12.5 59 16.5 58 26" fill="none" stroke="#f7caa0" stroke-width="0.65" opacity="0.75"/>
+    <path d="M 50.5 14 C 55 13.5 58 17 57.2 26" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1, 1" opacity="0.85"/>
+    <path d="M 39 39.5 C 39.5 31 41 22 44 16" stroke="#1c0702" stroke-width="1.8" opacity="0.55" fill="none"/>
+  </g>
+
+  <!-- 6. Ornate Gold Medieval Medallion (Carcassonne Meeple Emblem) -->
+  <g id="gold-emblem">
+    <!-- Soft Leather Pad Shadow onto Pouch -->
+    <circle cx="51.5" cy="68" r="14" fill="#120401" opacity="0.55" filter="url(#dropShadowFilter)"/>
+
+    <!-- Tooled Leather Base Disc -->
+    <circle cx="51.5" cy="67" r="13.8" fill="#361305" stroke="#1b0701" stroke-width="0.8"/>
+    <!-- Golden Waxed Thread Stitches on Disc Rim -->
+    <circle cx="51.5" cy="67" r="12.6" fill="none" stroke="#e8bc74" stroke-width="0.55" stroke-dasharray="1.1, 1.2" opacity="0.85"/>
+
+    <!-- Outer Gold Beveled Ring -->
+    <circle cx="51.5" cy="67" r="11.2" fill="none" stroke="url(#goldEmblem)" stroke-width="1.6"/>
+    <circle cx="51.5" cy="67" r="10.4" fill="none" stroke="#462b02" stroke-width="0.4"/>
+
+    <!-- Inner Enameled Dark Field -->
+    <circle cx="51.5" cy="67" r="10" fill="url(#medallionBg)"/>
+
+    <!-- 12 Studded Gold Rivets around Medallion Rim -->
+    <g fill="url(#brassAglet)">
+      <circle cx="51.5" cy="58.0" r="0.75"/>
+      <circle cx="56.0" cy="59.2" r="0.75"/>
+      <circle cx="59.3" cy="62.5" r="0.75"/>
+      <circle cx="60.5" cy="67.0" r="0.75"/>
+      <circle cx="59.3" cy="71.5" r="0.75"/>
+      <circle cx="56.0" cy="74.8" r="0.75"/>
+      <circle cx="51.5" cy="76.0" r="0.75"/>
+      <circle cx="47.0" cy="74.8" r="0.75"/>
+      <circle cx="43.7" cy="71.5" r="0.75"/>
+      <circle cx="42.5" cy="67.0" r="0.75"/>
+      <circle cx="43.7" cy="62.5" r="0.75"/>
+      <circle cx="47.0" cy="59.2" r="0.75"/>
+    </g>
+
+    <!-- Canonical Carcassonne Meeple Silhouette in Radiant Gold -->
+    <!-- Drop Shadow beneath Meeple -->
+    <g transform="translate(0.35, 0.6)" opacity="0.6">
+      <circle cx="51.5" cy="62.3" r="2.4" fill="#100300"/>
+      <path d="M 49.3 64.6 C 47.9 64.9 44.9 66.0 44.9 67.5 C 44.9 68.7 46.0 69.0 47.2 68.3 C 47.9 67.8 48.3 68.3 48.6 69.3 C 48.9 70.7 47.0 73.0 47.0 74.0 C 48.5 74.0 49.6 74.0 50.3 74.0 C 50.9 72.7 51.1 71.2 51.5 71.2 C 51.9 71.2 52.1 72.7 52.7 74.0 C 53.4 74.0 54.5 74.0 56.0 74.0 C 56.0 73.0 54.1 70.7 54.4 69.3 C 54.7 68.3 55.1 67.8 55.8 68.3 C 57.0 69.0 58.1 68.7 58.1 67.5 C 58.1 66.0 55.1 64.9 53.7 64.6 C 52.7 64.4 52.2 64.7 51.5 64.7 C 50.8 64.7 50.3 64.4 49.3 64.6 Z" fill="#100300"/>
+    </g>
+
+    <!-- Meeple Gold Figure -->
+    <g id="meeple-emblem" filter="url(#subtleGlow)">
+      <!-- Head -->
+      <circle cx="51.5" cy="62.3" r="2.4" fill="url(#goldEmblem)"/>
+      <circle cx="50.9" cy="61.7" r="1.5" fill="#fffce6" opacity="0.55"/>
+
+      <!-- Body / Arms / Legs -->
+      <path d="M 49.3 64.6 C 47.9 64.9 44.9 66.0 44.9 67.5 C 44.9 68.7 46.0 69.0 47.2 68.3 C 47.9 67.8 48.3 68.3 48.6 69.3 C 48.9 70.7 47.0 73.0 47.0 74.0 C 48.5 74.0 49.6 74.0 50.3 74.0 C 50.9 72.7 51.1 71.2 51.5 71.2 C 51.9 71.2 52.1 72.7 52.7 74.0 C 53.4 74.0 54.5 74.0 56.0 74.0 C 56.0 73.0 54.1 70.7 54.4 69.3 C 54.7 68.3 55.1 67.8 55.8 68.3 C 57.0 69.0 58.1 68.7 58.1 67.5 C 58.1 66.0 55.1 64.9 53.7 64.6 C 52.7 64.4 52.2 64.7 51.5 64.7 C 50.8 64.7 50.3 64.4 49.3 64.6 Z" 
+            fill="url(#goldEmblem)"/>
+
+      <!-- Meeple 3D Emboss Highlights along top surfaces -->
+      <path d="M 45.1 67.1 C 45.7 66.2 47.7 65.2 49.4 64.8 C 50.3 64.6 51.5 64.8 51.5 64.8" fill="none" stroke="#fffdf0" stroke-width="0.6" stroke-linecap="round" opacity="0.85"/>
+      <path d="M 51.5 64.8 C 51.5 64.8 52.7 64.6 53.6 64.8 C 55.3 65.2 57.3 66.2 57.9 67.1" fill="none" stroke="#fffdf0" stroke-width="0.6" stroke-linecap="round" opacity="0.85"/>
+    </g>
+
+    <!-- Top Mounting Bracket Stud -->
+    <circle cx="51.5" cy="52.8" r="1.5" fill="url(#brassAglet)" stroke="#3b2402" stroke-width="0.35"/>
+    <circle cx="51.0" cy="52.4" r="0.6" fill="#fff9d6" opacity="0.85"/>
+  </g>
+
+  <!-- 7. Golden Drawstring Cord & Knot & Brass Aglets -->
+  <g id="drawstring-hardware">
+    <!-- Deep Neck Cinch Shadow -->
+    <path d="M 32 39.5 C 41.5 43.5 58.5 43.5 68 39.5" fill="none" stroke="#0e0301" stroke-width="4" stroke-linecap="butt" opacity="0.75"/>
+
+    <!-- Lower Cord Wrap Layer -->
+    <path d="M 31 39.8 C 41.5 43.8 58.5 43.8 69 39.8" fill="none" stroke="#3b2302" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M 31 39.8 C 41.5 43.8 58.5 43.8 69 39.8" fill="none" stroke="url(#cordTwist)" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M 31 39.4 C 41.5 43.4 58.5 43.4 69 39.4" fill="none" stroke="#fffbe0" stroke-width="0.7" stroke-linecap="round" opacity="0.75"/>
+
+    <!-- Upper Cord Wrap Layer -->
+    <path d="M 31.8 37.8 C 42.5 41.2 57.5 41.2 68.2 38" fill="none" stroke="#3b2302" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M 31.8 37.8 C 42.5 41.2 57.5 41.2 68.2 38" fill="none" stroke="url(#cordTwist)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 31.8 37.5 C 42.5 40.9 57.5 40.9 68.2 37.7" fill="none" stroke="#fffbe0" stroke-width="0.6" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- Draped Hanging Cords - Draping gracefully along the left flank, leaving the emblem unobstructed -->
+    <!-- Shadows for Hanging Cords -->
+    <path d="M 36.5 42.5 C 32 49 28 57 29 65 C 29.8 71 31.5 76 32 80" 
+          fill="none" stroke="#0e0301" stroke-width="2.8" stroke-linecap="round" opacity="0.45"/>
+    <path d="M 39 43 C 35.5 50 33 58 35.5 66 C 37 72 37.5 78 37.5 83" 
+          fill="none" stroke="#0e0301" stroke-width="2.8" stroke-linecap="round" opacity="0.45"/>
+
+    <!-- Hanging Cord 1 (Outer Left Swag) -->
+    <g id="hanging-cord-1">
+      <path d="M 36 41 C 31.5 47.5 27.5 55.5 28.5 63.5 C 29.3 69.5 31 74.5 31.5 78.5" 
+            fill="none" stroke="#3b2302" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M 36 41 C 31.5 47.5 27.5 55.5 28.5 63.5 C 29.3 69.5 31 74.5 31.5 78.5" 
+            fill="none" stroke="url(#cordTwist)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 36 41 C 31.5 47.5 27.5 55.5 28.5 63.5 C 29.3 69.5 31 74.5 31.5 78.5" 
+            fill="none" stroke="#fffdf0" stroke-width="0.6" stroke-linecap="round" opacity="0.8"/>
+
+      <!-- Brass Aglet 1 -->
+      <g transform="translate(31.5, 78.5) rotate(10)">
+        <polygon points="-1.5,0 1.5,0 0.9,7.5 -0.9,7.5" fill="#0e0301" opacity="0.4" transform="translate(0.5, 0.7)"/>
+        <ellipse cx="0" cy="0" rx="1.6" ry="0.7" fill="url(#brassAglet)" stroke="#452e03" stroke-width="0.25"/>
+        <polygon points="-1.5,0 1.5,0 0.9,7.5 -0.9,7.5" fill="url(#brassAglet)" stroke="#452e03" stroke-width="0.3"/>
+        <line x1="-1.3" y1="2" x2="1.3" y2="2" stroke="#4a3003" stroke-width="0.35"/>
+        <line x1="-1.1" y1="4.5" x2="1.1" y2="4.5" stroke="#4a3003" stroke-width="0.35"/>
+        <line x1="-0.4" y1="0" x2="-0.2" y2="7.5" stroke="#ffffff" stroke-width="0.65" stroke-linecap="round" opacity="0.9"/>
+        <ellipse cx="0" cy="7.5" rx="0.9" ry="0.5" fill="url(#brassAglet)"/>
+        <circle cx="0" cy="8" r="0.35" fill="#251501"/>
+      </g>
+    </g>
+
+    <!-- Hanging Cord 2 (Inner Left Swag) -->
+    <g id="hanging-cord-2">
+      <path d="M 38.5 41.5 C 35 48.5 32.5 56.5 35 64.5 C 36.5 70.5 37 76.5 37 81.5" 
+            fill="none" stroke="#3b2302" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M 38.5 41.5 C 35 48.5 32.5 56.5 35 64.5 C 36.5 70.5 37 76.5 37 81.5" 
+            fill="none" stroke="url(#cordTwist)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 38.5 41.5 C 35 48.5 32.5 56.5 35 64.5 C 36.5 70.5 37 76.5 37 81.5" 
+            fill="none" stroke="#fffdf0" stroke-width="0.6" stroke-linecap="round" opacity="0.8"/>
+
+      <!-- Brass Aglet 2 -->
+      <g transform="translate(37, 81.5) rotate(2)">
+        <polygon points="-1.5,0 1.5,0 0.9,7.5 -0.9,7.5" fill="#0e0301" opacity="0.4" transform="translate(0.5, 0.7)"/>
+        <ellipse cx="0" cy="0" rx="1.6" ry="0.7" fill="url(#brassAglet)" stroke="#452e03" stroke-width="0.25"/>
+        <polygon points="-1.5,0 1.5,0 0.9,7.5 -0.9,7.5" fill="url(#brassAglet)" stroke="#452e03" stroke-width="0.3"/>
+        <line x1="-1.3" y1="2" x2="1.3" y2="2" stroke="#4a3003" stroke-width="0.35"/>
+        <line x1="-1.1" y1="4.5" x2="1.1" y2="4.5" stroke="#4a3003" stroke-width="0.35"/>
+        <line x1="-0.4" y1="0" x2="-0.2" y2="7.5" stroke="#ffffff" stroke-width="0.65" stroke-linecap="round" opacity="0.9"/>
+        <ellipse cx="0" cy="7.5" rx="0.9" ry="0.5" fill="url(#brassAglet)"/>
+        <circle cx="0" cy="8" r="0.35" fill="#251501"/>
+      </g>
+    </g>
+
+    <!-- Medieval Knot & Slide Toggle Hardware -->
+    <g id="knot-hardware">
+      <ellipse cx="37.5" cy="41" rx="4.5" ry="3.2" fill="#0e0301" opacity="0.6"/>
+
+      <rect x="35.2" y="38.6" width="5" height="3.4" rx="1.5" fill="url(#brassAglet)" stroke="#382102" stroke-width="0.3"/>
+      <line x1="35.8" y1="39.4" x2="39.6" y2="39.4" stroke="#fffce6" stroke-width="0.4" opacity="0.9"/>
+
+      <!-- Left Knot Bulb -->
+      <ellipse cx="35.8" cy="41" rx="2.5" ry="1.8" transform="rotate(-22 35.8 41)" fill="url(#cordTwist)" stroke="#3b2302" stroke-width="0.4"/>
+      <path d="M 34.6 40.4 C 35.2 39.6 36.6 40.2 36.8 41.2" fill="none" stroke="#fffbe6" stroke-width="0.65" stroke-linecap="round" opacity="0.85"/>
+
+      <!-- Right Knot Bulb -->
+      <ellipse cx="38.8" cy="40.8" rx="2.6" ry="1.9" transform="rotate(24 38.8 40.8)" fill="url(#cordTwist)" stroke="#3b2302" stroke-width="0.4"/>
+      <path d="M 37.8 40.2 C 38.5 39.5 39.8 40 40.2 41.2" fill="none" stroke="#fffbe6" stroke-width="0.65" stroke-linecap="round" opacity="0.9"/>
+
+      <!-- Knot Tight Cross-Band -->
+      <path d="M 36.6 39.4 C 37.3 39.7 37.6 41.6 37.3 42.6" fill="none" stroke="#2a1501" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M 36.6 39.4 C 37.3 39.7 37.6 41.6 37.3 42.6" fill="none" stroke="url(#cordTwist)" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="36.9" cy="40.3" r="0.45" fill="#ffffff" opacity="0.95"/>
+    </g>
+  </g>
+</svg>

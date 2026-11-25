@@ -1,0 +1,171 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 1. Meadow Base Layer -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Subtle Meadow Texture & Hill Shading -->
+  <g opacity="0.45">
+    <!-- Outer meadow hillocks -->
+    <circle cx="28" cy="20" r="22" fill="#84b85c"/>
+    <circle cx="58" cy="18" r="18" fill="#659640"/>
+    <circle cx="82" cy="25" r="24" fill="#80b457"/>
+    <circle cx="85" cy="62" r="22" fill="#6a9b44"/>
+    <circle cx="78" cy="86" r="20" fill="#84b85c"/>
+    <circle cx="58" cy="46" r="16" fill="#659640"/>
+    <!-- Inner southwest corner meadow hillocks -->
+    <circle cx="18" cy="82" r="18" fill="#6a9b44"/>
+    <circle cx="10" cy="88" r="12" fill="#80b457"/>
+  </g>
+
+  <!-- Grass Tufts (Outer Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- Northwest meadow -->
+    <path d="M 14 18 L 13 14.5 M 14 18 L 14.5 14 M 14 18 L 16 15"/>
+    <path d="M 34 12 L 33 8.5 M 34 12 L 34.5 8 M 34 12 L 36 9"/>
+    <path d="M 15 36 L 14 32.5 M 15 36 L 15.5 32 M 15 36 L 17 33"/>
+    <path d="M 38 28 L 37 24.5 M 38 28 L 38.5 24 M 38 28 L 40 25"/>
+    <!-- Northeast meadow -->
+    <path d="M 56 15 L 55 11.5 M 56 15 L 56.5 11 M 56 15 L 58 12"/>
+    <path d="M 72 12 L 71 8.5 M 72 12 L 72.5 8 M 72 12 L 74 9"/>
+    <path d="M 88 18 L 87 14.5 M 88 18 L 88.5 14 M 88 18 L 90 15"/>
+    <path d="M 64 28 L 63 24.5 M 64 28 L 64.5 24 M 64 28 L 66 25"/>
+    <!-- East & Southeast meadow -->
+    <path d="M 88 42 L 87 38.5 M 88 42 L 88.5 38 M 88 42 L 90 39"/>
+    <path d="M 72 52 L 71 48.5 M 72 52 L 72.5 48 M 72 52 L 74 49"/>
+    <path d="M 88 66 L 87 62.5 M 88 66 L 88.5 62 M 88 66 L 90 63"/>
+    <path d="M 68 76 L 67 72.5 M 68 76 L 68.5 72 M 68 76 L 70 73"/>
+    <path d="M 84 86 L 83 82.5 M 84 86 L 84.5 82 M 84 86 L 86 83"/>
+  </g>
+
+  <!-- Grass Tufts (Inner Southwest Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <path d="M 14 74 L 13 70.5 M 14 74 L 14.5 70 M 14 74 L 16 71"/>
+    <path d="M 26 88 L 25 84.5 M 26 88 L 26.5 84 M 26 88 L 28 85"/>
+    <path d="M 9 92 L 8 88.5 M 9 92 L 9.5 88 M 9 92 L 11 89"/>
+  </g>
+
+  <!-- Wildflowers (Outer Meadow) -->
+  <g fill="#fef08a" opacity="0.85">
+    <circle cx="18" cy="24" r="0.9"/>
+    <circle cx="32" cy="18" r="0.9"/>
+    <circle cx="14" cy="42" r="0.9"/>
+    <circle cx="42" cy="26" r="0.9"/>
+    <circle cx="60" cy="18" r="0.9"/>
+    <circle cx="80" cy="15" r="0.9"/>
+    <circle cx="92" cy="28" r="0.9"/>
+    <circle cx="74" cy="44" r="0.9"/>
+    <circle cx="86" cy="52" r="0.9"/>
+    <circle cx="66" cy="68" r="0.9"/>
+    <circle cx="88" cy="78" r="0.9"/>
+    <circle cx="76" cy="90" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <circle cx="24" cy="15" r="0.8"/>
+    <circle cx="38" cy="36" r="0.8"/>
+    <circle cx="52" cy="26" r="0.8"/>
+    <circle cx="68" cy="20" r="0.8"/>
+    <circle cx="86" cy="12" r="0.8"/>
+    <circle cx="92" cy="46" r="0.8"/>
+    <circle cx="80" cy="60" r="0.8"/>
+    <circle cx="62" cy="82" r="0.8"/>
+    <circle cx="82" cy="82" r="0.8"/>
+    <circle cx="72" cy="94" r="0.8"/>
+  </g>
+
+  <!-- Wildflowers (Inner Southwest Meadow) -->
+  <g fill="#fef08a" opacity="0.85">
+    <circle cx="11" cy="70" r="0.9"/>
+    <circle cx="22" cy="82" r="0.9"/>
+    <circle cx="16" cy="94" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <circle cx="18" cy="74" r="0.8"/>
+    <circle cx="8" cy="86" r="0.8"/>
+    <circle cx="25" cy="92" r="0.8"/>
+  </g>
+
+  <!-- Foliage / Trees on Outer Meadow -->
+  <!-- Grove Northeast: (74, 26) -->
+  <g>
+    <ellipse cx="74" cy="28" rx="9" ry="4.8" fill="#3c5f21" opacity="0.4"/>
+    <rect x="71" y="25" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="76" y="25.5" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="70" cy="22.5" r="4.6" fill="#477528"/>
+    <circle cx="77.5" cy="22" r="5" fill="#588c34"/>
+    <circle cx="73.5" cy="19.5" r="4.8" fill="#67a13f"/>
+    <circle cx="73" cy="18" r="2.5" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+
+  <!-- Single Tree Northwest: (24, 24) -->
+  <g>
+    <ellipse cx="24" cy="26" rx="7" ry="3.8" fill="#3c5f21" opacity="0.4"/>
+    <rect x="23.2" y="23" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="21.5" cy="20.5" r="3.8" fill="#4a782a"/>
+    <circle cx="26.5" cy="21" r="3.5" fill="#588c34"/>
+    <circle cx="24" cy="18" r="4" fill="#67a13f"/>
+    <circle cx="23.5" cy="16.5" r="2" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Single Tree Southeast: (80, 72) -->
+  <g>
+    <ellipse cx="80" cy="74" rx="7.5" ry="4" fill="#3c5f21" opacity="0.4"/>
+    <rect x="79" y="71" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="77" cy="68" r="4" fill="#4a782a"/>
+    <circle cx="82" cy="69" r="3.5" fill="#588c34"/>
+    <circle cx="79.5" cy="65.5" r="4.2" fill="#67a13f"/>
+    <circle cx="79" cy="64" r="2.2" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Shrub / Bush Outer Center: (62, 44) -->
+  <g>
+    <ellipse cx="62" cy="45" rx="5" ry="2.6" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="60.5" cy="43" r="2.6" fill="#4e7f2b"/>
+    <circle cx="63.5" cy="42.5" r="3" fill="#5f9736"/>
+    <circle cx="62" cy="41" r="2.1" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on Inner Southwest Meadow -->
+  <!-- Small Tree Southwest: (15, 84) -->
+  <g>
+    <ellipse cx="15" cy="86" rx="6.5" ry="3.5" fill="#3c5f21" opacity="0.4"/>
+    <rect x="14.2" y="83" width="1.5" height="3" fill="#4d3826"/>
+    <circle cx="12.8" cy="80.5" r="3.6" fill="#4a782a"/>
+    <circle cx="17.2" cy="81" r="3.2" fill="#588c34"/>
+    <circle cx="15" cy="78" r="3.8" fill="#67a13f"/>
+    <circle cx="14.6" cy="76.8" r="2" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Small Shrub Southwest: (25, 94) -->
+  <g>
+    <ellipse cx="25" cy="95" rx="4" ry="2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="23.8" cy="93.5" r="2" fill="#4e7f2b"/>
+    <circle cx="26" cy="93" r="2.2" fill="#5f9736"/>
+    <circle cx="25" cy="92" r="1.5" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- 2. Curved South-to-West Road Layer -->
+  <!-- Road Edge Shadow / Casing (14px) -->
+  <path d="M 50 100 Q 50 50 0 50" fill="none" stroke="#6f5c43" stroke-width="14" stroke-linecap="butt"/>
+
+  <!-- Road Inner Surface (10px) -->
+  <path d="M 50 100 Q 50 50 0 50" fill="none" stroke="#e4d6b7" stroke-width="10" stroke-linecap="butt"/>
+
+  <!-- Dashed Centerline -->
+  <path d="M 50 100 Q 50 50 0 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+
+  <!-- Roadside Details (Pebbles & Verge Grass) -->
+  <g fill="#93816c" opacity="0.6">
+    <!-- Outer verge pebbles -->
+    <circle cx="12" cy="40" r="0.8"/>
+    <circle cx="28" cy="46" r="0.7"/>
+    <circle cx="44" cy="58" r="0.8"/>
+    <circle cx="58" cy="80" r="0.7"/>
+    <circle cx="59" cy="94" r="0.8"/>
+    <!-- Inner verge pebbles -->
+    <circle cx="7" cy="59" r="0.7"/>
+    <circle cx="23" cy="71" r="0.8"/>
+    <circle cx="39" cy="86" r="0.7"/>
+  </g>
+
+  <!-- 3. Clean Perimeter Border -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>

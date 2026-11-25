@@ -1,0 +1,275 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for gradients and styling -->
+  <defs>
+    <!-- City Ground / Terracotta Plaza -->
+    <linearGradient id="cityGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cca06c"/>
+      <stop offset="60%" stop-color="#c78d58"/>
+      <stop offset="100%" stop-color="#b67f4a"/>
+    </linearGradient>
+
+    <!-- Roof Gradients -->
+    <linearGradient id="roofRed1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cc523e"/>
+      <stop offset="100%" stop-color="#993627"/>
+    </linearGradient>
+    <linearGradient id="roofRed2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ba4837"/>
+      <stop offset="100%" stop-color="#84291c"/>
+    </linearGradient>
+    <linearGradient id="roofRed3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#db614c"/>
+      <stop offset="100%" stop-color="#a63d2e"/>
+    </linearGradient>
+    <linearGradient id="roofRedDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a84031"/>
+      <stop offset="100%" stop-color="#6f2015"/>
+    </linearGradient>
+
+    <!-- Stone Wall / Building Masonry -->
+    <linearGradient id="sandstone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dfcfb3"/>
+      <stop offset="100%" stop-color="#c5b291"/>
+    </linearGradient>
+    <linearGradient id="sandstoneDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfbe9f"/>
+      <stop offset="100%" stop-color="#a89474"/>
+    </linearGradient>
+    <linearGradient id="wallCoping" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0e7d5"/>
+      <stop offset="100%" stop-color="#baa88c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Meadow Base Layer -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Meadow Texture & Hill Shading -->
+  <g opacity="0.42">
+    <!-- Upper meadow hillocks -->
+    <ellipse cx="24" cy="35" rx="18" ry="8" fill="#84b85c"/>
+    <ellipse cx="76" cy="35" rx="18" ry="8" fill="#80b457"/>
+    <!-- Lower meadow hillocks -->
+    <circle cx="20" cy="80" r="22" fill="#6a9b44"/>
+    <circle cx="82" cy="78" r="20" fill="#659640"/>
+    <circle cx="50" cy="88" r="16" fill="#80b457"/>
+    <circle cx="50" cy="66" r="12" fill="#6a9b44"/>
+  </g>
+
+  <!-- Grass Tufts (f0 upper narrow meadow: between city wall and road) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- tuft at (18, 36) -->
+    <path d="M 18 37 L 17 33.5 M 18 37 L 18.5 33 M 18 37 L 20 34.5"/>
+    <!-- tuft at (34, 38) -->
+    <path d="M 34 39 L 33 35.5 M 34 39 L 34.5 35 M 34 39 L 36 36.5"/>
+    <!-- tuft at (66, 38) -->
+    <path d="M 66 39 L 65 35.5 M 66 39 L 66.5 35 M 66 39 L 68 36.5"/>
+    <!-- tuft at (82, 36) -->
+    <path d="M 82 37 L 81 33.5 M 82 37 L 82.5 33 M 82 37 L 84 34.5"/>
+  </g>
+
+  <!-- Wildflowers (f0 upper narrow meadow) -->
+  <g fill="#fef08a" opacity="0.85">
+    <circle cx="15" cy="37" r="0.9"/>
+    <circle cx="37" cy="40" r="0.9"/>
+    <circle cx="63" cy="40" r="0.9"/>
+    <circle cx="85" cy="37" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <circle cx="20" cy="35" r="0.8"/>
+    <circle cx="31" cy="37" r="0.8"/>
+    <circle cx="69" cy="37" r="0.8"/>
+    <circle cx="80" cy="35" r="0.8"/>
+  </g>
+
+  <!-- Grass Tufts (f1 lower broad meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- tuft at (14, 66) -->
+    <path d="M 14 67 L 13 63.5 M 14 67 L 14.5 63 M 14 67 L 16 64"/>
+    <!-- tuft at (38, 72) -->
+    <path d="M 38 73 L 37 69.5 M 38 73 L 38.5 69 M 38 73 L 40 70"/>
+    <!-- tuft at (52, 88) -->
+    <path d="M 52 89 L 51 85.5 M 52 89 L 52.5 85 M 52 89 L 54 86"/>
+    <!-- tuft at (66, 67) -->
+    <path d="M 66 68 L 65 64.5 M 66 68 L 66.5 64 M 66 68 L 68 65"/>
+    <!-- tuft at (88, 88) -->
+    <path d="M 88 89 L 87 85.5 M 88 89 L 88.5 85 M 88 89 L 90 86"/>
+    <!-- tuft at (32, 92) -->
+    <path d="M 32 93 L 31 89.5 M 32 93 L 32.5 89 M 32 93 L 34 90"/>
+    <!-- tuft at (72, 90) -->
+    <path d="M 72 91 L 71 87.5 M 72 91 L 72.5 87 M 72 91 L 74 88"/>
+  </g>
+
+  <!-- Wildflowers (f1 lower broad meadow) -->
+  <!-- Yellow Buttercups -->
+  <g fill="#fef08a" opacity="0.88">
+    <circle cx="12" cy="68" r="0.9"/>
+    <circle cx="36" cy="74" r="0.9"/>
+    <circle cx="56" cy="90" r="0.9"/>
+    <circle cx="70" cy="70" r="0.9"/>
+    <circle cx="86" cy="70" r="0.9"/>
+    <circle cx="48" cy="94" r="0.9"/>
+  </g>
+  <!-- White Daisies -->
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="16" cy="64" r="0.8"/>
+    <circle cx="40" cy="71" r="0.8"/>
+    <circle cx="50" cy="85" r="0.8"/>
+    <circle cx="68" cy="66" r="0.8"/>
+    <circle cx="90" cy="86" r="0.8"/>
+    <circle cx="30" cy="94" r="0.8"/>
+  </g>
+  <!-- Poppy Accents -->
+  <g fill="#ef4444" opacity="0.85">
+    <circle cx="15" cy="72" r="0.75"/>
+    <circle cx="72" cy="73" r="0.75"/>
+    <circle cx="87" cy="74" r="0.75"/>
+  </g>
+
+  <!-- Tree Groves / Foliage in Lower Meadow (f1) -->
+  <!-- Southwest Grove: (22, 78) -->
+  <g id="grove-southwest">
+    <ellipse cx="22" cy="80.5" rx="8.5" ry="4.2" fill="#3c5f21" opacity="0.4"/>
+    <rect x="19.5" y="77" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="24.5" y="77.5" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="19" cy="74" r="4.3" fill="#477528"/>
+    <circle cx="25.5" cy="74.5" r="4.2" fill="#588c34"/>
+    <circle cx="22.5" cy="71" r="4.6" fill="#67a13f"/>
+    <circle cx="22" cy="69.5" r="2.4" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+
+  <!-- Southeast Grove: (78, 76) -->
+  <g id="grove-southeast">
+    <ellipse cx="78" cy="78.5" rx="9" ry="4.5" fill="#3c5f21" opacity="0.4"/>
+    <rect x="75" y="75" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="80" y="75.5" width="1.6" height="3.2" fill="#4d3826"/>
+    <circle cx="74.5" cy="72.5" r="4.6" fill="#477528"/>
+    <circle cx="81.5" cy="72.5" r="4.8" fill="#588c34"/>
+    <circle cx="78" cy="69.5" r="4.8" fill="#67a13f"/>
+    <circle cx="77.5" cy="68" r="2.5" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+
+  <!-- Small Shrub / Fruit Bush: (64, 63) -->
+  <g id="bush-southeast">
+    <ellipse cx="64" cy="64.5" rx="4.5" ry="2.2" fill="#3c5f21" opacity="0.35"/>
+    <rect x="63.3" y="62.5" width="1.4" height="2.2" fill="#4d3826"/>
+    <circle cx="62" cy="60.5" r="2.8" fill="#4a782a"/>
+    <circle cx="65.5" cy="60.8" r="2.6" fill="#588c34"/>
+    <circle cx="63.8" cy="58.5" r="3" fill="#67a13f"/>
+    <circle cx="63.5" cy="57.5" r="1.5" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- 2. Straight East-West Road Layer (centered at y=50) -->
+  <!-- Road Outer Casing (14px) -->
+  <path d="M 0 50 L 100 50" fill="none" stroke="#6f5c43" stroke-width="14" stroke-linecap="butt"/>
+  <!-- Road Inner Surface (10px) -->
+  <path d="M 0 50 L 100 50" fill="none" stroke="#e4d6b7" stroke-width="10" stroke-linecap="butt"/>
+  <!-- Road Shoulder Highlights & Subtle Ruts -->
+  <path d="M 0 45.2 L 100 45.2" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 0 54.8 L 100 54.8" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <!-- Dashed Centerline -->
+  <path d="M 0 50 L 100 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <!-- Roadside Details (Pebbles & Verge Details) -->
+  <g fill="#8d7b67" opacity="0.6">
+    <circle cx="28" cy="42.2" r="0.7"/>
+    <circle cx="74" cy="42.3" r="0.8"/>
+    <circle cx="33" cy="57.8" r="0.7"/>
+    <circle cx="68" cy="57.7" r="0.8"/>
+    <circle cx="88" cy="57.8" r="0.6"/>
+    <circle cx="12" cy="42.3" r="0.6"/>
+  </g>
+
+  <!-- 3. City Layer (North Cap: Spanning (0,0) to (100,0) down to ~y=25) -->
+  <!-- City Wall Drop Shadow on Meadow -->
+  <path d="M 0 8 Q 50 46 100 8" fill="none" stroke="#2d4219" stroke-width="4.5" opacity="0.34"/>
+
+  <!-- City Ground Pavement / Terracotta Fill -->
+  <path d="M 0 0 L 100 0 L 100 6 Q 50 44 0 6 Z" fill="url(#cityGround)"/>
+
+  <!-- City Ground Cobblestone Texture Courses -->
+  <path d="M 6 3 Q 50 14 94 3" fill="none" stroke="#aa713c" stroke-width="0.7" stroke-dasharray="2.5 3" opacity="0.45"/>
+  <path d="M 12 7 Q 50 22 88 7" fill="none" stroke="#aa713c" stroke-width="0.7" stroke-dasharray="3 3.5" opacity="0.45"/>
+  <path d="M 22 13 Q 50 32 78 13" fill="none" stroke="#aa713c" stroke-width="0.7" stroke-dasharray="3 4" opacity="0.45"/>
+
+  <!-- Medieval City Architecture Inside the Cap -->
+  <!-- Building 1: West House (x: 10..27) -->
+  <g id="bldg-west-house">
+    <rect x="11" y="4" width="16" height="8.5" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="1"/>
+    <rect x="10" y="2" width="18" height="8" rx="1.5" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="1.1"/>
+    <line x1="10" y1="6" x2="28" y2="6" stroke="#e36b57" stroke-width="0.7"/>
+    <rect x="15" y="8" width="2" height="3" fill="#3e2a1c"/>
+  </g>
+
+  <!-- Building 2: West-Central Small Cottage (x: 23..33) -->
+  <g id="bldg-west-cottage">
+    <rect x="23" y="10" width="10" height="7.5" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="0.9"/>
+    <rect x="22" y="9" width="12" height="7" rx="1.2" fill="url(#roofRed2)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="22" y1="12.5" x2="34" y2="12.5" stroke="#db6350" stroke-width="0.6"/>
+  </g>
+
+  <!-- Building 3: Center Tower / Citadel Keep (x: 35..49) -->
+  <g id="bldg-citadel-keep">
+    <!-- Tower Body -->
+    <rect x="36" y="6" width="13" height="13.5" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="1.2"/>
+    <!-- Arrow slit windows -->
+    <rect x="42" y="10" width="1.6" height="3.5" rx="0.5" fill="#3a271a"/>
+    <rect x="42" y="15" width="1.6" height="2.5" rx="0.4" fill="#3a271a"/>
+    <!-- Tower Corbeling -->
+    <rect x="35" y="5.5" width="15" height="1.8" fill="#e2d3b8" stroke="#594636" stroke-width="0.7"/>
+    <!-- Conical / Hipped Roof -->
+    <polygon points="34,5.5 42.5,-1 51,5.5" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="1.1"/>
+    <!-- Roof shadow facet -->
+    <polygon points="42.5,-1 51,5.5 42.5,5.5" fill="#752217" opacity="0.4"/>
+    <circle cx="42.5" cy="-1" r="1.1" fill="#c99738"/>
+  </g>
+
+  <!-- Building 4: Central Great Hall (x: 50..70) -->
+  <g id="bldg-great-hall">
+    <!-- Hall Walls -->
+    <rect x="52" y="7" width="18" height="10" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="1.1"/>
+    <!-- Arched Entrance -->
+    <path d="M 59 17 L 59 13 Q 61 11.5 63 13 L 63 17 Z" fill="#3a271a"/>
+    <!-- Gable Roof -->
+    <rect x="50.5" y="4.5" width="21" height="8.5" rx="1.5" fill="url(#roofRed3)" stroke="#5e2a1e" stroke-width="1.1"/>
+    <line x1="50.5" y1="8.8" x2="71.5" y2="8.8" stroke="#f07965" stroke-width="0.8"/>
+    <!-- Dormer Window -->
+    <polygon points="58,5 60.5,2.5 63,5" fill="#993627" stroke="#5e2a1e" stroke-width="0.7"/>
+    <rect x="59.5" y="4.5" width="2" height="2" fill="#3a271a"/>
+  </g>
+
+  <!-- Building 5: East House & Workshop (x: 72..89) -->
+  <g id="bldg-east-workshop">
+    <rect x="73" y="4.5" width="15" height="8" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="1"/>
+    <rect x="72" y="2.5" width="17" height="7.5" rx="1.5" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="1.1"/>
+    <line x1="72" y1="6.2" x2="89" y2="6.2" stroke="#e36b57" stroke-width="0.7"/>
+    <!-- Chimney & Smoke -->
+    <rect x="85" y="0.5" width="2.2" height="3" fill="#b44737" stroke="#5e2a1e" stroke-width="0.6"/>
+    <path d="M 86 0.5 Q 87 -0.8 85.5 -2" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Building 6: East Cottage (x: 66..76) -->
+  <g id="bldg-east-cottage">
+    <rect x="67" y="11" width="10" height="7.5" rx="1" fill="url(#sandstone)" stroke="#594636" stroke-width="0.9"/>
+    <rect x="66" y="9.5" width="11" height="7" rx="1.2" fill="url(#roofRed2)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="66" y1="13" x2="77" y2="13" stroke="#d65e4c" stroke-width="0.6"/>
+  </g>
+
+  <!-- Stone City Wall & Battlements Structure (Apex at y=25) -->
+  <!-- Outer Stone Wall Base Stroke -->
+  <path d="M 0 6 Q 50 44 100 6" fill="none" stroke="#594636" stroke-width="5" stroke-linecap="butt"/>
+  <!-- Wall Walkway Stone Course -->
+  <path d="M 0 6 Q 50 44 100 6" fill="none" stroke="#9e8d79" stroke-width="2.6" stroke-linecap="butt"/>
+  <!-- Battlements / Merlons Pattern -->
+  <path d="M 0 6 Q 50 44 100 6" fill="none" stroke="#594636" stroke-width="2.6" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+  <!-- Wall Coping Stone Sunlit Highlights -->
+  <path d="M 0 5.1 Q 50 43.1 100 5.1" fill="none" stroke="#ded5c4" stroke-width="1.1" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+
+  <!-- Turrets / Defensive Bastions at Wall Ends (0, 6) and (100, 6) -->
+  <circle cx="2" cy="7" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="98" cy="7" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="2" cy="7" r="1.4" fill="#3a271a"/>
+  <circle cx="98" cy="7" r="1.4" fill="#3a271a"/>
+
+  <!-- 4. Clean Perimeter Border -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>

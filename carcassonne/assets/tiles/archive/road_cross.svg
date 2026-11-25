@@ -1,0 +1,323 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for gradients and styling -->
+  <defs>
+    <radialGradient id="plazaCobble" cx="48%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#dfd0b5"/>
+      <stop offset="65%" stop-color="#caa979"/>
+      <stop offset="100%" stop-color="#af9165"/>
+    </radialGradient>
+    <linearGradient id="crossStone" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#ede4d3"/>
+      <stop offset="60%" stop-color="#d6c8b0"/>
+      <stop offset="100%" stop-color="#9e8f77"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Meadow Base Layer -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Subtle Meadow Texture & Hill Shading -->
+  <g opacity="0.45">
+    <!-- Northwest meadow -->
+    <circle cx="18" cy="18" r="16" fill="#84b85c"/>
+    <circle cx="32" cy="12" r="12" fill="#659640"/>
+    <circle cx="14" cy="32" r="11" fill="#6a9b44"/>
+    <!-- Northeast meadow -->
+    <circle cx="82" cy="18" r="16" fill="#80b457"/>
+    <circle cx="68" cy="16" r="12" fill="#84b85c"/>
+    <circle cx="84" cy="32" r="11" fill="#659640"/>
+    <!-- Southwest meadow -->
+    <circle cx="20" cy="80" r="16" fill="#6a9b44"/>
+    <circle cx="32" cy="84" r="12" fill="#84b85c"/>
+    <circle cx="14" cy="66" r="11" fill="#80b457"/>
+    <!-- Southeast meadow -->
+    <circle cx="80" cy="80" r="16" fill="#659640"/>
+    <circle cx="68" cy="82" r="12" fill="#6a9b44"/>
+    <circle cx="84" cy="68" r="11" fill="#84b85c"/>
+  </g>
+
+  <!-- Grass Tufts (Northwest Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <path d="M 14 16 L 13 12.5 M 14 16 L 14.5 12 M 14 16 L 16 13"/>
+    <path d="M 32 14 L 31 10.5 M 32 14 L 32.5 10 M 32 14 L 34 11"/>
+    <path d="M 12 34 L 11 30.5 M 12 34 L 12.5 30 M 12 34 L 14 31"/>
+    <path d="M 26 32 L 25 28.5 M 26 32 L 26.5 28 M 26 32 L 28 29"/>
+  </g>
+
+  <!-- Grass Tufts (Northeast Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <path d="M 68 12 L 67 8.5 M 68 12 L 68.5 8 M 68 12 L 70 9"/>
+    <path d="M 86 14 L 85 10.5 M 86 14 L 86.5 10 M 86 14 L 88 11"/>
+    <path d="M 67 31 L 66 27.5 M 67 31 L 67.5 27 M 67 31 L 69 28"/>
+    <path d="M 85 29 L 84 25.5 M 85 29 L 85.5 25 M 85 29 L 87 26"/>
+  </g>
+
+  <!-- Grass Tufts (Southwest Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <path d="M 14 66 L 13 62.5 M 14 66 L 14.5 62 M 14 66 L 16 63"/>
+    <path d="M 33 64 L 32 60.5 M 33 64 L 33.5 60 M 33 64 L 35 61"/>
+    <path d="M 16 88 L 15 84.5 M 16 88 L 16.5 84 M 16 88 L 18 85"/>
+    <path d="M 32 86 L 31 82.5 M 32 86 L 32.5 82 M 32 86 L 34 83"/>
+  </g>
+
+  <!-- Grass Tufts (Southeast Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <path d="M 68 68 L 67 64.5 M 68 68 L 68.5 64 M 68 68 L 70 65"/>
+    <path d="M 86 66 L 85 62.5 M 86 66 L 86.5 62 M 86 66 L 88 63"/>
+    <path d="M 66 88 L 65 84.5 M 66 88 L 66.5 84 M 66 88 L 68 85"/>
+    <path d="M 84 88 L 83 84.5 M 84 88 L 84.5 84 M 84 88 L 86 85"/>
+  </g>
+
+  <!-- Wildflowers in Meadows -->
+  <g fill="#fef08a" opacity="0.85">
+    <!-- NW -->
+    <circle cx="16" cy="26" r="0.9"/>
+    <circle cx="30" cy="20" r="0.9"/>
+    <circle cx="12" cy="10" r="0.9"/>
+    <circle cx="34" cy="37" r="0.9"/>
+    <!-- NE -->
+    <circle cx="72" cy="18" r="0.9"/>
+    <circle cx="88" cy="24" r="0.9"/>
+    <circle cx="64" cy="26" r="0.9"/>
+    <circle cx="82" cy="36" r="0.9"/>
+    <!-- SW -->
+    <circle cx="18" cy="62" r="0.9"/>
+    <circle cx="34" cy="76" r="0.9"/>
+    <circle cx="10" cy="80" r="0.9"/>
+    <circle cx="28" cy="92" r="0.9"/>
+    <!-- SE -->
+    <circle cx="68" cy="64" r="0.9"/>
+    <circle cx="84" cy="70" r="0.9"/>
+    <circle cx="72" cy="84" r="0.9"/>
+    <circle cx="88" cy="82" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <!-- NW -->
+    <circle cx="24" cy="12" r="0.8"/>
+    <circle cx="36" cy="18" r="0.8"/>
+    <circle cx="18" cy="36" r="0.8"/>
+    <!-- NE -->
+    <circle cx="78" cy="10" r="0.8"/>
+    <circle cx="90" cy="16" r="0.8"/>
+    <circle cx="70" cy="36" r="0.8"/>
+    <!-- SW -->
+    <circle cx="24" cy="68" r="0.8"/>
+    <circle cx="14" cy="72" r="0.8"/>
+    <circle cx="36" cy="82" r="0.8"/>
+    <circle cx="20" cy="92" r="0.8"/>
+    <!-- SE -->
+    <circle cx="76" cy="64" r="0.8"/>
+    <circle cx="90" cy="74" r="0.8"/>
+    <circle cx="64" cy="78" r="0.8"/>
+    <circle cx="80" cy="92" r="0.8"/>
+  </g>
+
+  <!-- Foliage / Trees on Northwest Meadow -->
+  <!-- Grove NW: (20, 22) -->
+  <g>
+    <ellipse cx="20" cy="24" rx="7.5" ry="4" fill="#3c5f21" opacity="0.4"/>
+    <rect x="18" y="21" width="1.5" height="3" fill="#4d3826"/>
+    <rect x="23" y="21.5" width="1.5" height="3" fill="#4d3826"/>
+    <circle cx="17" cy="18.5" r="4.2" fill="#477528"/>
+    <circle cx="24" cy="18" r="4.5" fill="#588c34"/>
+    <circle cx="20.5" cy="15.5" r="4.4" fill="#67a13f"/>
+    <circle cx="20" cy="14.2" r="2.3" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+  <!-- Shrub NW: (33, 31) -->
+  <g>
+    <ellipse cx="33" cy="32" rx="4.2" ry="2.2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="31.8" cy="30.5" r="2.3" fill="#4e7f2b"/>
+    <circle cx="34.2" cy="30" r="2.5" fill="#5f9736"/>
+    <circle cx="33" cy="28.8" r="1.8" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on Northeast Meadow -->
+  <!-- Single Tree NE: (80, 20) -->
+  <g>
+    <ellipse cx="80" cy="22.5" rx="7.5" ry="3.8" fill="#3c5f21" opacity="0.4"/>
+    <rect x="79.2" y="19.5" width="1.6" height="3.2" fill="#4d3826"/>
+    <circle cx="77" cy="17" r="4.2" fill="#4a782a"/>
+    <circle cx="82.5" cy="17.5" r="3.8" fill="#588c34"/>
+    <circle cx="80" cy="14" r="4.4" fill="#67a13f"/>
+    <circle cx="79.5" cy="12.5" r="2.3" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+  <!-- Shrub NE: (66, 17) -->
+  <g>
+    <ellipse cx="66" cy="18" rx="4" ry="2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="64.8" cy="16.5" r="2.2" fill="#4e7f2b"/>
+    <circle cx="67.2" cy="16" r="2.4" fill="#5f9736"/>
+    <circle cx="66" cy="14.8" r="1.7" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on Southwest Meadow -->
+  <!-- Single Tree SW: (20, 76) -->
+  <g>
+    <ellipse cx="20" cy="78" rx="7" ry="3.8" fill="#3c5f21" opacity="0.4"/>
+    <rect x="19.2" y="75" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="17.5" cy="72" r="3.8" fill="#4a782a"/>
+    <circle cx="22.5" cy="72.5" r="3.4" fill="#588c34"/>
+    <circle cx="20" cy="69" r="4" fill="#67a13f"/>
+    <circle cx="19.5" cy="67.5" r="2.1" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+  <!-- Shrub SW: (31, 70) -->
+  <g>
+    <ellipse cx="31" cy="71" rx="4" ry="2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="29.8" cy="69.5" r="2.2" fill="#4e7f2b"/>
+    <circle cx="32.2" cy="69" r="2.4" fill="#5f9736"/>
+    <circle cx="31" cy="67.8" r="1.7" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on Southeast Meadow -->
+  <!-- Grove SE: (78, 76) -->
+  <g>
+    <ellipse cx="78" cy="78.5" rx="8" ry="4.2" fill="#3c5f21" opacity="0.4"/>
+    <rect x="75" y="75.5" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="80" y="76" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="74" cy="72.5" r="4.4" fill="#477528"/>
+    <circle cx="81.5" cy="72" r="4.6" fill="#588c34"/>
+    <circle cx="77.5" cy="69.5" r="4.5" fill="#67a13f"/>
+    <circle cx="77" cy="68" r="2.4" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+  <!-- Shrub SE: (67, 83) -->
+  <g>
+    <ellipse cx="67" cy="84" rx="4" ry="2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="65.8" cy="82.5" r="2.2" fill="#4e7f2b"/>
+    <circle cx="68.2" cy="82" r="2.4" fill="#5f9736"/>
+    <circle cx="67" cy="80.8" r="1.7" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- 2. 4-Way Crossroads Layer -->
+  <!-- Road Edge Shadow / Casing (14px) -->
+  <path d="M 50 0 L 50 100 M 0 50 L 100 50" fill="none" stroke="#6f5c43" stroke-width="14" stroke-linecap="butt"/>
+  <!-- Central casing hub for smooth curved fillets into the junction -->
+  <circle cx="50" cy="50" r="12.5" fill="#6f5c43"/>
+
+  <!-- Road Inner Surface (10px) -->
+  <path d="M 50 0 L 50 100 M 0 50 L 100 50" fill="none" stroke="#e4d6b7" stroke-width="10" stroke-linecap="butt"/>
+  <circle cx="50" cy="50" r="11" fill="#e4d6b7"/>
+
+  <!-- Road Shoulder Highlights & Subtle Ruts -->
+  <!-- North Road -->
+  <path d="M 45.2 0 L 45.2 39" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 54.8 0 L 54.8 39" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <!-- South Road -->
+  <path d="M 45.2 61 L 45.2 100" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 54.8 61 L 54.8 100" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <!-- West Road -->
+  <path d="M 0 45.2 L 39 45.2" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 0 54.8 L 39 54.8" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <!-- East Road -->
+  <path d="M 61 45.2 L 100 45.2" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 61 54.8 L 100 54.8" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+
+  <!-- Dashed Centerlines terminating before the center plaza -->
+  <path d="M 50 0 L 50 39" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <path d="M 50 61 L 50 100" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <path d="M 0 50 L 39 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <path d="M 61 50 L 100 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+
+  <!-- Roadside Details (Pebbles & Verge Details) -->
+  <g fill="#93816c" opacity="0.6">
+    <!-- North verge -->
+    <circle cx="42" cy="14" r="0.8"/>
+    <circle cx="42.5" cy="28" r="0.7"/>
+    <circle cx="57.5" cy="18" r="0.7"/>
+    <circle cx="58" cy="32" r="0.8"/>
+    <!-- South verge -->
+    <circle cx="42" cy="72" r="0.7"/>
+    <circle cx="42.5" cy="86" r="0.8"/>
+    <circle cx="57.5" cy="68" r="0.8"/>
+    <circle cx="58" cy="82" r="0.7"/>
+    <!-- West verge -->
+    <circle cx="14" cy="42" r="0.8"/>
+    <circle cx="28" cy="42.5" r="0.7"/>
+    <circle cx="18" cy="57.5" r="0.7"/>
+    <circle cx="32" cy="58" r="0.8"/>
+    <!-- East verge -->
+    <circle cx="72" cy="42" r="0.7"/>
+    <circle cx="86" cy="42.5" r="0.8"/>
+    <circle cx="68" cy="57.5" r="0.8"/>
+    <circle cx="82" cy="58" r="0.7"/>
+  </g>
+
+  <!-- 3. Center Junction: Village Square & Wayside Cross Marker -->
+  <!-- Cobblestone Plaza Base -->
+  <circle cx="50" cy="50" r="10.8" fill="url(#plazaCobble)" stroke="#594636" stroke-width="0.8"/>
+
+  <!-- Concentric Cobblestone Rings -->
+  <circle cx="50" cy="50" r="9.2" fill="none" stroke="#997c55" stroke-width="0.6" stroke-dasharray="2 1.5" opacity="0.65"/>
+  <circle cx="50" cy="50" r="7" fill="none" stroke="#997c55" stroke-width="0.6" stroke-dasharray="1.8 1.4" opacity="0.6"/>
+  <circle cx="50" cy="50" r="4.8" fill="none" stroke="#997c55" stroke-width="0.5" stroke-dasharray="1.5 1.2" opacity="0.55"/>
+
+  <!-- Radial Paving Accents -->
+  <g stroke="#8f724d" stroke-width="0.5" stroke-linecap="round" opacity="0.45">
+    <line x1="55" y1="50" x2="59" y2="50"/>
+    <line x1="41" y1="50" x2="45" y2="50"/>
+    <line x1="50" y1="55" x2="50" y2="59"/>
+    <line x1="50" y1="41" x2="50" y2="45"/>
+    <line x1="53.5" y1="53.5" x2="56.5" y2="56.5"/>
+    <line x1="43.5" y1="43.5" x2="46.5" y2="46.5"/>
+    <line x1="53.5" y1="46.5" x2="56.5" y2="43.5"/>
+    <line x1="43.5" y1="53.5" x2="46.5" y2="56.5"/>
+  </g>
+
+  <!-- Road Paving Threshold Lines -->
+  <line x1="45" y1="39.5" x2="55" y2="39.5" stroke="#7a6750" stroke-width="0.7" stroke-dasharray="2 0.8" opacity="0.75"/>
+  <line x1="45" y1="60.5" x2="55" y2="60.5" stroke="#7a6750" stroke-width="0.7" stroke-dasharray="2 0.8" opacity="0.75"/>
+  <line x1="39.5" y1="45" x2="39.5" y2="55" stroke="#7a6750" stroke-width="0.7" stroke-dasharray="2 0.8" opacity="0.75"/>
+  <line x1="60.5" y1="45" x2="60.5" y2="55" stroke="#7a6750" stroke-width="0.7" stroke-dasharray="2 0.8" opacity="0.75"/>
+
+  <!-- Stone Guard Bollards at Plaza Quarters -->
+  <g>
+    <!-- Bollard NW -->
+    <ellipse cx="44.2" cy="44.6" rx="1.2" ry="0.7" fill="#3c2f21" opacity="0.3"/>
+    <circle cx="43.8" cy="43.8" r="0.9" fill="#d9cdb8" stroke="#594636" stroke-width="0.4"/>
+    <!-- Bollard NE -->
+    <ellipse cx="56.4" cy="44.6" rx="1.2" ry="0.7" fill="#3c2f21" opacity="0.3"/>
+    <circle cx="56.2" cy="43.8" r="0.9" fill="#d9cdb8" stroke="#594636" stroke-width="0.4"/>
+    <!-- Bollard SW -->
+    <ellipse cx="44.2" cy="56.8" rx="1.2" ry="0.7" fill="#3c2f21" opacity="0.3"/>
+    <circle cx="43.8" cy="56.2" r="0.9" fill="#d9cdb8" stroke="#594636" stroke-width="0.4"/>
+    <!-- Bollard SE -->
+    <ellipse cx="56.4" cy="56.8" rx="1.2" ry="0.7" fill="#3c2f21" opacity="0.3"/>
+    <circle cx="56.2" cy="56.2" r="0.9" fill="#d9cdb8" stroke="#594636" stroke-width="0.4"/>
+  </g>
+
+  <!-- Wayside Cross Monument at (50, 50) -->
+  <g>
+    <!-- Monument Drop Shadow -->
+    <ellipse cx="52.2" cy="52.2" rx="4.5" ry="2.2" fill="#3c2f21" opacity="0.35"/>
+
+    <!-- Stepped Stone Plinth Base: Tier 1 -->
+    <rect x="47" y="47" width="6" height="6" rx="0.7" fill="#c4b59c" stroke="#594636" stroke-width="0.6"/>
+    <rect x="47.3" y="47.3" width="5.4" height="2" rx="0.4" fill="#ded5be" opacity="0.75"/>
+
+    <!-- Stepped Stone Plinth Base: Tier 2 -->
+    <rect x="48" y="48" width="4" height="4" rx="0.5" fill="#d2c4ad" stroke="#594636" stroke-width="0.5"/>
+    <rect x="48.2" y="48.2" width="3.6" height="1.4" rx="0.3" fill="#eae1cb" opacity="0.8"/>
+
+    <!-- Vertical Shaft -->
+    <rect x="49.1" y="42.5" width="1.8" height="8.5" rx="0.3" fill="url(#crossStone)" stroke="#4a3b2c" stroke-width="0.5"/>
+
+    <!-- Horizontal Crossbeam -->
+    <rect x="46.5" y="44.7" width="7" height="1.8" rx="0.3" fill="url(#crossStone)" stroke="#4a3b2c" stroke-width="0.5"/>
+
+    <!-- Central Nimbus / Ring -->
+    <circle cx="50" cy="45.6" r="1.7" fill="url(#crossStone)" stroke="#4a3b2c" stroke-width="0.5"/>
+    <circle cx="50" cy="45.6" r="0.6" fill="#4a3b2c" opacity="0.7"/>
+
+    <!-- Carved Finial Caps -->
+    <circle cx="50" cy="42.2" r="0.7" fill="#dfd4be" stroke="#4a3b2c" stroke-width="0.4"/>
+    <circle cx="46.2" cy="45.6" r="0.7" fill="#dfd4be" stroke="#4a3b2c" stroke-width="0.4"/>
+    <circle cx="53.8" cy="45.6" r="0.7" fill="#dfd4be" stroke="#4a3b2c" stroke-width="0.4"/>
+
+    <!-- Cross Highlighting & Shading -->
+    <line x1="49.4" y1="42.8" x2="49.4" y2="50.8" stroke="#ffffff" stroke-width="0.35" opacity="0.6"/>
+    <line x1="46.7" y1="45" x2="53.3" y2="45" stroke="#ffffff" stroke-width="0.35" opacity="0.6"/>
+    <line x1="50.6" y1="42.8" x2="50.6" y2="50.8" stroke="#403020" stroke-width="0.35" opacity="0.5"/>
+    <line x1="46.7" y1="46.2" x2="53.3" y2="46.2" stroke="#403020" stroke-width="0.35" opacity="0.5"/>
+  </g>
+
+  <!-- 4. Clean Perimeter Border -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>

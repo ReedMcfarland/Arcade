@@ -1,0 +1,304 @@
+:root {
+  --wood-dark: #221710;
+  --parchment: #f7f1e3;
+  --parchment-dark: #e8dcc5;
+  --ink: #2c221b;
+  --gold: #c99738;
+  --gold-bright: #facc15;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background-color: var(--wood-dark);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.font-medieval {
+  font-family: 'Cinzel', serif;
+}
+
+/* Rich medieval wooden tabletop background */
+.tabletop-bg {
+  background-color: #2b1e16;
+  background-image:
+    radial-gradient(ellipse at center, rgba(98, 68, 46, 0.42) 0%, rgba(24, 15, 10, 0.92) 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.016) 0px,
+      rgba(255, 255, 255, 0.016) 2px,
+      transparent 2px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.07) 0px,
+      rgba(0, 0, 0, 0.07) 1px,
+      transparent 1px,
+      transparent 48px
+    );
+}
+
+/* Warm parchment surface for floating dropdowns and modals */
+.parchment-panel {
+  background: linear-gradient(160deg, #faf5ea 0%, #ede2cc 100%);
+  border: 1px solid #c9b38f;
+  box-shadow: 0 12px 32px rgba(10, 6, 3, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+/* Tactile medieval buttons */
+.btn-medieval {
+  background: linear-gradient(180deg, #dfb154 0%, #b58024 100%);
+  color: #23170b;
+  border: 1px solid #8a5e14;
+  box-shadow: 0 3px 0 #704a0e, 0 6px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, filter 0.15s ease, box-shadow 0.1s ease, opacity 0.15s ease;
+}
+.btn-medieval:hover:not(:disabled) {
+  filter: brightness(1.07);
+}
+.btn-medieval:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #704a0e, 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.btn-medieval:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+}
+
+.btn-confirm {
+  background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
+  color: #ffffff;
+  border: 1px solid #166534;
+  box-shadow: 0 3px 0 #14532d, 0 6px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.1s ease, filter 0.15s ease, box-shadow 0.1s ease, opacity 0.15s ease;
+}
+.btn-confirm:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.btn-confirm:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #14532d;
+}
+.btn-confirm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.btn-secondary {
+  background: linear-gradient(180deg, #f5ede0 0%, #dfd0b4 100%);
+  color: #3a2a1d;
+  border: 1px solid #b5a07e;
+  box-shadow: 0 2px 0 #96805f, 0 4px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fcf8f0 0%, #eadcc3 100%);
+}
+.btn-secondary:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #96805f;
+}
+
+/* Full-screen interactive board viewport */
+#board-viewport {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+#board-viewport.dragging {
+  cursor: grabbing;
+}
+
+#board-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* Placed board tile */
+.board-tile {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 5;
+}
+.board-tile.just-confirmed {
+  box-shadow: 0 0 0 3px #facc15, 0 8px 22px rgba(0, 0, 0, 0.55);
+  z-index: 12;
+  animation: tileLockIn 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes tileLockIn {
+  0% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Staged (Pending) tile on the board before Confirm (clean neutral look) */
+.pending-tile {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  cursor: grab;
+  touch-action: none;
+  z-index: 20;
+  box-shadow: 0 0 0 2.5px rgba(255, 255, 255, 0.75), 0 8px 24px rgba(0, 0, 0, 0.55);
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+}
+.pending-tile:active {
+  cursor: grabbing;
+}
+
+/* Hover cell during dragging (neutral snap guide) */
+.drag-hover-cell {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 15;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Staged (Pending) meeple snapped onto a tile feature before confirmation (no flashing/highlight) */
+.staged-meeple {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  z-index: 35;
+  cursor: grab;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.75));
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  transition: left 0.08s ease-out, top 0.08s ease-out;
+}
+.staged-meeple:active {
+  cursor: grabbing;
+}
+.staged-meeple.meeple-farmer {
+  transform: rotate(85deg) scale(0.92);
+}
+.staged-meeple.meeple-kind-big,
+.placed-meeple.meeple-kind-big {
+  width: 34px;
+  height: 34px;
+  margin-left: -17px;
+  margin-top: -17px;
+}
+
+/* Meeple supply tray in PLACE_MEEPLE phase */
+.meeple-tray-item {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.12s ease, opacity 0.15s ease, background-color 0.15s ease;
+}
+.meeple-tray-item:hover:not(.disabled) {
+  transform: translateY(-2px);
+}
+
+/* Placed meeple on board tile */
+.placed-meeple {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  z-index: 25;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.65));
+  pointer-events: none;
+  animation: meepleDrop 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.placed-meeple.meeple-farmer {
+  transform: rotate(85deg) scale(0.92);
+}
+@keyframes meepleDrop {
+  0% { transform: translateY(-16px) scale(1.4); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Floating score text popup (+4, +9) */
+.floating-score {
+  position: absolute;
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 22px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 3px #000;
+  pointer-events: none;
+  z-index: 60;
+  animation: floatScoreUp 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes floatScoreUp {
+  0% { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+  25% { transform: translate(-50%, -18px) scale(1.22); opacity: 1; }
+  75% { transform: translate(-50%, -36px) scale(1.05); opacity: 1; }
+  100% { transform: translate(-50%, -54px) scale(0.9); opacity: 0; }
+}
+
+/* Floating drag ghost following pointer */
+#drag-ghost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 60;
+  border-radius: 7px;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.72), 0 0 0 2.5px #fde047;
+  will-change: transform;
+  opacity: 0.96;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+#drag-ghost.meeple-ghost {
+  box-shadow: none;
+  border-radius: 0;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.75));
+}
+
+#floating-tile,
+.board-tile,
+.pending-tile {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Tile bag bounce animation */
+@keyframes bagBounce {
+  0%, 100% { transform: scale(1); }
+  30% { transform: scale(1.16) rotate(-4deg); }
+  60% { transform: scale(0.92) rotate(2deg); }
+}
+.bag-draw-bounce {
+  animation: bagBounce 0.38s ease-in-out;
+}
