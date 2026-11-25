@@ -1,0 +1,1918 @@
+[
+  {
+    "id": "tb_ha",
+    "name": "City Cap & Curved Road to Gate",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_ha.png",
+    "edges": [
+      "C",
+      "R",
+      "F",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 14.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 66.0,
+          "y": 38.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 84.0,
+          "y": 28.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE",
+          "SW",
+          "WS",
+          "WN",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 35.0,
+          "y": 65.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hb",
+    "name": "Overpass Bridge (4-Way)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hb.png",
+    "edges": [
+      "R",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          0,
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 22.0,
+          "y": 54.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "NW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f3",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hc",
+    "name": "City Cap & Overpass Bridge",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hc.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 14.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 78.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 22.0,
+          "y": 54.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 16.0,
+          "y": 34.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 84.0,
+          "y": 34.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f3",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hd",
+    "name": "Corner City (Grain), City Cap & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hd.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 70.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 12.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 48.0,
+          "y": 72.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 32.0,
+          "y": 74.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 68.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_he",
+    "name": "City Bridge (Grain) & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_he.png",
+    "edges": [
+      "F",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 44.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 80.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 12.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 26.0,
+          "y": 84.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 74.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hf",
+    "name": "Corner City (Grain) & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hf.png",
+    "edges": [
+      "C",
+      "F",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 32.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 64.0,
+          "y": 78.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 80.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 34.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hg",
+    "name": "Corner City (Grain)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hg.png",
+    "edges": [
+      "C",
+      "F",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 32.0,
+          "y": 32.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 72.0,
+          "y": 72.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hh",
+    "name": "Three-Sided City (Grain)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hh.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 36.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hi",
+    "name": "Corner City (Grain) & West Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hi.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 1,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 68.0,
+          "y": 36.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 16.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 16.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 28.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hj",
+    "name": "Monastery with Three Roads",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hj.png",
+    "edges": [
+      "F",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "m0",
+        "type": "monastery",
+        "edges": [],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 46.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 82.0,
+          "y": 54.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 84.0
+        }
+      },
+      {
+        "id": "r2",
+        "type": "road",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 18.0,
+          "y": 54.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "NW",
+          "NE",
+          "EN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hk",
+    "name": "Corner City (Cloth) & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hk.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 1
+        },
+        "hotspot": {
+          "x": 68.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 52.0,
+          "y": 78.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "WS",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 26.0,
+          "y": 62.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 74.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hl",
+    "name": "Corner City (Cloth), City Cap & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hl.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 1
+        },
+        "hotspot": {
+          "x": 70.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 12.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 48.0,
+          "y": 72.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 32.0,
+          "y": 74.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 68.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hm",
+    "name": "Corner City (Cloth) & Two City Caps",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hm.png",
+    "edges": [
+      "C",
+      "C",
+      "C",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 1
+        },
+        "hotspot": {
+          "x": 70.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 12.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "c2",
+        "type": "city",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 88.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1",
+          "c2"
+        ],
+        "hotspot": {
+          "x": 42.0,
+          "y": 56.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hn",
+    "name": "City Bridge (Cloth)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hn.png",
+    "edges": [
+      "F",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 1
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 14.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_ho",
+    "name": "Three-Sided City (Cloth)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_ho.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 1
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 36.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hp",
+    "name": "Three-Sided City (Wine)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hp.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 36.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hq",
+    "name": "City Bridge (Wine)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hq.png",
+    "edges": [
+      "F",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 14.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hr",
+    "name": "City Bridge (Wine) & North Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hr.png",
+    "edges": [
+      "R",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 54.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 18.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 26.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 74.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hs",
+    "name": "City Bridge (Wine) & South Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hs.png",
+    "edges": [
+      "F",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 46.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 82.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 14.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 26.0,
+          "y": 84.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 74.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_ht",
+    "name": "Corner City (Wine)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_ht.png",
+    "edges": [
+      "C",
+      "F",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 32.0,
+          "y": 32.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 72.0,
+          "y": 72.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hu",
+    "name": "Corner City (Wine) & Curved Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hu.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 32.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 66.0,
+          "y": 66.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 48.0,
+          "y": 56.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 82.0,
+          "y": 82.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hv",
+    "name": "Three-Sided City (Wine)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hv.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 50.0,
+          "y": 36.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 86.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hw",
+    "name": "Corner City (Wine), City Cap & Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hw.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 70.0,
+          "y": 32.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 12.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 48.0,
+          "y": 72.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 32.0,
+          "y": 74.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 68.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "tb_hx",
+    "name": "Opposite Corner Cities (Wine)",
+    "count": 1,
+    "is_start": false,
+    "expansion": "traders_builders",
+    "asset": "assets/tiles/tb_hx.png",
+    "edges": [
+      "C",
+      "C",
+      "C",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 1,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 74.0,
+          "y": 26.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          2,
+          3
+        ],
+        "shield": false,
+        "goods": {
+          "wine": 0,
+          "grain": 0,
+          "cloth": 0
+        },
+        "hotspot": {
+          "x": 26.0,
+          "y": 74.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ]
+  }
+]

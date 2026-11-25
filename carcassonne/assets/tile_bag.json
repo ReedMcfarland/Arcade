@@ -1,0 +1,2305 @@
+[
+  {
+    "id": "monastery_road",
+    "name": "Monastery with Road",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/monastery_road.png",
+    "edges": [
+      "F",
+      "F",
+      "R",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "m0",
+        "type": "monastery",
+        "edges": [],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 44.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 82.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW",
+          "WS",
+          "WN",
+          "NW",
+          "NE",
+          "EN",
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 20.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "monastery",
+    "name": "Monastery",
+    "count": 4,
+    "is_start": false,
+    "asset": "assets/tiles/monastery.png",
+    "edges": [
+      "F",
+      "F",
+      "F",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "m0",
+        "type": "monastery",
+        "edges": [],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "WS",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 20.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_full",
+    "name": "Grand Citadel",
+    "count": 1,
+    "is_start": false,
+    "asset": "assets/tiles/city_full.png",
+    "edges": [
+      "C",
+      "C",
+      "C",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": []
+  },
+  {
+    "id": "start_tile",
+    "name": "Starting Tile (City & Road)",
+    "count": 1,
+    "is_start": true,
+    "asset": "assets/tiles/start_tile.png",
+    "edges": [
+      "C",
+      "R",
+      "F",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 54.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 38.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW",
+          "SE",
+          "ES",
+          "CENTER"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 78.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_cap_road_straight",
+    "name": "City & Straight Road",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_cap_road_straight.png",
+    "edges": [
+      "C",
+      "R",
+      "F",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 54.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 38.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW",
+          "SE",
+          "ES",
+          "CENTER"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 78.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_cap",
+    "name": "City Gate",
+    "count": 5,
+    "is_start": false,
+    "asset": "assets/tiles/city_cap.png",
+    "edges": [
+      "C",
+      "F",
+      "F",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 18.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "WS",
+          "SW",
+          "SE",
+          "ES",
+          "EN",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 65.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_bridge_shield",
+    "name": "Fortified City Bridge",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/city_bridge_shield.png",
+    "edges": [
+      "F",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 15.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 85.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_bridge",
+    "name": "City Bridge",
+    "count": 1,
+    "is_start": false,
+    "asset": "assets/tiles/city_bridge.png",
+    "edges": [
+      "F",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 15.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SW",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 85.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_two_opposite",
+    "name": "Two Opposite Cities",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_two_opposite.png",
+    "edges": [
+      "F",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 84.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 16.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "SE",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_two_adjacent",
+    "name": "Two Adjacent Cities",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/city_two_adjacent.png",
+    "edges": [
+      "C",
+      "F",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 16.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0",
+          "c1"
+        ],
+        "hotspot": {
+          "x": 62.0,
+          "y": 62.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_cap_road_curve",
+    "name": "City & Curved Road",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_cap_road_curve.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 64.0,
+          "y": 64.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "WN",
+          "WS",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 35.0,
+          "y": 48.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 82.0,
+          "y": 82.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_cap_road_curve_left",
+    "name": "City & Left Curved Road",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_cap_road_curve_left.png",
+    "edges": [
+      "C",
+      "F",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 36.0,
+          "y": 64.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "EN",
+          "ES",
+          "SE",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 65.0,
+          "y": 48.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 18.0,
+          "y": 82.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_cap_road_t",
+    "name": "City & 3-Way Crossroads",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_cap_road_t.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 16.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 82.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 82.0
+        }
+      },
+      {
+        "id": "r2",
+        "type": "road",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 18.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 36.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_corner_shield",
+    "name": "Fortified City Corner",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/city_corner_shield.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 70.0,
+          "y": 30.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW",
+          "WS",
+          "WN",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 32.0,
+          "y": 68.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_corner",
+    "name": "City Corner",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_corner.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 70.0,
+          "y": 30.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW",
+          "WS",
+          "WN",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 32.0,
+          "y": 68.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_corner_road_shield",
+    "name": "Fortified City Corner & Road",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/city_corner_road_shield.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 30.0,
+          "y": 30.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 66.0,
+          "y": 66.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 54.0,
+          "y": 54.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 82.0,
+          "y": 82.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_corner_road",
+    "name": "City Corner & Road",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_corner_road.png",
+    "edges": [
+      "C",
+      "R",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 30.0,
+          "y": 30.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1,
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 66.0,
+          "y": 66.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "EN",
+          "SW",
+          "CENTER"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 54.0,
+          "y": 54.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 82.0,
+          "y": 82.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_three_shield",
+    "name": "Fortified Three-Sided City",
+    "count": 1,
+    "is_start": false,
+    "asset": "assets/tiles/city_three_shield.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_three",
+    "name": "Three-Sided City",
+    "count": 3,
+    "is_start": false,
+    "asset": "assets/tiles/city_three.png",
+    "edges": [
+      "C",
+      "C",
+      "F",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SE",
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 84.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_three_road_shield",
+    "name": "Fortified Three-Sided City & Road",
+    "count": 2,
+    "is_start": false,
+    "asset": "assets/tiles/city_three_road_shield.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": true,
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 84.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 28.0,
+          "y": 88.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 72.0,
+          "y": 88.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "city_three_road",
+    "name": "Three-Sided City & Road",
+    "count": 1,
+    "is_start": false,
+    "asset": "assets/tiles/city_three_road.png",
+    "edges": [
+      "C",
+      "C",
+      "R",
+      "C"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 84.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 28.0,
+          "y": 88.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 72.0,
+          "y": 88.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "road_straight",
+    "name": "Straight Road",
+    "count": 8,
+    "is_start": false,
+    "asset": "assets/tiles/road_straight.png",
+    "edges": [
+      "R",
+      "F",
+      "R",
+      "F"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          0,
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "WN",
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 25.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN",
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 75.0,
+          "y": 50.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "road_curve",
+    "name": "Curved Road",
+    "count": 9,
+    "is_start": false,
+    "asset": "assets/tiles/road_curve.png",
+    "edges": [
+      "F",
+      "F",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2,
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 36.0,
+          "y": 64.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 18.0,
+          "y": 82.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "SE",
+          "ES",
+          "EN",
+          "NE",
+          "NW",
+          "WN",
+          "CENTER"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 65.0,
+          "y": 35.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "road_t",
+    "name": "3-Way Crossroads",
+    "count": 4,
+    "is_start": false,
+    "asset": "assets/tiles/road_t.png",
+    "edges": [
+      "F",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 76.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 76.0
+        }
+      },
+      {
+        "id": "r2",
+        "type": "road",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 24.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "WN",
+          "CENTER"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 78.0,
+          "y": 78.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 22.0,
+          "y": 78.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "road_cross",
+    "name": "4-Way Crossroads",
+    "count": 1,
+    "is_start": false,
+    "asset": "assets/tiles/road_cross.png",
+    "edges": [
+      "R",
+      "R",
+      "R",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 78.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "r2",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 78.0
+        }
+      },
+      {
+        "id": "r3",
+        "type": "road",
+        "edges": [
+          3
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 22.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 22.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 78.0,
+          "y": 22.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SE",
+          "ES"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 78.0,
+          "y": 78.0
+        }
+      },
+      {
+        "id": "f3",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 22.0,
+          "y": 78.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_spring",
+    "name": "River Source",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": true,
+    "is_lake": false,
+    "asset": "assets/tiles/river_spring.png",
+    "edges": [
+      "F",
+      "F",
+      "W",
+      "F"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "WS",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 20.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_straight_bridge_road",
+    "name": "River Bridge with City and Road",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_straight_bridge_road.png",
+    "edges": [
+      "C",
+      "W",
+      "R",
+      "W"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 15.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 32.0,
+          "y": 70.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 20.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 75.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f3",
+        "nodes": [
+          "SE",
+          "ES"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_city_caps",
+    "name": "River with Opposite Cities",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_city_caps.png",
+    "edges": [
+      "C",
+      "W",
+      "C",
+      "W"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 15.0
+        }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 85.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "WN",
+          "EN"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "ES"
+        ],
+        "adjacent_cities": [
+          "c1"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 65.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_straight",
+    "name": "River Straight",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_straight.png",
+    "edges": [
+      "F",
+      "W",
+      "F",
+      "W"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW",
+          "SE",
+          "ES"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_curve_city",
+    "name": "River Curve with City Corner",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_curve_city.png",
+    "edges": [
+      "C",
+      "C",
+      "W",
+      "W"
+    ],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [
+          0,
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 75.0,
+          "y": 25.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WN",
+          "SE"
+        ],
+        "adjacent_cities": [
+          "c0"
+        ],
+        "hotspot": {
+          "x": 50.0,
+          "y": 55.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_straight_bend",
+    "name": "River Straight with Bend",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_straight_bend.png",
+    "edges": [
+      "W",
+      "F",
+      "W",
+      "F"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "WN",
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN",
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 50.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_curve_farm",
+    "name": "River Curve with Farmhouse",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_curve_farm.png",
+    "edges": [
+      "W",
+      "F",
+      "F",
+      "W"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "WS"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 65.0,
+          "y": 65.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_monastery",
+    "name": "River Monastery",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_monastery.png",
+    "edges": [
+      "F",
+      "W",
+      "R",
+      "W"
+    ],
+    "features": [
+      {
+        "id": "m0",
+        "type": "monastery",
+        "edges": [],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 35.0
+        }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          2
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 40.0,
+          "y": 75.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 15.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "SE",
+          "ES"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_curve_road",
+    "name": "River Curve with Road",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_curve_road.png",
+    "edges": [
+      "R",
+      "W",
+      "W",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          3,
+          0
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 35.0,
+          "y": 35.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 18.0,
+          "y": 18.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN",
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_curve_meadow",
+    "name": "River Curve with Meadow",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_curve_meadow.png",
+    "edges": [
+      "F",
+      "W",
+      "W",
+      "F"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "WS",
+          "WN",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 35.0,
+          "y": 35.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_bridge_road",
+    "name": "River Bridge with Cross Road",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": false,
+    "asset": "assets/tiles/river_bridge_road.png",
+    "edges": [
+      "W",
+      "R",
+      "W",
+      "R"
+    ],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [
+          3,
+          1
+        ],
+        "shield": false,
+        "hotspot": {
+          "x": 50.0,
+          "y": 50.0
+        }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f1",
+        "nodes": [
+          "NE",
+          "EN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 20.0
+        }
+      },
+      {
+        "id": "f2",
+        "nodes": [
+          "ES",
+          "SE"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 80.0,
+          "y": 80.0
+        }
+      },
+      {
+        "id": "f3",
+        "nodes": [
+          "WS",
+          "SW"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 20.0,
+          "y": 80.0
+        }
+      }
+    ]
+  },
+  {
+    "id": "river_lake",
+    "name": "River Lake",
+    "count": 1,
+    "is_start": false,
+    "is_river": true,
+    "is_spring": false,
+    "is_lake": true,
+    "asset": "assets/tiles/river_lake.png",
+    "edges": [
+      "F",
+      "F",
+      "W",
+      "F"
+    ],
+    "features": [],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": [
+          "NW",
+          "NE",
+          "EN",
+          "ES",
+          "SE",
+          "SW",
+          "WS",
+          "WN"
+        ],
+        "adjacent_cities": [],
+        "hotspot": {
+          "x": 75.0,
+          "y": 30.0
+        }
+      }
+    ]
+  }
+]

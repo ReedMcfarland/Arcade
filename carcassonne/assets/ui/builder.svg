@@ -1,0 +1,52 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="builder-shadow-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" />
+    </filter>
+    <filter id="builder-contact-blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.0" />
+    </filter>
+    <!-- Classic Carcassonne Builder silhouette (domed head/cap, flared shoulders, waist, wide skirted base) -->
+    <clipPath id="builder-clip">
+      <path d="M 50 10 C 42 10 36 16 36 23 C 36 26.5 37.8 29.5 40.5 31.5 C 33 34 27 38.5 27 44 C 27 47.5 30 49.5 34 50.5 L 31 66 C 26 70 21 75 21 81 C 21 83 22.5 84 25 84 H 75 C 77.5 84 79 83 79 81 C 79 75 74 70 69 66 L 66 50.5 C 70 49.5 73 47.5 73 44 C 73 38.5 67 34 59.5 31.5 C 62.2 29.5 64 26.5 64 23 C 64 16 58 10 50 10 Z" />
+    </clipPath>
+    <linearGradient id="builder-lighting-grad" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.06" />
+      <stop offset="70%" stop-color="#000000" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.28" />
+    </linearGradient>
+    <linearGradient id="builder-rim-bevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.14" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45" />
+    </linearGradient>
+    <radialGradient id="builder-head-glow" cx="46%" cy="17%" r="22%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.30" />
+      <stop offset="65%" stop-color="#ffffff" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Tabletop Shadow -->
+  <g class="builder-shadow">
+    <ellipse cx="50" cy="87.5" rx="30" ry="4.5" fill="#000000" opacity="0.24" filter="url(#builder-shadow-blur)" />
+    <ellipse cx="50" cy="84.5" rx="26" ry="2.2" fill="#000000" opacity="0.30" filter="url(#builder-contact-blur)" />
+  </g>
+
+  <!-- 3D Wooden Extrusion Under-Edge -->
+  <path d="M 50 10 C 42 10 36 16 36 23 C 36 26.5 37.8 29.5 40.5 31.5 C 33 34 27 38.5 27 44 C 27 47.5 30 49.5 34 50.5 L 31 66 C 26 70 21 75 21 81 C 21 83 22.5 84 25 84 H 75 C 77.5 84 79 83 79 81 C 79 75 74 70 69 66 L 66 50.5 C 70 49.5 73 47.5 73 44 C 73 38.5 67 34 59.5 31.5 C 62.2 29.5 64 26.5 64 23 C 64 16 58 10 50 10 Z" transform="translate(0, 1.5)" fill="#000000" opacity="0.28" />
+
+  <!-- Base Wooden Silhouette (Uses currentColor) -->
+  <path id="builder-body" d="M 50 10 C 42 10 36 16 36 23 C 36 26.5 37.8 29.5 40.5 31.5 C 33 34 27 38.5 27 44 C 27 47.5 30 49.5 34 50.5 L 31 66 C 26 70 21 75 21 81 C 21 83 22.5 84 25 84 H 75 C 77.5 84 79 83 79 81 C 79 75 74 70 69 66 L 66 50.5 C 70 49.5 73 47.5 73 44 C 73 38.5 67 34 59.5 31.5 C 62.2 29.5 64 26.5 64 23 C 64 16 58 10 50 10 Z" fill="currentColor" />
+
+  <!-- Tactile Surface Overlays -->
+  <g clip-path="url(#builder-clip)">
+    <rect width="100" height="100" fill="url(#builder-lighting-grad)" />
+    <circle cx="50" cy="20" r="24" fill="url(#builder-head-glow)" />
+    <!-- Subtle inner apron/belt detail -->
+    <path d="M 33 50.5 Q 50 53.5 67 50.5" fill="none" stroke="#000000" stroke-opacity="0.16" stroke-width="1.6" />
+    <path d="M 50 10 C 42 10 36 16 36 23 C 36 26.5 37.8 29.5 40.5 31.5 C 33 34 27 38.5 27 44 C 27 47.5 30 49.5 34 50.5 L 31 66 C 26 70 21 75 21 81 C 21 83 22.5 84 25 84 H 75 C 77.5 84 79 83 79 81 C 79 75 74 70 69 66 L 66 50.5 C 70 49.5 73 47.5 73 44 C 73 38.5 67 34 59.5 31.5 C 62.2 29.5 64 26.5 64 23 C 64 16 58 10 50 10 Z" fill="none" stroke="url(#builder-rim-bevel)" stroke-width="2.2" />
+  </g>
+</svg>

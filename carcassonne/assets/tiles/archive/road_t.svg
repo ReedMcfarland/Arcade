@@ -1,0 +1,274 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 1. Meadow Base Layer -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Subtle Meadow Texture & Hill Shading -->
+  <g opacity="0.45">
+    <!-- North Meadow Hills -->
+    <circle cx="20" cy="18" r="22" fill="#84b85c"/>
+    <circle cx="80" cy="16" r="20" fill="#6a9b44"/>
+    <circle cx="50" cy="12" r="18" fill="#80b457"/>
+    <circle cx="50" cy="28" r="14" fill="#659640"/>
+    <!-- South-West Meadow Hills -->
+    <circle cx="18" cy="80" r="22" fill="#6a9b44"/>
+    <circle cx="12" cy="65" r="14" fill="#84b85c"/>
+    <circle cx="30" cy="88" r="16" fill="#80b457"/>
+    <!-- South-East Meadow Hills -->
+    <circle cx="82" cy="78" r="22" fill="#659640"/>
+    <circle cx="88" cy="65" r="14" fill="#84b85c"/>
+    <circle cx="70" cy="88" r="16" fill="#80b457"/>
+  </g>
+
+  <!-- Grass Tufts (North Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- tuft at (12, 12) -->
+    <path d="M 12 12 L 11 8.5 M 12 12 L 12.5 8 M 12 12 L 14 9"/>
+    <!-- tuft at (36, 10) -->
+    <path d="M 36 10 L 35 6.5 M 36 10 L 36.5 6 M 36 10 L 38 7"/>
+    <!-- tuft at (62, 10) -->
+    <path d="M 62 10 L 61 6.5 M 62 10 L 62.5 6 M 62 10 L 64 7"/>
+    <!-- tuft at (88, 12) -->
+    <path d="M 88 12 L 87 8.5 M 88 12 L 88.5 8 M 88 12 L 90 9"/>
+    <!-- tuft at (14, 34) -->
+    <path d="M 14 34 L 13 30.5 M 14 34 L 14.5 30 M 14 34 L 16 31"/>
+    <!-- tuft at (35, 34) -->
+    <path d="M 35 34 L 34 30.5 M 35 34 L 35.5 30 M 35 34 L 37 31"/>
+    <!-- tuft at (65, 34) -->
+    <path d="M 65 34 L 64 30.5 M 65 34 L 65.5 30 M 65 34 L 67 31"/>
+    <!-- tuft at (86, 34) -->
+    <path d="M 86 34 L 85 30.5 M 86 34 L 86.5 30 M 86 34 L 88 31"/>
+  </g>
+
+  <!-- Grass Tufts (South-West Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- tuft at (14, 68) -->
+    <path d="M 14 68 L 13 64.5 M 14 68 L 14.5 64 M 14 68 L 16 65"/>
+    <!-- tuft at (34, 70) -->
+    <path d="M 34 70 L 33 66.5 M 34 70 L 34.5 66 M 34 70 L 36 67"/>
+    <!-- tuft at (16, 90) -->
+    <path d="M 16 90 L 15 86.5 M 16 90 L 16.5 86 M 16 90 L 18 87"/>
+    <!-- tuft at (36, 90) -->
+    <path d="M 36 90 L 35 86.5 M 36 90 L 36.5 86 M 36 90 L 38 87"/>
+  </g>
+
+  <!-- Grass Tufts (South-East Meadow) -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- tuft at (66, 70) -->
+    <path d="M 66 70 L 65 66.5 M 66 70 L 66.5 66 M 66 70 L 68 67"/>
+    <!-- tuft at (86, 68) -->
+    <path d="M 86 68 L 85 64.5 M 86 68 L 86.5 64 M 86 68 L 88 65"/>
+    <!-- tuft at (64, 90) -->
+    <path d="M 64 90 L 63 86.5 M 64 90 L 64.5 86 M 64 90 L 66 87"/>
+    <!-- tuft at (84, 90) -->
+    <path d="M 84 90 L 83 86.5 M 84 90 L 84.5 86 M 84 90 L 86 87"/>
+  </g>
+
+  <!-- Wildflowers in Meadows -->
+  <g fill="#fef08a" opacity="0.85">
+    <circle cx="16" cy="15" r="0.9"/>
+    <circle cx="34" cy="8" r="0.9"/>
+    <circle cx="66" cy="8" r="0.9"/>
+    <circle cx="84" cy="14" r="0.9"/>
+    <circle cx="12" cy="38" r="0.9"/>
+    <circle cx="38" cy="37" r="0.9"/>
+    <circle cx="62" cy="37" r="0.9"/>
+    <circle cx="88" cy="38" r="0.9"/>
+    <circle cx="12" cy="72" r="0.9"/>
+    <circle cx="36" cy="74" r="0.9"/>
+    <circle cx="14" cy="94" r="0.9"/>
+    <circle cx="38" cy="86" r="0.9"/>
+    <circle cx="64" cy="74" r="0.9"/>
+    <circle cx="88" cy="72" r="0.9"/>
+    <circle cx="62" cy="86" r="0.9"/>
+    <circle cx="86" cy="94" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <circle cx="10" cy="10" r="0.8"/>
+    <circle cx="38" cy="14" r="0.8"/>
+    <circle cx="60" cy="13" r="0.8"/>
+    <circle cx="90" cy="9" r="0.8"/>
+    <circle cx="18" cy="32" r="0.8"/>
+    <circle cx="82" cy="32" r="0.8"/>
+    <circle cx="18" cy="66" r="0.8"/>
+    <circle cx="32" cy="88" r="0.8"/>
+    <circle cx="82" cy="66" r="0.8"/>
+    <circle cx="68" cy="88" r="0.8"/>
+  </g>
+
+  <!-- Foliage / Trees on North Meadow -->
+  <!-- Grove North-West: (24, 20) -->
+  <g>
+    <ellipse cx="24" cy="22" rx="9" ry="4.8" fill="#3c5f21" opacity="0.4"/>
+    <rect x="21" y="19" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="26" y="19.5" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="20" cy="16.5" r="4.6" fill="#477528"/>
+    <circle cx="27.5" cy="16" r="5" fill="#588c34"/>
+    <circle cx="23.5" cy="13.5" r="4.8" fill="#67a13f"/>
+    <circle cx="23" cy="12" r="2.5" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+
+  <!-- Grove North-East: (76, 20) -->
+  <g>
+    <ellipse cx="76" cy="22" rx="8.5" ry="4.5" fill="#3c5f21" opacity="0.4"/>
+    <rect x="73.5" y="19" width="1.6" height="3.5" fill="#4d3826"/>
+    <rect x="78.5" y="19.5" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="72.5" cy="16.5" r="4.5" fill="#477528"/>
+    <circle cx="79.5" cy="16" r="4.8" fill="#588c34"/>
+    <circle cx="76" cy="13.5" r="4.6" fill="#67a13f"/>
+    <circle cx="75.5" cy="12" r="2.5" fill="#7ebb4d" opacity="0.65"/>
+  </g>
+
+  <!-- Shrub North-Mid: (50, 24) -->
+  <g>
+    <ellipse cx="50" cy="25" rx="4.5" ry="2.5" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="48.5" cy="23" r="2.5" fill="#4e7f2b"/>
+    <circle cx="51.5" cy="22.5" r="2.8" fill="#5f9736"/>
+    <circle cx="50" cy="21" r="2" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on South-West Meadow -->
+  <!-- Grove South-West: (22, 78) -->
+  <g>
+    <ellipse cx="22" cy="80" rx="7.5" ry="4" fill="#3c5f21" opacity="0.4"/>
+    <rect x="21" y="77" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="19" cy="74" r="4" fill="#4a782a"/>
+    <circle cx="24" cy="75" r="3.5" fill="#588c34"/>
+    <circle cx="21.5" cy="71.5" r="4.2" fill="#67a13f"/>
+    <circle cx="21" cy="70" r="2.2" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+  <!-- Shrub South-West: (12, 60) -->
+  <g>
+    <ellipse cx="12" cy="61" rx="4" ry="2.2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="10.8" cy="59" r="2.4" fill="#4e7f2b"/>
+    <circle cx="13.2" cy="58.5" r="2.5" fill="#5f9736"/>
+    <circle cx="12" cy="57" r="1.8" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- Foliage / Trees on South-East Meadow -->
+  <!-- Grove South-East: (78, 78) -->
+  <g>
+    <ellipse cx="78" cy="80" rx="8" ry="4.2" fill="#3c5f21" opacity="0.4"/>
+    <rect x="75.5" y="77" width="1.6" height="3" fill="#4d3826"/>
+    <rect x="80.5" y="77.5" width="1.6" height="3" fill="#4d3826"/>
+    <circle cx="74.5" cy="74.5" r="4.2" fill="#477528"/>
+    <circle cx="81.5" cy="74" r="4.4" fill="#588c34"/>
+    <circle cx="78" cy="71.5" r="4.4" fill="#67a13f"/>
+    <circle cx="77.5" cy="70" r="2.3" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+  <!-- Shrub South-East: (88, 60) -->
+  <g>
+    <ellipse cx="88" cy="61" rx="4" ry="2.2" fill="#3c5f21" opacity="0.35"/>
+    <circle cx="86.8" cy="59" r="2.4" fill="#4e7f2b"/>
+    <circle cx="89.2" cy="58.5" r="2.5" fill="#5f9736"/>
+    <circle cx="88" cy="57" r="1.8" fill="#7ebb4d" opacity="0.6"/>
+  </g>
+
+  <!-- 2. Roads Layer (3-Way Crossroads: West, East, South) -->
+  <!-- Road Edge Shadow / Casing (14px) -->
+  <path d="M 0 50 L 100 50" fill="none" stroke="#6f5c43" stroke-width="14" stroke-linecap="butt"/>
+  <path d="M 50 50 L 50 100" fill="none" stroke="#6f5c43" stroke-width="14" stroke-linecap="butt"/>
+
+  <!-- Road Inner Surface (10px) -->
+  <path d="M 0 50 L 100 50" fill="none" stroke="#e4d6b7" stroke-width="10" stroke-linecap="butt"/>
+  <path d="M 50 50 L 50 100" fill="none" stroke="#e4d6b7" stroke-width="10" stroke-linecap="butt"/>
+
+  <!-- Road Shoulder Highlights & Subtle Ruts -->
+  <!-- Top / North Shoulder across East-West road -->
+  <path d="M 0 45.2 L 100 45.2" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <!-- South Shoulders on West & East branches -->
+  <path d="M 0 54.8 L 43 54.8" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 57 54.8 L 100 54.8" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+  <!-- West & East Shoulders on South branch -->
+  <path d="M 45.2 57 L 45.2 100" fill="none" stroke="#d5c49f" stroke-width="0.6" opacity="0.7"/>
+  <path d="M 54.8 57 L 54.8 100" fill="none" stroke="#c9b78e" stroke-width="0.6" opacity="0.7"/>
+
+  <!-- Dashed Centerlines (stopping neatly before village plaza at r=12) -->
+  <path d="M 0 50 L 38 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <path d="M 100 50 L 62 50" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+  <path d="M 50 100 L 50 62" fill="none" stroke="#bfaa88" stroke-width="1.3" stroke-dasharray="3.5 3.5" stroke-linecap="butt"/>
+
+  <!-- Roadside Details (Pebbles & Stones) -->
+  <g fill="#93816c" opacity="0.6">
+    <circle cx="22" cy="42" r="0.8"/>
+    <circle cx="34" cy="58" r="0.7"/>
+    <circle cx="78" cy="42" r="0.8"/>
+    <circle cx="66" cy="58" r="0.7"/>
+    <circle cx="42" cy="76" r="0.8"/>
+    <circle cx="58" cy="84" r="0.9"/>
+  </g>
+
+  <!-- 3. Central Junction Layer: Round Cobblestone Village Plaza & Well -->
+  <!-- Plaza Drop Shadow on Meadow / Roads -->
+  <ellipse cx="50" cy="51.5" rx="13.2" ry="12.2" fill="#3c5f21" opacity="0.32"/>
+
+  <!-- Plaza Cobblestone Base -->
+  <circle cx="50" cy="50" r="12" fill="#d9cbb0" stroke="#6f5c43" stroke-width="1.5"/>
+
+  <!-- Outer Cobblestone Curb Course -->
+  <circle cx="50" cy="50" r="10.8" fill="none" stroke="#9c896d" stroke-width="1.3" stroke-dasharray="2.2 1.3"/>
+
+  <!-- Inner Paver Ring -->
+  <circle cx="50" cy="50" r="7.8" fill="none" stroke="#baa78c" stroke-width="0.9" stroke-dasharray="2 1.5"/>
+
+  <!-- Cobblestone Paving Texture Accents -->
+  <g fill="#9c896d" opacity="0.55">
+    <circle cx="44.5" cy="46" r="0.7"/>
+    <circle cx="55.5" cy="46" r="0.7"/>
+    <circle cx="44" cy="54" r="0.7"/>
+    <circle cx="56" cy="54" r="0.7"/>
+    <circle cx="50" cy="58.5" r="0.8"/>
+    <circle cx="50" cy="41.5" r="0.8"/>
+  </g>
+
+  <!-- Wooden Crossroads Guidepost (NW corner of plaza) -->
+  <g>
+    <line x1="42.5" y1="44.5" x2="42.5" y2="41" stroke="#543d2b" stroke-width="0.9" stroke-linecap="round"/>
+    <!-- West sign blade -->
+    <polygon points="40.2,41.8 42.5,41 42.5,42.6" fill="#cbb793" stroke="#4a3321" stroke-width="0.4"/>
+    <!-- South sign blade -->
+    <polygon points="42.5,42.2 44.5,43 42.5,43.8" fill="#baa27a" stroke="#4a3321" stroke-width="0.4"/>
+  </g>
+
+  <!-- Small Village Stone Bench (NE corner of plaza) -->
+  <g>
+    <rect x="55.2" y="42.2" width="3.8" height="1.6" rx="0.4" fill="#c4b49b" stroke="#594636" stroke-width="0.5"/>
+    <line x1="55.6" y1="43" x2="58.6" y2="43" stroke="#dfd4c0" stroke-width="0.4"/>
+  </g>
+
+  <!-- Central Village Well Structure at (50, 50) -->
+  <!-- Well Base Shadow -->
+  <ellipse cx="50" cy="52" rx="5.2" ry="3.5" fill="#5c4e3e" opacity="0.38"/>
+
+  <!-- Well Outer Stone Basin Wall -->
+  <circle cx="50" cy="50" r="4.6" fill="#9c896d" stroke="#594636" stroke-width="1.2"/>
+  <!-- Stone Course Joint Detail -->
+  <circle cx="50" cy="50" r="4.6" fill="none" stroke="#7d6a52" stroke-width="0.9" stroke-dasharray="1.8 1.2"/>
+
+  <!-- Well Stone Coping Rim -->
+  <circle cx="50" cy="50" r="3.4" fill="#d9cbb0" stroke="#6f5c43" stroke-width="0.6"/>
+
+  <!-- Well Deep Water Reservoir -->
+  <circle cx="50" cy="50" r="2.4" fill="#2d4959" stroke="#1f333f" stroke-width="0.5"/>
+  <!-- Water Reflection / Shimmer -->
+  <ellipse cx="49.2" cy="49.2" rx="1.1" ry="0.7" fill="#6ba3be" opacity="0.75"/>
+
+  <!-- Wooden Support Posts & Winch -->
+  <rect x="46" y="47.6" width="1.2" height="4.8" rx="0.3" fill="#523924"/>
+  <rect x="52.8" y="47.6" width="1.2" height="4.8" rx="0.3" fill="#523924"/>
+  <line x1="46" y1="48.5" x2="54" y2="48.5" stroke="#7d593a" stroke-width="0.9"/>
+  <!-- Rope & Bucket -->
+  <line x1="50" y1="48.5" x2="50" y2="50.4" stroke="#d5c49f" stroke-width="0.7"/>
+  <rect x="49.3" y="50" width="1.4" height="1.5" rx="0.2" fill="#523924"/>
+
+  <!-- Well Roof Canopy (Pitched Terracotta Tile) -->
+  <polygon points="44.2,47 50,42.5 55.8,47" fill="#ba4837" stroke="#5e2a1e" stroke-width="0.8"/>
+  <!-- Roof Ridge Highlight -->
+  <line x1="44.2" y1="47" x2="50" y2="42.5" stroke="#e06956" stroke-width="0.6"/>
+  <!-- Roof Shadow Facet -->
+  <polygon points="50,42.5 55.8,47 50,47" fill="#752217" opacity="0.35"/>
+  <!-- Roof Finial / Cap -->
+  <circle cx="50" cy="42.2" r="0.7" fill="#d9cbb0" stroke="#5e2a1e" stroke-width="0.4"/>
+
+  <!-- 4. Clean Perimeter Border -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>

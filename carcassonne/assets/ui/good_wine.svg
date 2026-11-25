@@ -1,0 +1,49 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="wine-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#1a0f08" flood-opacity="0.38" />
+    </filter>
+    <linearGradient id="oak-body" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c3f18" />
+      <stop offset="22%" stop-color="#b4632b" />
+      <stop offset="45%" stop-color="#d08344" />
+      <stop offset="72%" stop-color="#9e5120" />
+      <stop offset="100%" stop-color="#683210" />
+    </linearGradient>
+    <linearGradient id="oak-top" x1="15%" y1="15%" x2="85%" y2="85%">
+      <stop offset="0%" stop-color="#dfb178" />
+      <stop offset="55%" stop-color="#ba793f" />
+      <stop offset="100%" stop-color="#8b4d1f" />
+    </linearGradient>
+    <linearGradient id="iron-hoop" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#292524" />
+      <stop offset="30%" stop-color="#6b635e" />
+      <stop offset="55%" stop-color="#8b817b" />
+      <stop offset="100%" stop-color="#1c1917" />
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#wine-shadow)">
+    <!-- Barrel main body -->
+    <path d="M 27 24 C 19 38 19 64 27 79 C 34 86 66 86 73 79 C 81 64 81 38 73 24 Z" fill="url(#oak-body)" stroke="#4a2209" stroke-width="2" />
+
+    <!-- Stave grooves -->
+    <path d="M 36 27 C 31 41 31 63 36 81" fill="none" stroke="#4a2209" stroke-width="1.3" stroke-opacity="0.55" />
+    <path d="M 50 28 V 84" fill="none" stroke="#4a2209" stroke-width="1.3" stroke-opacity="0.55" />
+    <path d="M 64 27 C 69 41 69 63 64 81" fill="none" stroke="#4a2209" stroke-width="1.3" stroke-opacity="0.55" />
+
+    <!-- Iron hoops -->
+    <path d="M 23.5 34 Q 50 40 76.5 34 L 77.5 39 Q 50 45 22.5 39 Z" fill="url(#iron-hoop)" stroke="#1c1917" stroke-width="1" />
+    <path d="M 22.5 64 Q 50 70 77.5 64 L 76.5 69 Q 50 75 23.5 69 Z" fill="url(#iron-hoop)" stroke="#1c1917" stroke-width="1" />
+
+    <!-- Barrel top lid -->
+    <ellipse cx="50" cy="24" rx="23" ry="8.5" fill="url(#oak-top)" stroke="#4a2209" stroke-width="2" />
+    <ellipse cx="50" cy="24" rx="18" ry="5.8" fill="none" stroke="#6b3714" stroke-width="1.1" stroke-opacity="0.7" />
+    <line x1="36" y1="21.5" x2="64" y2="21.5" stroke="#6b3714" stroke-width="1" stroke-opacity="0.5" />
+    <line x1="34" y1="26.5" x2="66" y2="26.5" stroke="#6b3714" stroke-width="1" stroke-opacity="0.5" />
+
+    <!-- Bung plug on front -->
+    <ellipse cx="50" cy="52" rx="4.2" ry="3.2" fill="#4a2209" stroke="#2e1304" stroke-width="1" />
+    <ellipse cx="49.5" cy="51.5" rx="2" ry="1.3" fill="#8b4d1f" opacity="0.6" />
+  </g>
+</svg>

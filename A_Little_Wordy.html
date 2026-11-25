@@ -1,0 +1,1166 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Seeded Wordy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+/* Layout concept: a dark felt table with a swirling CRT background. Chunky panels with hard drop shadows
+   hold the score, the tile board and the clue hand; every action opens a bottom sheet. Phone-first single column. */
+:root {
+  --bg-deep: #081c1c;
+  --bg-red: #4d1427;
+  --bg-blue: #10294d;
+  --panel: #223539;
+  --panel-hi: #3d565c;
+  --panel-lo: #111d20;
+  --ink: #f4f2e9;
+  --ink-dim: #a3b8ba;
+  --red: #fe5f55;
+  --red-lo: #a8352d;
+  --blue: #1ba4ff;
+  --blue-lo: #0c6aaf;
+  --gold: #f7b92f;
+  --gold-lo: #94670d;
+  --green: #4fd09a;
+  --green-lo: #278a63;
+  --cons: #ee5646;
+  --cons-lo: #9c3126;
+  --vowel: #6584a8;
+  --vowel-lo: #3a5373;
+  --card: #eef2ef;
+  --card-ink: #17262a;
+  --vanilla: #62808e;
+  --spicy: #e8473b;
+  --font-display: 'Lilita One', 'Fredoka', system-ui, sans-serif;
+  --font-body: 'Fredoka', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-label: 'Fredoka', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg-deep);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.35;
+  padding-block: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 60; background: var(--bg-deep);
+}
+button { font-family: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.swirl {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 20% 25%, var(--bg-red), transparent 72%),
+    radial-gradient(55% 55% at 85% 20%, var(--bg-blue), transparent 72%),
+    radial-gradient(70% 60% at 50% 95%, #0f3d38, transparent 72%),
+    var(--bg-deep);
+  background-size: 150% 150%, 150% 150%, 150% 150%, auto;
+  animation: drift 26s ease-in-out infinite alternate;
+}
+.swirl::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,.6) 100%);
+}
+@keyframes drift {
+  from { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
+  to { background-position: 40% 25%, 60% 35%, 40% 70%, 0 0; }
+}
+
+.wrap { position: relative; z-index: 1; max-width: 560px; margin-inline: auto; padding-block: 14px 130px; display: flex; flex-direction: column; gap: 16px; }
+
+/* Panels and buttons */
+.panel {
+  background: var(--panel); border: 3px solid var(--panel-hi); border-radius: 14px;
+  box-shadow: 0 5px 0 var(--panel-lo), 0 12px 20px rgba(0,0,0,.35); padding: 14px; min-width: 0;
+}
+.lbl { font-family: var(--font-label); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 8px; }
+.btn {
+  --bc: var(--blue); --bl: var(--blue-lo);
+  font-weight: 700; font-size: 18px; letter-spacing: .05em; text-transform: uppercase; color: #fff;
+  border: 0; border-radius: 12px; padding: 12px 16px; min-height: 52px; cursor: pointer;
+  background: var(--bc); box-shadow: 0 5px 0 var(--bl), inset 0 0 0 2px rgba(255,255,255,.18);
+  transition: transform .08s, box-shadow .08s; text-shadow: 0 2px 0 rgba(0,0,0,.25);
+}
+.btn:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--bl), inset 0 0 0 2px rgba(255,255,255,.18); }
+.btn.red { --bc: var(--red); --bl: var(--red-lo); }
+.btn.gold { --bc: var(--gold); --bl: var(--gold-lo); color: #2a1c00; text-shadow: none; }
+.btn.grey { --bc: var(--panel-hi); --bl: var(--panel-lo); }
+.btn.green { --bc: var(--green); --bl: var(--green-lo); color: #06281b; text-shadow: none; }
+.btn.wide { width: 100%; }
+.btn.sm { font-size: 15px; min-height: 44px; padding: 8px 12px; }
+.btn:disabled { filter: grayscale(.9) brightness(.65); cursor: not-allowed; }
+.link { background: none; border: 0; color: var(--ink-dim); text-decoration: underline; font-size: 15px; padding: 10px 4px; cursor: pointer; }
+
+/* Logo */
+.logo { text-align: center; padding-top: 18px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+.logo .l1, .logo .l2 {
+  font-size: clamp(54px, 19vw, 92px); font-weight: 700; line-height: .95; letter-spacing: .02em;
+  -webkit-text-stroke: 8px #0b1517; paint-order: stroke fill; text-shadow: 0 7px 0 #0b1517;
+}
+.logo .l1 { color: var(--red); transform: rotate(-4deg); animation: bob 4.5s ease-in-out infinite; }
+.logo .l2 { color: var(--gold); transform: rotate(2deg); animation: bob 4.5s ease-in-out -2s infinite; }
+@keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+.mini { font-weight: 700; font-size: 22px; letter-spacing: .06em; color: var(--gold); -webkit-text-stroke: 4px #0b1517; paint-order: stroke fill; }
+
+/* Seed screen */
+.txt {
+  width: 100%; font: inherit; font-size: 22px; font-weight: 600; color: var(--ink);
+  background: #0c171a; border: 3px solid var(--panel-hi); border-radius: 12px; padding: 12px 14px; min-height: 54px;
+}
+.txt::placeholder { color: #5f777c; }
+.row { display: flex; gap: 10px; }
+.row > * { flex: 1; min-width: 0; }
+.steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 17px; }
+.steps li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; }
+.steps i { font-style: normal; font-family: var(--font-label); font-size: 12px; background: var(--gold); color: #2a1c00; border-radius: 8px; width: 30px; height: 30px; display: grid; place-items: center; box-shadow: 0 3px 0 var(--gold-lo); }
+.sub { color: var(--ink-dim); font-size: 16px; }
+.sub b { color: var(--ink); }
+
+/* Pool card toggle items */
+.pool-list { display: flex; flex-direction: column; gap: 8px; }
+.pcard {
+  display: grid; grid-template-columns: 38px 1fr auto; gap: 10px; align-items: center;
+  width: 100%; text-align: left; border: 3px solid var(--panel-hi); border-radius: 12px;
+  background: #0c171a; color: var(--ink); padding: 9px 12px; cursor: pointer;
+  transition: transform .08s, border-color .12s, opacity .12s;
+}
+.pcard.on { border-color: var(--green); background: rgba(79, 208, 154, .1); }
+.pcard.off { opacity: .52; border-color: #26393d; }
+.pcard .pcost {
+  font-family: var(--font-display); font-size: 22px; line-height: 1; text-align: center;
+  border-radius: 8px; padding: 6px 0; color: #fff; background: var(--vanilla);
+}
+.pcard.s .pcost { background: var(--spicy); }
+.pcard .pinfo b { display: block; font-size: 16px; line-height: 1.15; }
+.pcard .pinfo small { display: block; color: var(--ink-dim); font-size: 13px; margin-top: 2px; }
+.pcard .pchk {
+  font-family: var(--font-display); font-size: 13px; letter-spacing: .04em; text-transform: uppercase;
+  padding: 5px 9px; border-radius: 8px; background: var(--green); color: #05281a;
+}
+.pcard.off .pchk { background: var(--panel-lo); color: var(--ink-dim); }
+
+/* Tiles */
+.tile {
+  --tc: var(--cons); --tl: var(--cons-lo);
+  position: relative; width: 44px; height: 50px; border-radius: 9px; border: 0; padding: 0;
+  background: var(--tc); color: #fff; font-weight: 700; font-size: 27px; line-height: 1;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.28), 0 4px 0 var(--tl);
+  display: grid; place-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  text-shadow: 0 2px 0 rgba(0,0,0,.28);
+}
+.tile.vow { --tc: var(--vowel); --tl: var(--vowel-lo); }
+.tile[data-bt] { touch-action: none; }
+.tile.ghost { background: transparent; box-shadow: inset 0 0 0 2px rgba(255,255,255,.12); pointer-events: none; }
+.tile.off { opacity: .3; cursor: not-allowed; }
+.tile.dragging { opacity: .25; }
+.tile.fly { position: fixed; z-index: 9999; pointer-events: none; transform: translate(-50%, -62%) rotate(-7deg) scale(1.15); box-shadow: inset 0 0 0 3px rgba(255,255,255,.3), 0 14px 18px rgba(0,0,0,.5); }
+.tile.flipped { background: #0e1a1d; box-shadow: inset 0 0 0 3px #2c4247; color: transparent; }
+.tile.on { outline: 3px solid var(--gold); outline-offset: 2px; }
+.tile.mini { width: 38px; height: 44px; font-size: 23px; cursor: default; }
+.tile .bdg {
+  position: absolute; left: 50%; bottom: -13px; transform: translateX(-50%); z-index: 2;
+  font-family: var(--font-label); font-size: 9px; letter-spacing: .04em; padding: 2px 4px; border-radius: 5px; white-space: nowrap;
+  background: var(--green); color: #05281a; text-shadow: none; box-shadow: 0 2px 0 var(--green-lo);
+}
+.tile.out { opacity: .45; }
+.tile.out::after { content: ""; position: absolute; left: 4px; right: 4px; top: 50%; height: 3px; background: #0b1517; transform: rotate(-24deg); }
+.tile.out .bdg { background: #0b1517; color: var(--red); box-shadow: none; }
+.tile.in { outline: 3px solid var(--green); outline-offset: 1px; }
+.board { display: flex; flex-wrap: wrap; gap: 8px 7px; padding-bottom: 14px; }
+
+.builder { display: flex; flex-direction: column; gap: 14px; }
+.wordrow {
+  min-height: 78px; border: 3px dashed var(--panel-hi); border-radius: 12px; padding: 10px;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: rgba(0,0,0,.2);
+}
+.wordrow.hot { border-color: var(--gold); background: rgba(247,185,47,.08); }
+.wordrow .empty { color: #6b8388; font-size: 16px; }
+.rack { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 6px 0; }
+.rack.hot { background: rgba(255,255,255,.04); border-radius: 12px; }
+
+/* Tile pool: tiles snap to an invisible 6 x 4 grid of points */
+.pool { position: relative; width: 100%; max-width: 372px; margin: 0 auto; aspect-ratio: 6 / 4.48; border-radius: 12px; background: rgba(0,0,0,.16); }
+.pool.hot { background: rgba(255,255,255,.08); }
+.slot { position: absolute; left: calc(var(--c) * 100% / 6); top: calc(var(--r) * 100% / 4); width: calc(100% / 6); height: 25%; padding: 3px; transition: left .14s ease-out, top .14s ease-out; }
+.slot .tile { width: 100%; height: 100%; font-size: clamp(24px, 7.6vw, 32px); }
+.slot .tile .bdg { bottom: auto; top: 3px; left: auto; right: 3px; transform: none; font-size: 8px; padding: 1px 3px; }
+
+.enter .tile.deal, .enter .card { animation: dealin .5s cubic-bezier(.2,.9,.3,1.25) both; animation-delay: calc(var(--i, 0) * 55ms); }
+@keyframes dealin { from { opacity: 0; transform: translateY(-46px) rotate(-14deg) scale(.8); } to { opacity: 1; transform: none; } }
+
+/* Scoreboard */
+.score { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
+.sbox { border-radius: 12px; padding: 8px 10px; text-align: center; box-shadow: 0 5px 0 rgba(0,0,0,.4), inset 0 0 0 3px rgba(255,255,255,.14); min-width: 0; }
+.sbox .k { font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+.sbox .n { font-size: 44px; font-weight: 700; line-height: 1.05; font-variant-numeric: tabular-nums; text-shadow: 0 3px 0 rgba(0,0,0,.3); }
+.sbox.r { background: var(--red); }
+.sbox.b { background: var(--blue); }
+.sbox.g { background: var(--gold); color: #2a1c00; }
+.sbox.g .n { text-shadow: none; }
+.sbox.r .n.bump { animation: bump .5s cubic-bezier(.2,1.6,.4,1); }
+@keyframes bump { 0% { transform: scale(1); } 35% { transform: scale(1.4) rotate(-4deg); } 100% { transform: scale(1); } }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.seedchip { --bc: var(--panel); --bl: var(--panel-lo); font-size: 14px; min-height: 40px; padding: 6px 12px; text-transform: none; letter-spacing: .02em; max-width: 60%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.pills { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 14px; }
+.pill { background: #0c171a; border: 2px solid var(--panel-hi); border-radius: 10px; padding: 6px 2px; text-align: center; min-width: 0; }
+.pill span { display: block; font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; color: var(--ink-dim); }
+.pill b { font-size: 22px; font-variant-numeric: tabular-nums; }
+.pill b.q { color: #4c6367; }
+.note { margin-top: 8px; font-size: 15px; color: var(--ink-dim); }
+.note b { color: var(--ink); }
+
+/* Cards */
+.hand { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card {
+  --cc: var(--vanilla);
+  position: relative; display: flex; flex-direction: column; gap: 6px; text-align: left; min-width: 0;
+  border: 0; border-radius: 12px; background: var(--card); color: var(--card-ink); padding: 8px 10px 0; min-height: 158px; cursor: pointer;
+  box-shadow: 0 5px 0 rgba(0,0,0,.5), 0 12px 16px rgba(0,0,0,.35); transition: transform .15s ease;
+}
+.card.s { --cc: var(--spicy); }
+.card:hover { transform: translateY(-5px) rotate(-1.5deg); }
+.card:active { transform: translateY(1px); }
+.card .ctop { display: flex; justify-content: space-between; align-items: center; }
+.card .cost { font-size: 34px; font-weight: 700; line-height: 1; color: var(--cc); }
+.card .tag { font-family: var(--font-label); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--cc); border: 2px solid var(--cc); border-radius: 6px; padding: 2px 5px; }
+.card .crule { font-size: 14px; line-height: 1.2; flex: 1; }
+.card .banner { margin: 0 -10px; padding: 7px 10px 8px; background: var(--cc); color: #fff; border-radius: 0 0 12px 12px; font-weight: 700; font-size: 15px; text-transform: uppercase; line-height: 1.05; letter-spacing: .02em; }
+.card .banner small { display: block; font-weight: 400; font-size: 11px; opacity: .85; text-transform: none; margin-top: 2px; }
+.card .used { position: absolute; top: -8px; right: -6px; background: var(--gold); color: #2a1c00; font-weight: 700; font-size: 13px; border-radius: 8px; padding: 1px 6px; box-shadow: 0 3px 0 var(--gold-lo); }
+
+/* Log */
+.log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.log li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: center; background: #0c171a; border-radius: 10px; padding: 8px 10px; }
+.log .lc { font-weight: 700; font-size: 18px; text-align: center; color: #fff; background: var(--red); border-radius: 8px; padding: 3px 0; box-shadow: 0 3px 0 var(--red-lo); }
+.log .lc.z { background: var(--green); color: #05281a; box-shadow: 0 3px 0 var(--green-lo); }
+.log b { display: block; font-size: 16px; }
+.log span.t { color: var(--ink-dim); font-size: 15px; overflow-wrap: anywhere; }
+.empty-note { color: #6b8388; }
+
+/* Bottom bar */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 28px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: linear-gradient(transparent, rgba(4,11,13,.94) 45%); }
+.bar-in { max-width: 560px; margin: 0 auto; display: flex; gap: 10px; }
+.bar-in .btn { flex: 1; }
+.bar-in .btn.big { flex: 2; }
+
+/* Sheet */
+.backdrop { position: fixed; inset: 0; z-index: 50; background: rgba(3,9,11,.75); display: flex; align-items: flex-end; justify-content: center; }
+.sheet {
+  width: 100%; max-width: 560px; max-height: 92dvh; display: flex; flex-direction: column; background: var(--panel);
+  border: 3px solid var(--panel-hi); border-bottom: 0; border-radius: 18px 18px 0 0; box-shadow: 0 -6px 0 var(--panel-lo); animation: rise .24s ease-out;
+}
+@keyframes rise { from { transform: translateY(40px); opacity: .4; } to { transform: none; opacity: 1; } }
+.sheet-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 14px max(16px, env(safe-area-inset-right, 0px)) 6px max(16px, env(safe-area-inset-left, 0px)); }
+.sheet-head h2 { font-size: 26px; line-height: 1.05; text-wrap: balance; }
+.x { background: var(--panel-lo); color: var(--ink); border: 0; border-radius: 10px; width: 44px; height: 44px; font-size: 20px; font-weight: 700; cursor: pointer; flex: none; }
+.sheet-body { overflow: auto; padding: 8px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.sheet-foot { display: flex; gap: 10px; padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); border-top: 3px solid var(--panel-lo); background: rgba(0,0,0,.15); }
+.sheet-foot .btn { flex: 1; }
+.sheet-foot .btn.big { flex: 2; }
+.kindrow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.tagx { font-family: var(--font-label); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: #fff; border-radius: 7px; padding: 4px 7px; }
+.tagx.v { background: var(--vanilla); }
+.tagx.s { background: var(--spicy); }
+.costline { color: var(--gold); font-size: 17px; font-weight: 600; }
+.rule { font-size: 17px; }
+.say { background: #0b1619; border: 3px dashed var(--gold); border-radius: 12px; padding: 12px 14px; font-size: 21px; line-height: 1.25; }
+.say .lbl { color: var(--gold); margin-bottom: 6px; }
+.warn { background: rgba(254,95,85,.14); border: 2px solid var(--red); border-radius: 10px; padding: 10px 12px; font-size: 16px; }
+.grid { display: grid; gap: 8px; grid-template-columns: repeat(6, 1fr); }
+.grid.g3 { grid-template-columns: repeat(3, 1fr); }
+.grid.g2 { grid-template-columns: repeat(2, 1fr); }
+.chip { font-weight: 700; font-size: 20px; min-height: 48px; border-radius: 10px; border: 3px solid var(--panel-hi); background: var(--panel-lo); color: var(--ink); cursor: pointer; padding: 4px; line-height: 1.05; }
+.chip.on { background: var(--gold); border-color: #fff; color: #2a1c00; }
+.chip.sm { font-size: 16px; }
+.flips { display: flex; flex-wrap: wrap; gap: 10px; }
+.big-n { font-size: 56px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.peek { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: rgba(0,0,0,.25); border-radius: 12px; min-height: 76px; align-items: center; }
+.revmark { position: absolute; top: -9px; right: -7px; font-family: var(--font-label); font-size: 8px; background: var(--gold); color: #2a1c00; border-radius: 5px; padding: 2px 4px; }
+.stamp { font-size: clamp(40px, 14vw, 64px); font-weight: 700; color: var(--green); -webkit-text-stroke: 6px #0b1517; paint-order: stroke fill; transform: rotate(-4deg); text-align: center; text-shadow: 0 5px 0 #0b1517; }
+.stamp.f { color: var(--red); }
+.final { text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.final .big-n { font-size: 96px; color: var(--red); -webkit-text-stroke: 6px #0b1517; paint-order: stroke fill; text-shadow: 0 6px 0 #0b1517; }
+.kv { display: flex; justify-content: space-between; gap: 10px; font-size: 18px; padding: 6px 0; border-bottom: 2px dotted var(--panel-hi); }
+.kv:last-child { border-bottom: 0; }
+.toast { position: fixed; z-index: 70; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 14px); transform: translateX(-50%); background: var(--red); color: #fff; font-weight: 700; padding: 8px 16px; border-radius: 12px; box-shadow: 0 5px 0 var(--red-lo); animation: pop .3s cubic-bezier(.2,1.6,.4,1); white-space: nowrap; }
+.toast.ok { background: var(--green); color: #05281a; box-shadow: 0 5px 0 var(--green-lo); }
+@keyframes pop { from { transform: translateX(-50%) scale(.6); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+a { color: var(--blue); }
+
+/* Type: a chunky display face for the game chrome, a rounded sans for everything you read */
+.logo .l1, .logo .l2, .mini, .tile, .btn, .sbox .n, .card .cost, .card .banner, .stamp, .big-n, .final .big-n,
+.sheet-head h2, .toast, .chip, .log .lc, .pill b, .costline, .steps i { font-family: var(--font-display); font-weight: 400; }
+.card .banner small { font-family: var(--font-body); font-weight: 500; }
+.lbl, .tile .bdg, .sbox .k, .pill span, .card .tag, .tagx, .revmark { font-weight: 600; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+@media (max-width: 380px) {
+  .tile { width: 40px; height: 46px; font-size: 24px; }
+  .tile.mini { width: 34px; height: 40px; font-size: 20px; }
+  .sbox .n { font-size: 36px; }
+}
+</style>
+
+<div class="swirl" aria-hidden="true"></div>
+<main class="wrap" id="app"></main>
+
+<div class="backdrop" id="bd" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="stitle" tabindex="-1" id="sheet">
+    <div class="sheet-head">
+      <div><h2 id="stitle"></h2><div id="ssub"></div></div>
+      <button type="button" class="x" data-act="close" aria-label="Close">X</button>
+    </div>
+    <div class="sheet-body" id="sbody"></div>
+    <div class="sheet-foot" id="sfoot"></div>
+  </div>
+</div>
+<div id="toastbox"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* ---------- Game data ---------- */
+var VOW = { A: 5, E: 8, I: 5, O: 5, U: 3 };
+var CON = { B: 2, C: 3, D: 4, F: 3, G: 2, H: 4, J: 1, K: 1, L: 4, M: 3, N: 5, P: 2, Q: 1, R: 4, S: 4, T: 5, V: 1, W: 2, X: 1, Y: 2, Z: 1 };
+var RARE = ['Z', 'J', 'Q', 'X', 'K'];
+var VAN = ['first', 'last', 'len', 'rel', 'strike', 'builder'];
+var SPI = ['super', 'rare', 'vowel', 'cons', 'vowc', 'burn', 'share', 'give', 'rhyme', 'dyn'];
+var KEY = 'seeded-wordy-v1';
+var COLS = 6, ROWS = 4; /* invisible snap grid for the tile pool */
+
+var S = null;
+var ui = { sheet: null, peek: false, lock: false, bump: false, enter: false, confirm: null };
+var peekTimer = null;
+
+/* ---------- Dictionary (Words.txt) ---------- */
+var dict = null;
+var dictState = 'loading'; // 'loading' | 'ready' | 'error'
+
+fetch('./Words.txt')
+  .then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  })
+  .then(function (txt) {
+    dict = new Set();
+    txt.split(/\r?\n/).forEach(function (line) {
+      var w = line.trim().toUpperCase();
+      if (w) dict.add(w);
+    });
+    dictState = 'ready';
+  })
+  .catch(function () {
+    dictState = 'error';
+  });
+
+function checkWord(word) {
+  if (dictState === 'loading') {
+    toast('Loading Words.txt, try again...');
+    return false;
+  }
+  if (dictState === 'error') {
+    toast('Words.txt not loaded (check skipped)');
+    return true;
+  }
+  var w = String(word || '').trim().toUpperCase();
+  if (!dict.has(w)) {
+    toast('"' + w + '" is not a real word!');
+    return false;
+  }
+  return true;
+}
+
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+function $(s) { return document.querySelector(s); }
+
+/* ---------- Seeded random ---------- */
+function xmur3(str) {
+  var h = 1779033703 ^ str.length;
+  for (var i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  return function () { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return h >>> 0; };
+}
+function mulberry32(a) {
+  return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+function shuffle(arr, rnd) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function normSeed(s) { return String(s).trim().toLowerCase().replace(/\s+/g, ' '); }
+function drawTiles(rnd) {
+  var vb = [], cb = [], k, i;
+  for (k in VOW) for (i = 0; i < VOW[k]; i++) vb.push(k);
+  for (k in CON) for (i = 0; i < CON[k]; i++) cb.push(k);
+  var v = shuffle(vb, rnd).slice(0, 4).sort();
+  var c = shuffle(cb, rnd).slice(0, 7).sort();
+  return v.concat(c).map(function (ch, idx) { return { id: idx, ch: ch, v: idx < 4 }; });
+}
+function getDisabled() {
+  return Array.isArray(S && S.disabledCards) ? S.disabledCards : [];
+}
+function enabledVan() {
+  var dis = getDisabled();
+  return VAN.filter(function (id) { return dis.indexOf(id) < 0; });
+}
+function enabledSpi() {
+  var dis = getDisabled();
+  return SPI.filter(function (id) { return dis.indexOf(id) < 0; });
+}
+function deal(seedRaw, disabledList) {
+  var seed = normSeed(seedRaw);
+  var dis = Array.isArray(disabledList) ? disabledList : [];
+  var rnd1 = mulberry32(xmur3('wordy:' + seed)());
+  var tiles1 = drawTiles(rnd1);
+  var vPool = VAN.filter(function (id) { return dis.indexOf(id) < 0; });
+  var sPool = SPI.filter(function (id) { return dis.indexOf(id) < 0; });
+  var hand = shuffle(vPool, rnd1).slice(0, 4).concat(shuffle(sPool, rnd1).slice(0, 4));
+  var rnd2 = mulberry32(xmur3('wordy:p2:' + seed)());
+  var tiles2 = drawTiles(rnd2);
+  return { seed: seed, tiles: tiles1, tiles1: tiles1, tiles2: tiles2, hand: hand };
+}
+
+/* ---------- Tile helpers ---------- */
+function myTileSet() { return (S.myTiles && S.myTiles.length === 11) ? S.myTiles : S.tiles; }
+function wordOf(ids, tileSet) {
+  var ts = tileSet || S.tiles;
+  return ids.map(function (i) { return ts[i].ch; }).join('');
+}
+function myWord() {
+  var ts = myTileSet();
+  return S.word.map(function (i) { return ts[i].ch; });
+}
+function myCount(L) { return myWord().filter(function (c) { return c === L; }).length; }
+function uniqLetters() { return uniq(S.tiles.map(function (t) { return t.ch; })).sort(); }
+function vowelLetters() { return uniq(S.tiles.filter(function (t) { return t.v; }).map(function (t) { return t.ch; })).sort(); }
+function letterCounts() { var m = {}; S.tiles.forEach(function (t) { m[t.ch] = (m[t.ch] || 0) + 1; }); return m; }
+function repeatLetters() { var m = letterCounts(); return Object.keys(m).filter(function (k) { return m[k] > 1; }); }
+function fl(f) { return S.tiles[f.ids[0]].ch; }
+function modeTag() { return (S.mode && S.mode !== 'S') ? ' (' + S.mode + ')' : ''; }
+
+/* ---------- Clue cards ---------- */
+var CL = {
+  first: { k: 'v', name: 'First Letter', bird: 'Dinowlsaur', cost: 4, s: 'Their first letter.', full: 'Your friend tells you the first letter of their secret word.', inp: 'none', ans: 'letter', q: function () { return 'What is the first letter of your word?'; } },
+  last: { k: 'v', name: 'Last Letter', bird: 'Hum Reaper', cost: 1, s: 'Their last letter.', full: 'Your friend tells you the last letter of their secret word.', inp: 'none', ans: 'letter', q: function () { return 'What is the last letter of your word?'; } },
+  len: { k: 'v', name: 'Exact Word Length', bird: 'Caterpigeon', cost: 3, s: 'Their exact word length.', full: 'Your friend tells you exactly how many letters their secret word has.', inp: 'none', ans: 'num', lo: 1, q: function () { return 'How many letters is your word?'; } },
+  rel: { k: 'v', name: 'Relative Word Length', bird: 'Manatweet', cost: 1, s: 'Build a word. Longer, shorter or same length?', full: 'Build a valid word from the tiles. Your friend says whether it is longer, shorter or the same length as their secret word.', inp: 'word', ans: 'rel', q: function (f) { return 'Is my word (' + f.ids.length + ' letters) longer, shorter, or the same length as yours?'; } },
+  strike: { k: 'v', name: 'Letter Strike', bird: 'Bow & Sparrow', cost: 2, s: 'Is a letter of your pick in their word?', full: 'Choose a letter from the tiles. Your friend says whether that letter is in their secret word.', inp: 'letter', ans: 'yn', q: function (f) { return 'Is there a ' + fl(f) + ' in your word?'; } },
+  builder: { k: 'v', name: 'Word Builder', bird: 'Best Nester', cost: 4, s: 'Build a word. They flip every tile not in theirs.', full: 'Build a valid word from the tiles. Your friend flips face-down every tile of it that is not in their secret word. Duplicate letters count separately.', inp: 'word', ans: 'flip', q: function (f) { return 'I built ' + wordOf(f.ids) + '. Flip every tile that is not in your word. Duplicates count separately.'; } },
+  super: { k: 's', name: 'Super Strike', bird: 'Aerial Bombirdment', cost: 3, s: 'Letter Strike, plus a position if it hits.', full: 'Choose a letter from the tiles. Your friend says whether it is in their word. If it is, they also reveal the position of one copy of that letter.', inp: 'letter', ans: 'ynpos', q: function (f) { return 'Is there a ' + fl(f) + ' in your word? If yes, where is one of them?'; } },
+  rare: { k: 's', name: 'Rare Find', bird: 'Permed Eagle', cost: 1, s: 'Is Z, J, Q, X or K in their word?', full: 'Pick one of Z, J, Q, X or K. Your friend says whether it appears in their secret word.', inp: 'rare', ans: 'yn', q: function (f) { return 'Is there a ' + f.letter + ' in your word?'; } },
+  vowel: { k: 's', name: 'Buy a Vowel', bird: 'Business Bird', cost: 1, s: 'They reveal one of their vowels.', full: 'Your friend reveals a vowel tile from their word that has not been revealed yet. If there are none left, they tell you.', inp: 'none', ans: 'vowel', q: function () { return 'Reveal one vowel from your word that you have not revealed yet. If there are none left, say so.'; } },
+  cons: { k: 's', name: 'Consonant Count', bird: "Ravin' Raven", cost: 3, s: 'How many consonants?', full: 'Your friend tells you how many consonant tiles are in their secret word.', inp: 'none', ans: 'num', lo: 0, q: function () { return 'How many consonant tiles are in your word?'; } },
+  vowc: { k: 's', name: 'Vowel Count', bird: 'Blowfinch', cost: 2, s: 'How many vowels?', full: 'Your friend tells you how many vowel tiles are in their secret word.', inp: 'none', ans: 'num', lo: 0, q: function () { return 'How many vowel tiles are in your word?'; } },
+  burn: { k: 's', name: 'Burn the Copies', bird: 'Emperor Drenguin', cost: 2, s: 'How many times does a repeated letter appear?', full: 'Choose a letter that appears at least twice in the tiles. Your friend says how many times it is in their secret word.', inp: 'repeat', ans: 'num', lo: 0, q: function (f) { return 'How many times does ' + fl(f) + ' appear in your word?'; } },
+  share: { k: 's', name: "Let's Share", bird: 'Toucommunist', cost: 1, s: 'Swap counts for one letter.', full: 'Choose a letter from the tiles. You both tell each other how many times it appears in your own words. Not allowed once your friend has already guessed your word.', inp: 'letter', ans: 'num', lo: 0, q: function (f) { return 'I have ' + myCount(fl(f)) + ' of ' + fl(f) + ' in my word. How many ' + fl(f) + ' are in yours?'; } },
+  give: { k: 's', name: 'Give and Take', bird: 'Quid Pro Quail', cost: 1, s: 'Each reveals one letter tile.', full: 'You and your friend each reveal one letter tile from your own words that has not been revealed yet. Duplicates count separately. Not allowed once your friend has already guessed your word.', inp: 'mine', ans: 'letter', q: function (f) { return 'I am revealing a ' + myWord()[f.pick] + '. Now reveal one tile from yours.'; } },
+  rhyme: { k: 's', name: 'Rhyme Time', bird: 'Yolo Dodo', cost: 5, s: 'They say a word that rhymes with theirs.', full: 'Your friend says a valid word that rhymes with their secret word. If nothing rhymes, they make one up.', inp: 'none', ans: 'text', q: function () { return 'Say a valid word that rhymes with your secret word. If nothing rhymes, make one up.'; } },
+  dyn: { k: 's', name: 'Dynamic Word Builder', bird: 'Loch Nest Monster', cost: '*', dyn: true, s: 'Word Builder. Cost = tiles left face-up.', full: 'Build a valid word from the tiles, like Word Builder. Your friend flips every tile that is not in their word. The cost equals the number of tiles in your word that stay face-up.', inp: 'word', ans: 'flip', q: function (f) { return 'I built ' + wordOf(f.ids) + '. Flip every tile that is not in your word. Duplicates count separately.'; } }
+};
+
+/* ---------- State ---------- */
+function fresh(keepDis) {
+  var dis = Array.isArray(keepDis) ? keepDis.slice() : (S && Array.isArray(S.disabledCards) ? S.disabledCards.slice() : []);
+  return { v: 1, stage: 'seed', seed: '', mode: 'S', disabledCards: dis, tiles: [], myTiles: [], theirTiles: [], hand: [], draft: [], pool: [], word: [], given: 0, wrong: 0, log: [], flow: null, myRev: [], done: null };
+}
+function load() {
+  try {
+    var j = localStorage.getItem(KEY);
+    if (j) {
+      var o = JSON.parse(j);
+      if (o && o.v === 1) {
+        if (!o.mode) o.mode = 'S';
+        if (!Array.isArray(o.disabledCards)) o.disabledCards = [];
+        return o;
+      }
+    }
+  } catch (e) {}
+  return null;
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+/* ---------- Deduction from the log ---------- */
+function deduce() {
+  var D = { len: null, lo: 1, hi: 11, vow: null, con: null, first: null, last: null, L: {}, pos: [], rhyme: [] };
+  function g(ch) { return D.L[ch] || (D.L[ch] = { min: 0, max: null }); }
+  function isIn(ch, n) { var s = g(ch); s.min = Math.max(s.min, n || 1); }
+  function isOut(ch) { g(ch).max = 0; }
+  function exact(ch, n) { var s = g(ch); s.min = n; s.max = n; }
+  S.log.forEach(function (e) {
+    var d = e.d || {};
+    switch (e.id) {
+      case 'first': D.first = d.letter; isIn(d.letter); break;
+      case 'last': D.last = d.letter; isIn(d.letter); break;
+      case 'len': D.len = d.n; break;
+      case 'rel': var n = d.word.length; if (d.rel === 'same') D.len = n; else if (d.rel === 'longer') D.hi = Math.min(D.hi, n - 1); else D.lo = Math.max(D.lo, n + 1); break;
+      case 'strike': case 'rare': if (d.yes) isIn(d.letter); else isOut(d.letter); break;
+      case 'super': if (d.yes) { isIn(d.letter); if (d.pos) D.pos.push({ ch: d.letter, pos: d.pos }); } else isOut(d.letter); break;
+      case 'vowel': if (d.letter) isIn(d.letter); break;
+      case 'cons': D.con = d.n; break;
+      case 'vowc': D.vow = d.n; break;
+      case 'burn': case 'share': exact(d.letter, d.n); break;
+      case 'give': isIn(d.theirs); break;
+      case 'rhyme': D.rhyme.push(d.text); break;
+      case 'builder': case 'dyn':
+        var m = {};
+        d.letters.forEach(function (x) { var r = m[x.ch] || (m[x.ch] = { b: 0, u: 0 }); r.b++; if (!x.out) r.u++; });
+        Object.keys(m).forEach(function (ch) { var r = m[ch]; if (r.u === 0) isOut(ch); else if (r.u < r.b) exact(ch, r.u); else isIn(ch, r.u); });
+        break;
+    }
+  });
+  if (D.len == null && D.lo === D.hi) D.len = D.lo;
+  if (D.len == null && D.vow != null && D.con != null) D.len = D.vow + D.con;
+  if (D.len != null && D.vow != null && D.con == null) D.con = D.len - D.vow;
+  if (D.len != null && D.con != null && D.vow == null) D.vow = D.len - D.con;
+  return D;
+}
+
+function sum(e) {
+  var d = e.d || {};
+  switch (e.id) {
+    case 'first': return 'First letter is ' + d.letter;
+    case 'last': return 'Last letter is ' + d.letter;
+    case 'len': return d.n + ' letters long';
+    case 'rel': return d.word + ': ' + (d.rel === 'same' ? 'same length' : 'mine is ' + d.rel);
+    case 'strike': case 'rare': return d.letter + ': ' + (d.yes ? 'in their word' : 'not in their word');
+    case 'super': return d.letter + ': ' + (d.yes ? 'in, at position ' + d.pos : 'not in their word');
+    case 'vowel': return d.letter ? d.letter + ' is in their word' : 'No unrevealed vowels left';
+    case 'cons': return d.n + ' consonants';
+    case 'vowc': return d.n + ' vowels';
+    case 'burn': return d.letter + ' appears ' + d.n + (d.n === 1 ? ' time' : ' times');
+    case 'share': return d.letter + ': you have ' + d.mine + ', they have ' + d.n;
+    case 'give': return 'You showed ' + d.mine + ', they showed ' + d.theirs;
+    case 'rhyme': return 'Rhymes with "' + d.text + '"';
+    case 'builder': case 'dyn': return d.letters.map(function (x) { return x.ch + (x.out ? ' out' : ' in'); }).join(', ');
+    case 'guess': return d.word + ': ' + (d.ok ? 'correct' : 'wrong');
+  }
+  return '';
+}
+
+/* ---------- Tile pool ---------- */
+/* S.pool[tileId] = snap point 0-23 on an invisible 6 x 4 grid. Every tile keeps its own point, even while it sits in a word line. */
+function defaultPool() {
+  var v = 0, c = 0;
+  return S.tiles.map(function (t) {
+    if (t.v) { var a = Math.floor(v / 2) * COLS + (v % 2); v++; return a; }
+    var b = Math.floor(c / 3) * COLS + 3 + (c % 3); c++; return b;
+  });
+}
+function poolValid(p) {
+  if (!Array.isArray(p) || p.length !== 11) return false;
+  var seen = {};
+  for (var i = 0; i < p.length; i++) { var n = p[i]; if (typeof n !== 'number' || n < 0 || n >= COLS * ROWS || n % 1 !== 0 || seen[n]) return false; seen[n] = 1; }
+  return true;
+}
+function ensurePool() { if (S.tiles && S.tiles.length === 11 && !poolValid(S.pool)) S.pool = defaultPool(); }
+function slotHTML(t, inner) {
+  var cell = S.pool[t.id];
+  return '<div class="slot" style="--c:' + (cell % COLS) + ';--r:' + Math.floor(cell / COLS) + '">' + inner + '</div>';
+}
+function poolHTML(hidden, o) {
+  var h = S.tiles.filter(function (t) { return hidden.indexOf(t.id) < 0; }).map(function (t) {
+    return slotHTML(t, tileBtn(t, { off: o.allowed && !o.allowed(t), deal: o.deal, i: t.id }));
+  }).join('');
+  return '<div class="pool" data-drop="pool">' + h + '</div>';
+}
+function intelTile(t, s) {
+  var cls = '', b = '';
+  if (s) {
+    if (s.max === 0) { cls = ' out'; b = 'OUT'; }
+    else if (s.min >= 1) { cls = ' in'; b = (s.max != null && s.max === s.min) ? 'x' + s.min : (s.min > 1 ? '>=' + s.min : 'IN'); }
+  }
+  return slotHTML(t, '<button type="button" class="tile ' + (t.v ? 'vow' : 'con') + cls + '" data-bt="' + t.id + '" aria-label="Tile ' + t.ch + (b ? ', ' + b : '') + '">' + t.ch + (b ? '<span class="bdg">' + b + '</span>' : '') + '</button>');
+}
+function intelPoolHTML(D) {
+  return '<div class="builder" data-builder="intel" data-mode="pool"><div class="pool" data-drop="pool">' + S.tiles.map(function (t) { return intelTile(t, D.L[t.ch]); }).join('') + '</div></div>';
+}
+
+
+function tileBtn(t, o) {
+  o = o || {};
+  return '<button type="button" class="tile ' + (t.v ? 'vow' : 'con') + (o.off ? ' off' : '') + (o.deal ? ' deal' : '') + '" data-bt="' + t.id + '"' + (o.off ? ' disabled' : '') + ' aria-label="Tile ' + t.ch + '"' + (o.i != null ? ' style="--i:' + o.i + '"' : '') + '>' + t.ch + '</button>';
+}
+function builderHTML(ctx, ids, o) {
+  var slot = ids.length ? ids.map(function (id) { return tileBtn(S.tiles[id]); }).join('') : '<span class="empty">' + (o.mode === 'single' ? 'Drop a tile here' : 'Drop tiles here to spell a word') + '</span>';
+  return '<div class="builder" data-builder="' + ctx + '" data-mode="' + o.mode + '"><div class="wordrow" data-drop="row">' + slot + '</div>' + poolHTML(ids, o) + '</div>';
+}
+
+function viewSeed() {
+  var m = S.mode || 'S';
+  var modeDesc = m === 'S'
+    ? '<b>S (Shared):</b> Both phases use the exact same 11 letter tiles.'
+    : m === 'P1'
+    ? '<b>P1:</b> Build your word with P1\'s tiles, then guess with P2\'s tiles.'
+    : '<b>P2:</b> Build your word with P2\'s tiles, then guess with P1\'s tiles.';
+  var vCount = enabledVan().length, sCount = enabledSpi().length;
+  var customPool = getDisabled().length > 0;
+  var poolLabel = customPool ? 'Card Pool (' + vCount + 'V / ' + sCount + 'S active)' : 'Card Pool Settings (All 16)';
+  return '<div class="logo" aria-label="Seeded Wordy"><div class="l1">SEEDED</div><div class="l2">WORDY</div></div>' +
+    '<div class="panel"><div class="lbl">Seed</div>' +
+    '<input class="txt" id="seedIn" type="text" maxlength="32" placeholder="e.g. maple-finch-42" value="' + esc(S.seed || '') + '" autocomplete="off" autocapitalize="off" spellcheck="false">' +
+    '<div class="lbl" style="margin-top:12px">Letter Set Mode</div>' +
+    '<div class="grid g3">' +
+      chip(m === 'S', 'mode', { v: 'S' }, 'S') +
+      chip(m === 'P1', 'mode', { v: 'P1' }, 'P1') +
+      chip(m === 'P2', 'mode', { v: 'P2' }, 'P2') +
+    '</div>' +
+    '<p class="sub" style="margin-top:10px">' + modeDesc + ' Both players enter the same seed (or pick P1 &amp; P2 for asymmetric letter sets).</p>' +
+    '<div style="margin-top:12px"><button type="button" class="btn ' + (customPool ? 'green' : 'grey') + ' wide sm" data-act="poolcfg">' + esc(poolLabel) + '</button></div>' +
+    '<div class="row" style="margin-top:12px"><button type="button" class="btn gold" data-act="rand">Random</button><button type="button" class="btn" data-act="deal">Deal</button></div></div>' +
+    '<div class="panel"><div class="lbl">How a round goes</div><ol class="steps">' +
+    '<li><i>1</i><span>Spell a secret word from the tiles.</span></li>' +
+    '<li><i>2</i><span>Ask clues out loud. Your friend answers, you log it.</span></li>' +
+    '<li><i>3</i><span>Every clue gives your friend berries. Wrong guesses give 2.</span></li>' +
+    '<li><i>4</i><span>Solve their word, then compare. Fewer berries given wins.</span></li></ol></div>';
+}
+
+function viewBuild() {
+  var d = S.draft, w = wordOf(d);
+  var m = S.mode || 'S';
+  var subNote = m === 'S'
+    ? 'Your friend has these exact tiles too.'
+    : 'These are ' + m + '\'s tiles for building your word. Once locked in, you\'ll switch to ' + (m === 'P1' ? 'P2' : 'P1') + '\'s tiles to guess.';
+  var h = '<div class="top"><span class="mini">SEEDED WORDY</span><span class="sub">Seed <b>' + esc(S.seed + modeTag()) + '</b></span></div>';
+  h += '<div class="panel"><div class="lbl">Step 1 · Your 11 tiles' + (m !== 'S' ? ' (' + m + ')' : '') + '</div><p class="sub" style="margin-bottom:12px">' + subNote + ' Drag tiles around the pool to try words out. Drop tiles in the word line to spell your secret word, 1 to 11 letters, no names or places. Tap a tile to send it up or down.</p>';
+  h += builderHTML('draft', d, { mode: 'word', deal: ui.enter }) + '</div>';
+  if (ui.lock) {
+    h += '<div class="panel"><div class="lbl">Lock it in?</div><p style="font-size:22px;margin-bottom:6px">' + esc(w) + '</p><p class="sub">You can look at it later, but you can not change it. Check the spelling first.</p><div class="row" style="margin-top:14px"><button type="button" class="btn grey" data-act="lockno">Keep editing</button><button type="button" class="btn green" data-act="lockok">Lock it in</button></div></div>';
+  } else {
+    h += '<button type="button" class="btn wide" data-act="lock"' + (d.length ? '' : ' disabled') + '>Lock in word</button>';
+    h += '<p class="sub" style="text-align:center">Not sure it is a word? <a href="https://explodingkittens.com/dictionary" target="_blank" rel="noopener">Check the dictionary</a></p>';
+  }
+  return h;
+}
+
+
+function viewPlay() {
+  var D = deduce(), used = {};
+  S.log.forEach(function (e) { used[e.id] = (used[e.id] || 0) + 1; });
+  var clueN = S.log.filter(function (e) { return e.id !== 'guess'; }).length;
+  var lenTxt = D.len != null ? D.len : ((D.lo > 1 || D.hi < 11) ? D.lo + '-' + D.hi : null);
+  function pill(k, v) { return '<div class="pill"><span>' + k + '</span><b' + (v == null ? ' class="q"' : '') + '>' + (v == null ? '?' : v) + '</b></div>'; }
+  function card(id, i) {
+    var c = CL[id], n = used[id] || 0;
+    return '<button type="button" class="card ' + c.k + '" data-act="clue" data-id="' + id + '" style="--i:' + i + '"><span class="ctop"><span class="cost">' + c.cost + '</span><span class="tag">' + (c.k === 'v' ? 'Vanilla' : 'Spicy') + '</span></span><span class="crule">' + esc(c.s) + '</span><span class="banner">' + esc(c.name) + '<small>' + esc(c.bird) + '</small></span>' + (n ? '<span class="used">' + n + 'x</span>' : '') + '</button>';
+  }
+  var m = S.mode || 'S';
+  var oppTag = m === 'P1' ? ' (P2\'s tiles)' : m === 'P2' ? ' (P1\'s tiles)' : '';
+  var vCards = S.hand.filter(function (id) { return CL[id] && CL[id].k === 'v'; });
+  var sCards = S.hand.filter(function (id) { return CL[id] && CL[id].k === 's'; });
+  var h = '<div class="top"><span class="mini">SEEDED WORDY</span><button type="button" class="btn seedchip" data-act="menu">Seed: ' + esc(S.seed + modeTag()) + '</button></div>';
+  h += '<div class="score"><div class="sbox r"><div class="k">Berries given</div><div class="n' + (ui.bump ? ' bump' : '') + '">' + S.given + '</div></div><div class="sbox b"><div class="k">Clues</div><div class="n">' + clueN + '</div></div><div class="sbox g"><div class="k">Misses</div><div class="n">' + S.wrong + '</div></div></div>';
+  if (S.flow && !ui.sheet) h += '<button type="button" class="btn gold wide" data-act="resume">Continue: ' + (S.flow.type === 'guess' ? 'your guess' : esc(CL[S.flow.id].name)) + '</button>';
+  h += '<div class="panel"><div class="lbl">Intel on their word' + oppTag + '</div><div class="pills">' + pill('LEN', lenTxt) + pill('VOW', D.vow) + pill('CON', D.con) + pill('1ST', D.first) + pill('LST', D.last) + '</div>';
+  h += '<p class="sub" style="margin-bottom:8px">Drag tiles around to try ideas for their word. Badges show what you know.</p>' + intelPoolHTML(D);
+  if (D.pos.length) h += '<div class="note">Positions: ' + D.pos.map(function (p) { return '<b>' + p.ch + '</b> at ' + p.pos; }).join(', ') + '</div>';
+  if (D.rhyme.length) h += '<div class="note">Rhymes with: <b>' + D.rhyme.map(esc).join(', ') + '</b></div>';
+  h += '</div>';
+  h += '<div><div class="lbl">Vanilla clues</div>' + (vCards.length ? '<div class="hand">' + vCards.map(card).join('') + '</div>' : '<p class="empty-note">No Vanilla clues enabled in pool.</p>') + '</div>';
+  h += '<div><div class="lbl">Spicy clues</div>' + (sCards.length ? '<div class="hand">' + sCards.map(function (id, i) { return card(id, i + 4); }).join('') + '</div>' : '<p class="empty-note">No Spicy clues enabled in pool.</p>') + '</div>';
+  h += '<div class="panel"><div class="lbl">Notebook</div>' + logHTML() + '</div>';
+  h += '<div class="bar"><div class="bar-in"><button type="button" class="btn gold" data-act="mword">My word</button><button type="button" class="btn big" data-act="guess">Guess word</button></div></div>';
+  return h;
+}
+
+function logHTML() {
+  if (!S.log.length) return '<p class="empty-note">Nothing asked yet. Pick a clue card.</p>';
+  return '<ul class="log">' + S.log.slice().reverse().map(function (e) {
+    var name = e.id === 'guess' ? 'Guess' : CL[e.id].name;
+    return '<li><span class="lc' + (e.cost ? '' : ' z') + '">' + (e.cost ? '+' + e.cost : '0') + '</span><div><b>' + esc(name) + '</b><span class="t">' + esc(sum(e)) + '</span></div></li>';
+  }).join('') + '</ul>';
+}
+
+function viewDone() {
+  var clueCost = 0; S.log.forEach(function (e) { if (e.id !== 'guess') clueCost += e.cost; });
+  var forfeit = S.done && S.done.kind === 'forfeit';
+  var h = '<div class="top"><span class="mini">SEEDED WORDY</span><span class="sub">Seed <b>' + esc(S.seed + modeTag()) + '</b></span></div>';
+  h += '<div class="stamp' + (forfeit ? ' f' : '') + '">' + (forfeit ? 'FORFEIT' : 'SOLVED') + '</div>';
+  h += '<div class="panel final"><div class="lbl" style="margin:0">Berries you gave</div><div class="big-n">' + S.given + '</div></div>';
+  h += '<div class="panel"><div class="kv"><span>Clue berries</span><b>' + clueCost + '</b></div><div class="kv"><span>Wrong guesses (' + S.wrong + ' x 2)</span><b>' + (S.wrong * 2) + '</b></div><div class="kv"><span>Your word</span><b>' + esc(wordOf(S.word, myTileSet())) + '</b></div></div>';
+  if (forfeit) h += '<div class="panel"><p>You forfeited, so your friend wins this round.</p></div>';
+  else h += '<div class="panel"><div class="lbl">Compare</div><p>When your friend finishes, compare totals. The player who gave <b>fewer</b> berries wins. Tied? First to spell a new valid 4-letter word from the tiles wins.</p><p class="sub" style="margin-top:8px">Your friend can no longer use Let\'s Share or Give and Take on you.</p></div>';
+  h += '<div class="panel"><div class="lbl">Notebook</div>' + logHTML() + '</div>';
+  h += '<button type="button" class="btn red wide" data-act="newgame">New game</button>';
+  if (ui.confirm === 'new') h += '<div class="panel"><p>Erase this game and start over?</p><div class="row" style="margin-top:12px"><button type="button" class="btn grey" data-act="cancelconfirm">Keep it</button><button type="button" class="btn red" data-act="newok">Erase</button></div></div>';
+  return h;
+}
+
+function render() {
+  var y = window.scrollY;
+  var v = S.stage === 'seed' ? viewSeed() : S.stage === 'build' ? viewBuild() : S.stage === 'play' ? viewPlay() : viewDone();
+  var app = $('#app');
+  app.className = 'wrap' + (ui.enter ? ' enter' : '');
+  app.innerHTML = v;
+  ui.enter = false; ui.bump = false;
+  window.scrollTo(0, y);
+}
+
+/* ---------- Sheet views ---------- */
+function chip(on, act, data, label, cls) {
+  var attrs = ''; for (var k in data) attrs += ' data-' + k + '="' + esc(data[k]) + '"';
+  return '<button type="button" class="chip' + (on ? ' on' : '') + (cls ? ' ' + cls : '') + '" data-act="' + act + '"' + attrs + '>' + label + '</button>';
+}
+function numGrid(act, lo, hi, cur) {
+  var out = '';
+  for (var n = lo; n <= hi; n++) out += chip(cur === n, act, { v: n }, n);
+  return '<div class="grid">' + out + '</div>';
+}
+function builderOpts(f) {
+  if (f.type === 'guess') return { mode: 'word' };
+  var c = CL[f.id];
+  if (c.inp === 'word') return { mode: 'word' };
+  if (c.inp === 'repeat') { var cnt = letterCounts(); return { mode: 'single', allowed: function (t) { return cnt[t.ch] > 1; } }; }
+  return { mode: 'single' };
+}
+function canAsk(f) {
+  var c = CL[f.id];
+  switch (c.inp) {
+    case 'none': return true;
+    case 'letter': return f.ids.length === 1;
+    case 'repeat': return f.ids.length === 1;
+    case 'word': return f.ids.length >= 1;
+    case 'rare': return !!f.letter;
+    case 'mine': return f.pick != null;
+  }
+  return false;
+}
+function answered(f) {
+  var a = f.a, c = CL[f.id];
+  switch (c.ans) {
+    case 'letter': return !!a.letter;
+    case 'vowel': return a.letter !== undefined;
+    case 'num': return a.n != null;
+    case 'rel': return !!a.rel;
+    case 'yn': return a.yn != null;
+    case 'ynpos': return a.yn === 0 || (a.yn === 1 && !!a.pos);
+    case 'flip': return true;
+    case 'text': return !!(a.text || '').trim();
+  }
+  return false;
+}
+function unflipped(f) { var n = 0; f.ids.forEach(function (id, i) { if (!f.a.fl[i]) n++; }); return n; }
+
+function ansUI(f) {
+  var c = CL[f.id], a = f.a, h = '<div><div class="lbl">Their answer</div>';
+  switch (c.ans) {
+    case 'letter':
+      h += '<div class="grid">' + uniqLetters().map(function (L) { return chip(a.letter === L, 'a-letter', { v: L }, L); }).join('') + '</div>'; break;
+    case 'vowel':
+      h += '<div class="grid">' + vowelLetters().map(function (L) { return chip(a.letter === L, 'a-letter', { v: L }, L); }).join('') + '</div>';
+      h += '<div style="margin-top:8px">' + chip(a.letter === null, 'a-none', {}, 'None left', 'sm') + '</div>'; break;
+    case 'num': h += numGrid('a-num', c.lo, 11, a.n); break;
+    case 'rel':
+      h += '<div class="grid g3">' + chip(a.rel === 'longer', 'a-rel', { v: 'longer' }, 'Mine is longer', 'sm') + chip(a.rel === 'same', 'a-rel', { v: 'same' }, 'Same length', 'sm') + chip(a.rel === 'shorter', 'a-rel', { v: 'shorter' }, 'Mine is shorter', 'sm') + '</div>'; break;
+    case 'yn':
+      h += '<div class="grid g2">' + chip(a.yn === 1, 'a-yn', { v: 1 }, 'Yes') + chip(a.yn === 0, 'a-yn', { v: 0 }, 'No') + '</div>'; break;
+    case 'ynpos':
+      h += '<div class="grid g2">' + chip(a.yn === 1, 'a-yn', { v: 1 }, 'Yes') + chip(a.yn === 0, 'a-yn', { v: 0 }, 'No') + '</div>';
+      if (a.yn === 1) h += '<div class="lbl" style="margin-top:14px">Position of one copy</div>' + numGrid('a-pos', 1, 11, a.pos); break;
+    case 'flip':
+      h += '<p class="sub" style="margin-bottom:10px">Tap each tile your friend flipped face-down.</p><div class="flips">' + f.ids.map(function (id, i) {
+        var t = S.tiles[id], off = a.fl[i];
+        return '<button type="button" class="tile ' + (t.v ? 'vow' : 'con') + (off ? ' flipped' : '') + '" data-act="a-flip" data-i="' + i + '" aria-pressed="' + (off ? 'true' : 'false') + '" aria-label="' + t.ch + (off ? ' flipped' : ' face-up') + '">' + (off ? '' : t.ch) + '</button>';
+      }).join('') + '</div>';
+      if (c.dyn) h += '<p class="costline" style="margin-top:12px">Cost: ' + unflipped(f) + ' face-up</p>'; break;
+    case 'text':
+      h += '<input class="txt" id="rhymeIn" type="text" maxlength="30" placeholder="Their rhyming word" value="' + esc(a.text || '') + '" autocomplete="off" autocapitalize="off">'; break;
+  }
+  return h + '</div>';
+}
+
+function inputUI(f) {
+  var c = CL[f.id], h = '';
+  if (c.inp === 'letter' || c.inp === 'repeat' || c.inp === 'word') {
+    var o = builderOpts(f);
+    if (c.inp === 'repeat' && !repeatLetters().length) return '<div class="warn">No letter repeats in your 11 tiles, so this card can not be used this round.</div>';
+    h += '<div><div class="lbl">' + (c.inp === 'word' ? 'Build a word' : 'Pick a tile') + '</div>' + builderHTML('flow', f.ids, o) + '</div>';
+  } else if (c.inp === 'rare') {
+    h += '<div><div class="lbl">Pick a letter</div><div class="grid" style="grid-template-columns:repeat(5,1fr)">' + RARE.map(function (L) { return chip(f.letter === L, 'rare', { v: L }, L); }).join('') + '</div></div>';
+  } else if (c.inp === 'mine') {
+    var mts = myTileSet();
+    var opts = S.word.map(function (id, i) { return { i: i, t: mts[id] }; }).filter(function (x) { return S.myRev.indexOf(x.i) < 0; });
+    if (!opts.length) return '<div class="warn">Every tile of your word has already been revealed.</div>';
+    h += '<div><div class="lbl">Which of your tiles do you reveal?</div><div class="flips">' + opts.map(function (x) { return '<button type="button" class="tile ' + (x.t.v ? 'vow' : 'con') + (f.pick === x.i ? ' on' : '') + '" data-act="pick" data-i="' + x.i + '" aria-label="Reveal ' + x.t.ch + '">' + x.t.ch + '</button>'; }).join('') + '</div></div>';
+  }
+  return h;
+}
+
+function poolCardRow(id) {
+  var c = CL[id], on = getDisabled().indexOf(id) < 0;
+  return '<button type="button" class="pcard ' + c.k + (on ? ' on' : ' off') + '" data-act="togglecard" data-id="' + id + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
+    '<span class="pcost">' + c.cost + '</span>' +
+    '<span class="pinfo"><b>' + esc(c.name) + ' <small style="display:inline;opacity:.75">(' + esc(c.bird) + ')</small></b><small>' + esc(c.s) + '</small></span>' +
+    '<span class="pchk">' + (on ? 'ON' : 'OFF') + '</span>' +
+  '</button>';
+}
+
+function sheetView() {
+  var t = '', sub = '', body = '', foot = '';
+  if (ui.sheet === 'flow') {
+    var f = S.flow;
+    if (f.type === 'guess') {
+      t = 'Guess their word';
+      if (f.step === 'in') {
+        body = '<p class="rule">Spell your guess with the tiles. A wrong guess gives your friend 2 berries.</p><div><div class="lbl">Your guess</div>' + builderHTML('flow', f.ids, { mode: 'word' }) + '</div>';
+        foot = '<button type="button" class="btn grey" data-act="close">Cancel</button><button type="button" class="btn big" data-act="gask"' + (f.ids.length ? '' : ' disabled') + '>Guess</button>';
+      } else {
+        body = '<div class="say"><div class="lbl">Say this to your friend</div>Is your word <b>' + esc(wordOf(f.ids)) + '</b>?</div><div><div class="lbl">Their answer</div><div class="grid g2"><button type="button" class="btn red" data-act="gbad">Wrong +2</button><button type="button" class="btn green" data-act="gok">Correct</button></div></div>';
+        foot = '<button type="button" class="btn grey" data-act="gedit">Edit guess</button>';
+      }
+    } else {
+      var c = CL[f.id];
+      t = c.name;
+      sub = '<div class="kindrow" style="margin-top:6px"><span class="tagx ' + c.k + '">' + (c.k === 'v' ? 'Vanilla' : 'Spicy') + '</span><span class="costline">' + (c.dyn ? 'Costs 1 per tile left face-up' : 'Costs ' + c.cost + (c.cost === 1 ? ' berry' : ' berries')) + '</span></div>';
+      if (f.step === 'in') {
+        body = '<p class="rule">' + esc(c.full) + '</p>' + inputUI(f);
+        var blocked = c.inp === 'repeat' && !repeatLetters().length;
+        foot = '<button type="button" class="btn grey" data-act="close">Cancel</button><button type="button" class="btn big" data-act="ask"' + (canAsk(f) && !blocked ? '' : ' disabled') + '>Ask</button>';
+      } else {
+        body = '<div class="say"><div class="lbl">Say this to your friend</div>' + esc(c.q(f)) + '</div>';
+        if (f.id === 'share') body += '<p class="rule">Your count of ' + fl(f) + ': <b>' + myCount(fl(f)) + '</b></p>';
+        body += ansUI(f);
+        foot = '<button type="button" class="btn grey" data-act="undo">Undo ask</button><button type="button" class="btn big" id="logBtn" data-act="logit"' + (answered(f) ? '' : ' disabled') + '>Log answer</button>';
+      }
+    }
+  } else if (ui.sheet === 'word') {
+    t = 'My word'; sub = '<p class="sub">Tap Show to see it. Tap a tile while it is showing to mark it as revealed to your friend.</p>';
+    var shown = ui.peek, mts = myTileSet();
+    body = '<div class="peek">' + S.word.map(function (id, i) {
+      var tl = mts[id], rev = S.myRev.indexOf(i) >= 0, face = shown || rev;
+      return '<button type="button" class="tile ' + (tl.v ? 'vow' : 'con') + (face ? '' : ' flipped') + '" data-act="rev" data-i="' + i + '" aria-label="' + (face ? tl.ch : 'Hidden tile') + '">' + (face ? tl.ch : '') + (rev ? '<span class="revmark">SHOWN</span>' : '') + '</button>';
+    }).join('') + '</div>';
+    body += '<p class="sub">' + S.word.length + ' letters. ' + S.myRev.length + ' revealed so far.</p>';
+    foot = '<button type="button" class="btn grey" data-act="close">Close</button><button type="button" class="btn big gold" data-act="peek">' + (shown ? 'Hide' : 'Show') + '</button>';
+  } else if (ui.sheet === 'pool') {
+    var vc = enabledVan().length, sc = enabledSpi().length;
+    t = 'Card Pool Settings';
+    sub = '<p class="sub">Toggle which cards can be dealt. Up to 4 Vanilla and 4 Spicy cards are dealt each game. Make sure your friend uses the same pool settings!</p>';
+    if (vc < 4 || sc < 4) {
+      body += '<div class="warn">Fewer than 4 ' + (vc < 4 && sc < 4 ? 'Vanilla &amp; Spicy' : vc < 4 ? 'Vanilla' : 'Spicy') + ' cards enabled (' + vc + 'V / ' + sc + 'S) — fewer cards will be dealt in your hand.</div>';
+    }
+    body += '<div><div class="lbl">Vanilla Clues (' + vc + ' / ' + VAN.length + ' on)</div><div class="pool-list">' + VAN.map(poolCardRow).join('') + '</div></div>';
+    body += '<div><div class="lbl">Spicy Clues (' + sc + ' / ' + SPI.length + ' on)</div><div class="pool-list">' + SPI.map(poolCardRow).join('') + '</div></div>';
+    foot = '<button type="button" class="btn grey" data-act="poolall">Reset All On</button><button type="button" class="btn big" data-act="close">Done</button>';
+  } else if (ui.sheet === 'menu') {
+    t = 'Game menu';
+    var disN = getDisabled().length;
+    body = '<div class="kv"><span>Seed</span><b>' + esc(S.seed) + '</b></div>' +
+           '<div class="kv"><span>Mode</span><b>' + esc(S.mode || 'S') + '</b></div>' +
+           '<div class="kv"><span>Card Pool</span><b>' + (disN ? (16 - disN) + ' / 16 active' : 'All 16 cards') + '</b></div>' +
+           '<button type="button" class="btn grey wide" data-act="copyseed">Copy seed</button>';
+    if (ui.confirm === 'forfeit') body += '<div class="warn">Forfeit this round? Your friend wins automatically.</div><div class="row"><button type="button" class="btn grey" data-act="cancelconfirm">Keep playing</button><button type="button" class="btn red" data-act="forfeitok">Forfeit</button></div>';
+    else if (ui.confirm === 'new') body += '<div class="warn">Erase this game and start over?</div><div class="row"><button type="button" class="btn grey" data-act="cancelconfirm">Keep it</button><button type="button" class="btn red" data-act="newok">Erase</button></div>';
+    else body += '<div class="row"><button type="button" class="btn red" data-act="forfeit">Forfeit</button><button type="button" class="btn red" data-act="newgame">New game</button></div>';
+    foot = '<button type="button" class="btn grey" data-act="close">Close</button>';
+  }
+  return { t: t, sub: sub, body: body, foot: foot };
+}
+
+function renderSheet() {
+  var bd = $('#bd');
+  if (!ui.sheet) { bd.hidden = true; return; }
+  var wasHidden = bd.hidden;
+  var sb = $('#sbody'), top = sb.scrollTop;
+  var v = sheetView();
+  $('#stitle').textContent = v.t;
+  $('#ssub').innerHTML = v.sub;
+  sb.innerHTML = v.body;
+  $('#sfoot').innerHTML = v.foot;
+  bd.hidden = false;
+  sb.scrollTop = wasHidden ? 0 : top;
+  if (wasHidden) $('#sheet').focus();
+}
+
+function toast(msg, ok) {
+  var el = document.createElement('div');
+  el.className = 'toast' + (ok ? ' ok' : ''); el.textContent = msg; el.setAttribute('role', 'status');
+  var box = $('#toastbox'); box.innerHTML = ''; box.appendChild(el);
+  setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1700);
+}
+
+function refresh() { save(); render(); renderSheet(); }
+
+/* ---------- Flow actions ---------- */
+function openClue(id) { S.flow = { type: 'clue', id: id, step: 'in', ids: [], letter: null, pick: null, paid: 0, a: {} }; ui.sheet = 'flow'; }
+function finishClue() {
+  var f = S.flow, c = CL[f.id], a = f.a, d = {}, cost = f.paid || 0;
+  switch (f.id) {
+    case 'first': case 'last': d = { letter: a.letter }; break;
+    case 'len': case 'cons': case 'vowc': d = { n: a.n }; break;
+    case 'rel': d = { word: wordOf(f.ids), rel: a.rel }; break;
+    case 'strike': d = { letter: fl(f), yes: a.yn === 1 }; break;
+    case 'rare': d = { letter: f.letter, yes: a.yn === 1 }; break;
+    case 'super': d = { letter: fl(f), yes: a.yn === 1, pos: a.yn === 1 ? a.pos : null }; break;
+    case 'vowel': d = { letter: a.letter }; break;
+    case 'burn': d = { letter: fl(f), n: a.n }; break;
+    case 'share': d = { letter: fl(f), n: a.n, mine: myCount(fl(f)) }; break;
+    case 'give': d = { mine: myWord()[f.pick], theirs: a.letter }; S.myRev.push(f.pick); break;
+    case 'rhyme': d = { text: (a.text || '').trim() }; break;
+    case 'builder': case 'dyn': d = { word: wordOf(f.ids), letters: f.ids.map(function (id, i) { return { ch: S.tiles[id].ch, out: !!a.fl[i] }; }) }; break;
+  }
+  if (c.dyn) { cost = unflipped(f); S.given += cost; }
+  S.log.push({ id: f.id, cost: cost, d: d });
+  ui.bump = true; S.flow = null; ui.sheet = null;
+  toast('+' + cost + ' berries given');
+}
+function finishGuess(ok) {
+  var f = S.flow;
+  S.log.push({ id: 'guess', cost: ok ? 0 : 2, d: { word: wordOf(f.ids), ok: ok } });
+  if (ok) { S.stage = 'done'; S.done = { kind: 'solved' }; toast('Solved!', true); }
+  else { S.given += 2; S.wrong++; ui.bump = true; toast('+2 berries given'); }
+  S.flow = null; ui.sheet = null;
+}
+
+var ADJ = ['maple', 'cobalt', 'quiet', 'brisk', 'amber', 'lucky', 'mossy', 'silver', 'tiny', 'windy'];
+var NOUN = ['finch', 'wren', 'robin', 'heron', 'lark', 'plover', 'swift', 'jay', 'owl', 'kite'];
+
+/* ---------- Tile pool and word line: tap and drag ---------- */
+function getIds(ctx) { return ctx === 'draft' ? S.draft : (S.flow ? S.flow.ids : []); }
+function setIds(ctx, ids) { if (ctx === 'draft') S.draft = ids; else if (S.flow) S.flow.ids = ids; refresh(); }
+function movePool(id, cell) {
+  var occ = S.pool.indexOf(cell);
+  if (occ >= 0 && occ !== id) S.pool[occ] = S.pool[id];
+  S.pool[id] = cell;
+}
+function tapTile(ctx, id, mode) {
+  if (mode === 'pool') return;
+  var ids = getIds(ctx).slice();
+  if (ids.indexOf(id) >= 0) ids = ids.filter(function (i) { return i !== id; });
+  else if (mode === 'single') ids = [id]; else ids.push(id);
+  setIds(ctx, ids);
+}
+function dropIndex(row, id, x, y) {
+  var els = Array.prototype.filter.call(row.querySelectorAll('[data-bt]'), function (e) { return +e.dataset.bt !== id; });
+  if (!els.length) return 0;
+  var best = 0, bd = 1e9, after = false;
+  els.forEach(function (e, i) {
+    var r = e.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, dd = Math.hypot(x - cx, (y - cy) * 1.5);
+    if (dd < bd) { bd = dd; best = i; after = x > cx; }
+  });
+  return best + (after ? 1 : 0);
+}
+/* Where is the pointer: over the word line, or over the pool (and if so, which snap point)? */
+function regionAt(b, x, y) {
+  var row = b.querySelector('.wordrow'), pool = b.querySelector('.pool');
+  function box(el, pad) {
+    if (!el) return null;
+    var r = el.getBoundingClientRect();
+    return (x >= r.left - pad && x <= r.right + pad && y >= r.top - pad && y <= r.bottom + pad) ? r : null;
+  }
+  if (box(row, 6)) return { zone: 'row', el: row };
+  var pr = box(pool, 14);
+  if (pr) {
+    var col = Math.max(0, Math.min(COLS - 1, Math.floor((x - pr.left) / (pr.width / COLS))));
+    var rw = Math.max(0, Math.min(ROWS - 1, Math.floor((y - pr.top) / (pr.height / ROWS))));
+    return { zone: 'pool', el: pool, cell: rw * COLS + col };
+  }
+  return null;
+}
+function doDrop(d, x, y) {
+  var b = d.el.closest('[data-builder]'); if (!b) return;
+  var reg = regionAt(b, x, y); if (!reg) return;
+  var mode = b.dataset.mode;
+  if (reg.zone === 'pool') {
+    movePool(d.id, reg.cell);
+    if (mode === 'pool') { refresh(); return; }
+    setIds(d.ctx, getIds(d.ctx).filter(function (i) { return i !== d.id; }));
+    return;
+  }
+  if (mode === 'pool') return;
+  var ids = getIds(d.ctx).slice();
+  if (mode === 'single') ids = [d.id];
+  else { var idx = dropIndex(reg.el, d.id, x, y); ids = ids.filter(function (i) { return i !== d.id; }); ids.splice(idx, 0, d.id); }
+  setIds(d.ctx, ids);
+}
+
+var drag = null;
+document.addEventListener('pointerdown', function (e) {
+  var t = e.target.closest ? e.target.closest('.tile[data-bt]') : null;
+  if (!t || t.disabled) return;
+  var b = t.closest('[data-builder]'); if (!b) return;
+  drag = { id: +t.dataset.bt, ctx: b.dataset.builder, mode: b.dataset.mode, el: t, sx: e.clientX, sy: e.clientY, moved: false, ghost: null, pid: e.pointerId };
+});
+window.addEventListener('pointermove', function (e) {
+  if (!drag || e.pointerId !== drag.pid) return;
+  if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 8) {
+    drag.moved = true;
+    var g = drag.el.cloneNode(true); g.classList.add('fly'); g.removeAttribute('data-bt'); document.body.appendChild(g); drag.ghost = g;
+    drag.el.classList.add('dragging');
+  }
+  if (drag.moved) {
+    drag.ghost.style.left = e.clientX + 'px'; drag.ghost.style.top = e.clientY + 'px';
+    document.querySelectorAll('.hot').forEach(function (n) { n.classList.remove('hot'); });
+    var bb = drag.el.closest('[data-builder]'), rg = bb ? regionAt(bb, e.clientX, e.clientY) : null;
+    if (rg) rg.el.classList.add('hot');
+    e.preventDefault();
+  }
+}, { passive: false });
+function endDrag(e, cancel) {
+  if (!drag || e.pointerId !== drag.pid) return;
+  var d = drag; drag = null;
+  document.querySelectorAll('.hot').forEach(function (n) { n.classList.remove('hot'); });
+  if (d.ghost && d.ghost.parentNode) d.ghost.parentNode.removeChild(d.ghost);
+  if (d.moved) { d.el.classList.remove('dragging'); if (!cancel) doDrop(d, e.clientX, e.clientY); }
+  else if (!cancel) tapTile(d.ctx, d.id, d.mode);
+}
+window.addEventListener('pointerup', function (e) { endDrag(e, false); });
+window.addEventListener('pointercancel', function (e) { endDrag(e, true); });
+document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('.tile')) e.preventDefault(); });
+
+/* ---------- Clicks ---------- */
+document.addEventListener('click', function (e) {
+  var tb = e.target.closest ? e.target.closest('.tile[data-bt]') : null;
+  if (tb && e.detail === 0 && !tb.disabled) { var b = tb.closest('[data-builder]'); if (b) tapTile(b.dataset.builder, +tb.dataset.bt, b.dataset.mode); return; }
+  var el = e.target.closest ? e.target.closest('[data-act]') : null; if (!el) return;
+  var act = el.dataset.act, f = S.flow, v = el.dataset.v, i = el.dataset.i;
+  switch (act) {
+    case 'mode': {
+      var si = $('#seedIn'); if (si) S.seed = si.value;
+      S.mode = v; refresh(); return;
+    }
+    case 'poolcfg': {
+      var si2 = $('#seedIn'); if (si2) S.seed = si2.value;
+      ui.sheet = 'pool'; refresh(); return;
+    }
+    case 'togglecard': {
+      var cid = el.dataset.id;
+      if (!Array.isArray(S.disabledCards)) S.disabledCards = [];
+      var idx = S.disabledCards.indexOf(cid);
+      if (idx >= 0) S.disabledCards.splice(idx, 1);
+      else S.disabledCards.push(cid);
+      refresh(); return;
+    }
+    case 'poolall': {
+      S.disabledCards = [];
+      toast('All 16 cards enabled', true);
+      refresh(); return;
+    }
+    case 'rand': {
+      var rval = ADJ[Math.floor(Math.random() * ADJ.length)] + '-' + NOUN[Math.floor(Math.random() * NOUN.length)] + '-' + (10 + Math.floor(Math.random() * 90));
+      S.seed = rval;
+      var sin = $('#seedIn'); if (sin) sin.value = rval;
+      return;
+    }
+    case 'deal': {
+      var raw = $('#seedIn').value; if (!normSeed(raw)) { $('#seedIn').focus(); return; }
+      var m = S.mode || 'S';
+      var dis = getDisabled().slice();
+      var d = deal(raw, dis);
+      var keep = fresh(dis);
+      keep.stage = 'build';
+      keep.seed = d.seed;
+      keep.mode = m;
+      keep.myTiles = m === 'P2' ? d.tiles2 : d.tiles1;
+      keep.theirTiles = m === 'P1' ? d.tiles2 : d.tiles1;
+      keep.tiles = keep.myTiles;
+      keep.hand = d.hand;
+      S = keep;
+      S.pool = defaultPool();
+      ui.enter = true; ui.lock = false; refresh(); return;
+    }
+    case 'lock':
+      if (!checkWord(wordOf(S.draft))) return;
+      ui.lock = true; render(); return;
+    case 'lockno': ui.lock = false; render(); return;
+    case 'lockok':
+      if (!checkWord(wordOf(S.draft))) { ui.lock = false; render(); return; }
+      S.word = S.draft.slice();
+      if (S.theirTiles && S.theirTiles.length === 11) S.tiles = S.theirTiles;
+      S.pool = defaultPool();
+      S.stage = 'play';
+      ui.lock = false; ui.enter = true; refresh(); window.scrollTo(0, 0); return;
+    case 'clue': openClue(el.dataset.id); break;
+    case 'guess': S.flow = { type: 'guess', step: 'in', ids: [], a: {} }; ui.sheet = 'flow'; break;
+    case 'resume': ui.sheet = 'flow'; break;
+    case 'close':
+      if (ui.sheet === 'flow' && f && f.step === 'in') S.flow = null;
+      ui.sheet = null; ui.confirm = null; clearTimeout(peekTimer); ui.peek = false; break;
+    case 'ask':
+      if (!f || !canAsk(f)) return;
+      if (CL[f.id].inp === 'word' && !checkWord(wordOf(f.ids))) return;
+      f.step = 'ans'; f.a = { fl: f.ids.map(function () { return false; }) };
+      if (typeof CL[f.id].cost === 'number') { f.paid = CL[f.id].cost; S.given += f.paid; ui.bump = true; }
+      break;
+    case 'undo': S.given -= f.paid; f.paid = 0; f.step = 'in'; f.a = {}; break;
+    case 'gask':
+      if (!checkWord(wordOf(f.ids))) return;
+      f.step = 'ans'; break;
+    case 'gedit': f.step = 'in'; break;
+    case 'gok': finishGuess(true); break;
+    case 'gbad': finishGuess(false); break;
+    case 'logit': if (answered(f)) finishClue(); break;
+    case 'a-letter': f.a.letter = v; break;
+    case 'a-none': f.a.letter = null; break;
+    case 'a-num': f.a.n = +v; break;
+    case 'a-rel': f.a.rel = v; break;
+    case 'a-yn': f.a.yn = +v; if (+v === 0) f.a.pos = null; break;
+    case 'a-pos': f.a.pos = +v; break;
+    case 'a-flip': f.a.fl[+i] = !f.a.fl[+i]; break;
+    case 'rare': f.letter = v; break;
+    case 'pick': f.pick = +i; break;
+    case 'mword': ui.sheet = 'word'; ui.peek = false; break;
+    case 'peek':
+      ui.peek = !ui.peek; clearTimeout(peekTimer);
+      if (ui.peek) peekTimer = setTimeout(function () { ui.peek = false; renderSheet(); }, 8000);
+      break;
+    case 'rev':
+      if (ui.peek) {
+        var k = S.myRev.indexOf(+i); if (k >= 0) S.myRev.splice(k, 1); else S.myRev.push(+i);
+        clearTimeout(peekTimer); peekTimer = setTimeout(function () { ui.peek = false; renderSheet(); }, 8000);
+      }
+      break;
+    case 'menu': ui.sheet = 'menu'; ui.confirm = null; break;
+    case 'copyseed':
+      try { navigator.clipboard.writeText(S.seed).then(function () { toast('Seed copied', true); }, function () { toast('Copy failed. Select the seed manually.'); }); } catch (err) { toast('Copy failed. Select the seed manually.'); }
+      return;
+    case 'forfeit': ui.confirm = 'forfeit'; break;
+    case 'forfeitok': S.stage = 'done'; S.done = { kind: 'forfeit' }; S.flow = null; ui.sheet = null; ui.confirm = null; break;
+    case 'newgame': ui.confirm = 'new'; break;
+    case 'cancelconfirm': ui.confirm = null; break;
+    case 'newok': S = fresh(S.disabledCards); ui.sheet = null; ui.confirm = null; ui.enter = false; break;
+    default: return;
+  }
+  refresh();
+});
+
+document.addEventListener('input', function (e) {
+  if (e.target && e.target.id === 'seedIn') {
+    S.seed = e.target.value;
+    return;
+  }
+  if (e.target && e.target.id === 'rhymeIn' && S.flow) {
+    S.flow.a.text = e.target.value; save();
+    var b = $('#logBtn'); if (b) b.disabled = !answered(S.flow);
+  }
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && ui.sheet) { var c = $('[data-act="close"]'); if (c) c.click(); }
+  if (e.key === 'Enter' && e.target && e.target.id === 'seedIn') { var d = document.querySelector('[data-act="deal"]'); if (d) d.click(); }
+});
+
+/* ---------- Boot ---------- */
+S = load() || fresh();
+ensurePool();
+if (S.flow && S.stage === 'play') ui.sheet = 'flow'; else S.flow = null;
+render(); renderSheet();
+})();
+</script>
+
+</body></html>

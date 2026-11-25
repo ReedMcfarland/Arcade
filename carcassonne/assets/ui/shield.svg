@@ -1,0 +1,241 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Outer Shield Drop Shadow Filter -->
+    <filter id="shieldShadow" x="-15%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#0a0f1d" flood-opacity="0.4"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="0.8" flood-color="#0a0f1d" flood-opacity="0.2"/>
+    </filter>
+
+    <!-- Metal Gradients -->
+    <linearGradient id="goldRim" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#fff176"/>
+      <stop offset="15%" stop-color="#fbc02d"/>
+      <stop offset="45%" stop-color="#df9b12"/>
+      <stop offset="75%" stop-color="#b7791f"/>
+      <stop offset="92%" stop-color="#8c5310"/>
+      <stop offset="100%" stop-color="#5a3106"/>
+    </linearGradient>
+
+    <linearGradient id="goldCross" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="20%" stop-color="#fdd835"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="80%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Blue (Azure) Field Gradients -->
+    <radialGradient id="azureTopLeft" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="85%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+    <radialGradient id="azureBottomRight" cx="65%" cy="65%" r="70%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="85%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+
+    <!-- White (Argent) Field Gradients -->
+    <radialGradient id="argentTopRight" cx="65%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f1f5f9"/>
+      <stop offset="85%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </radialGradient>
+    <radialGradient id="argentBottomLeft" cx="35%" cy="65%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f1f5f9"/>
+      <stop offset="85%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </radialGradient>
+
+    <!-- Shield Convex Sheen -->
+    <linearGradient id="shieldCurvature" x1="25%" y1="10%" x2="75%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="65%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <!-- Rivet Specular Gradient -->
+    <radialGradient id="silverRivet" cx="32%" cy="30%" r="68%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#f8fafc"/>
+      <stop offset="65%" stop-color="#cbd5e1"/>
+      <stop offset="85%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </radialGradient>
+
+    <!-- Field Clip Path -->
+    <clipPath id="fieldClip">
+      <path d="M 15.5 15.5
+               L 84.5 15.5
+               Q 83 17.5 81.5 20.5
+               L 81.5 46
+               C 81.5 66.5, 62.5 80.5, 50 86
+               C 37.5 80.5, 18.5 66.5, 18.5 46
+               L 18.5 20.5
+               Q 17 17.5 15.5 15.5
+               Z"/>
+    </clipPath>
+
+    <!-- Reusable Rivet Template -->
+    <g id="rivet">
+      <circle cx="0.2" cy="0.35" r="1.4" fill="#331c04" opacity="0.55"/>
+      <circle cx="0" cy="0" r="1.35" fill="url(#silverRivet)" stroke="#475569" stroke-width="0.25"/>
+      <circle cx="-0.42" cy="-0.42" r="0.38" fill="#ffffff" opacity="0.95"/>
+    </g>
+  </defs>
+
+  <!-- Main Shield Body with Drop Shadow -->
+  <g id="shield" filter="url(#shieldShadow)">
+    <!-- 1. Outer Golden Heater Shield Frame -->
+    <path id="outerRim"
+          d="M 10 10
+             L 90 10
+             Q 88.5 12.5 87 16
+             L 87 46
+             C 87 70, 65 86, 50 94
+             C 35 86, 13 70, 13 46
+             L 13 16
+             Q 11.5 12.5 10 10
+             Z"
+          fill="url(#goldRim)"
+          stroke="#5a3106"
+          stroke-width="0.8"
+          stroke-linejoin="round"/>
+
+    <!-- Rim Top Highlight (Glazed Edge) -->
+    <path d="M 12 10.5 L 88 10.5" stroke="#fff9c4" stroke-width="0.8" stroke-linecap="round"/>
+    <!-- Rim Left Flank Highlight -->
+    <path d="M 10 10 Q 11.5 12.5 13 16 L 13 46" stroke="#fff176" stroke-width="0.6" fill="none" opacity="0.75"/>
+
+    <!-- 2. Inner Shield Field (Clipped) -->
+    <g clip-path="url(#fieldClip)">
+      <!-- 4 Heraldic Quarters -->
+      <!-- Q1 (Dexter Chief / Top-Left): Azure -->
+      <rect x="10" y="10" width="40" height="37" fill="url(#azureTopLeft)"/>
+      <!-- Q2 (Sinister Chief / Top-Right): Argent -->
+      <rect x="50" y="10" width="40" height="37" fill="url(#argentTopRight)"/>
+      <!-- Q3 (Dexter Base / Bottom-Left): Argent -->
+      <rect x="10" y="47" width="40" height="45" fill="url(#argentBottomLeft)"/>
+      <!-- Q4 (Sinister Base / Bottom-Right): Azure -->
+      <rect x="50" y="47" width="40" height="45" fill="url(#azureBottomRight)"/>
+
+      <!-- Azure Heraldic Diapering / Subtle Damask (Faint Stars) -->
+      <g stroke="#ffffff" stroke-opacity="0.14" stroke-width="0.55" fill="none" stroke-linecap="round">
+        <!-- Q1 diapering -->
+        <path d="M 23 23 L 27 27 M 27 23 L 23 27 M 36 23 L 40 27 M 40 23 L 36 27 M 29.5 35 L 33.5 39 M 33.5 35 L 29.5 39"/>
+        <circle cx="25" cy="25" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="38" cy="25" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="31.5" cy="37" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <!-- Q4 diapering -->
+        <path d="M 60 60 L 64 64 M 64 60 L 60 64 M 73 60 L 77 64 M 77 60 L 73 64 M 66.5 72 L 70.5 76 M 70.5 72 L 66.5 76"/>
+        <circle cx="62" cy="62" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="75" cy="62" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="68.5" cy="74" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+      </g>
+
+      <!-- Argent Heraldic Ermine Flecks -->
+      <g fill="#64748b" fill-opacity="0.18" stroke="none">
+        <!-- Q2 flecks -->
+        <circle cx="65" cy="26" r="0.85"/>
+        <path d="M 64.3 27.4 L 65 26.5 L 65.7 27.4 L 65 29 Z"/>
+        <circle cx="77" cy="32" r="0.85"/>
+        <path d="M 76.3 33.4 L 77 32.5 L 77.7 33.4 L 77 35 Z"/>
+        <circle cx="60" cy="38" r="0.85"/>
+        <path d="M 59.3 39.4 L 60 38.5 L 60.7 39.4 L 60 41 Z"/>
+        <!-- Q3 flecks -->
+        <circle cx="30" cy="58" r="0.85"/>
+        <path d="M 29.3 59.4 L 30 58.5 L 30.7 59.4 L 30 61 Z"/>
+        <circle cx="42" cy="65" r="0.85"/>
+        <path d="M 41.3 66.4 L 42 65.5 L 42.7 66.4 L 42 68 Z"/>
+        <circle cx="34" cy="74" r="0.85"/>
+        <path d="M 33.3 75.4 L 34 74.5 L 34.7 75.4 L 34 77 Z"/>
+      </g>
+
+      <!-- 3. Raised Heraldic Gold Cross dividing the Quarters -->
+      <!-- Cross Drop Shadow on Field -->
+      <path d="M 46.4 12 H 53.6 V 43.4 H 86 V 50.6 H 53.6 V 90 H 46.4 V 50.6 H 14 V 43.4 H 46.4 Z"
+            fill="#2a1202" opacity="0.35"/>
+
+      <!-- Cross Main Golden Body -->
+      <path d="M 47 12 H 53 V 44 H 86 V 50 H 53 V 90 H 47 V 50 H 14 V 44 H 47 Z"
+            fill="url(#goldCross)"
+            stroke="#713f12"
+            stroke-width="0.6"
+            stroke-linejoin="round"/>
+
+      <!-- Cross 3D Bevel Highlights and Shading -->
+      <!-- Vertical Top-Left Highlight Edge -->
+      <line x1="47.4" y1="13" x2="47.4" y2="88" stroke="#fff9c4" stroke-width="0.5" opacity="0.85"/>
+      <!-- Horizontal Top Highlight Edge -->
+      <line x1="15" y1="44.4" x2="85" y2="44.4" stroke="#fff9c4" stroke-width="0.5" opacity="0.85"/>
+      <!-- Cross Center Ridge Light -->
+      <line x1="50" y1="13" x2="50" y2="88" stroke="#fef08a" stroke-width="0.6" stroke-linecap="round"/>
+      <line x1="16" y1="47" x2="84" y2="47" stroke="#fef08a" stroke-width="0.6" stroke-linecap="round"/>
+      <!-- Bottom/Right Shading of Cross Arms -->
+      <line x1="15" y1="49.6" x2="85" y2="49.6" stroke="#5a2b06" stroke-width="0.5" opacity="0.85"/>
+      <line x1="52.6" y1="14" x2="52.6" y2="87" stroke="#5a2b06" stroke-width="0.5" opacity="0.85"/>
+
+      <!-- Surface Curved Convexity Sheen Overlay -->
+      <path d="M 15.5 15.5 L 84.5 15.5 Q 83 17.5 81.5 20.5 L 81.5 46 C 81.5 66.5, 62.5 80.5, 50 86 C 37.5 80.5, 18.5 66.5, 18.5 46 L 18.5 20.5 Z"
+            fill="url(#shieldCurvature)"/>
+    </g>
+
+    <!-- 4. Inner Field Perimeter Inset Groove / Engraving -->
+    <path d="M 15.5 15.5
+             L 84.5 15.5
+             Q 83 17.5 81.5 20.5
+             L 81.5 46
+             C 81.5 66.5, 62.5 80.5, 50 86
+             C 37.5 80.5, 18.5 66.5, 18.5 46
+             L 18.5 20.5
+             Q 17 17.5 15.5 15.5
+             Z"
+          fill="none"
+          stroke="#522904"
+          stroke-width="0.9"/>
+    <path d="M 16 16.3 L 84 16.3" stroke="#261201" stroke-width="0.45" opacity="0.65"/>
+
+    <!-- 5. Central Ornamental Boss / Medallion at Cross Intersection -->
+    <circle cx="50.2" cy="47.4" r="3.8" fill="#261201" opacity="0.45"/>
+    <circle cx="50" cy="47" r="3.4" fill="url(#goldRim)" stroke="#713f12" stroke-width="0.55"/>
+    <circle cx="50" cy="47" r="2.6" fill="none" stroke="#fff9c4" stroke-width="0.4"/>
+    <use href="#rivet" x="50" y="47"/>
+
+    <!-- 6. Silver Studs / Rivets along the Gold Perimeter Rim -->
+    <!-- Top Row Rivets (y = 12.8, dx = 15.25) -->
+    <use href="#rivet" x="19.5"  y="12.8"/>
+    <use href="#rivet" x="34.75" y="12.8"/>
+    <use href="#rivet" x="50"    y="12.8"/>
+    <use href="#rivet" x="65.25" y="12.8"/>
+    <use href="#rivet" x="80.5"  y="12.8"/>
+
+    <!-- Right Flank Rivets -->
+    <use href="#rivet" x="84.25" y="24.5"/>
+    <use href="#rivet" x="84.25" y="35.2"/>
+    <use href="#rivet" x="84.25" y="46.0"/>
+
+    <!-- Left Flank Rivets -->
+    <use href="#rivet" x="15.75" y="24.5"/>
+    <use href="#rivet" x="15.75" y="35.2"/>
+    <use href="#rivet" x="15.75" y="46.0"/>
+
+    <!-- Right Curved Lower Edge Rivets (equidistant arc spacing) -->
+    <use href="#rivet" x="81.3" y="60.3"/>
+    <use href="#rivet" x="73.4" y="72.6"/>
+    <use href="#rivet" x="62.5" y="82.4"/>
+
+    <!-- Left Curved Lower Edge Rivets (equidistant arc spacing) -->
+    <use href="#rivet" x="18.7" y="60.3"/>
+    <use href="#rivet" x="26.6" y="72.6"/>
+    <use href="#rivet" x="37.5" y="82.4"/>
+
+    <!-- Bottom Tip Rivet -->
+    <use href="#rivet" x="50" y="90"/>
+  </g>
+</svg>

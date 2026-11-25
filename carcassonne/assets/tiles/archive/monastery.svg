@@ -1,0 +1,336 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Roof Gradients -->
+    <linearGradient id="roof-south" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#db4a37"/>
+      <stop offset="100%" stop-color="#b03123"/>
+    </linearGradient>
+    <linearGradient id="roof-shaded" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a83224"/>
+      <stop offset="100%" stop-color="#7e1f14"/>
+    </linearGradient>
+    <!-- Wall Gradients -->
+    <linearGradient id="wall-lit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ede2cb"/>
+      <stop offset="100%" stop-color="#d5c5a4"/>
+    </linearGradient>
+    <linearGradient id="wall-side" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c9b999"/>
+      <stop offset="100%" stop-color="#b09e7c"/>
+    </linearGradient>
+    <!-- Cloister Grass & Well Gradients -->
+    <radialGradient id="cloister-grass" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#84bb4e"/>
+      <stop offset="100%" stop-color="#5d8b33"/>
+    </radialGradient>
+    <radialGradient id="water-well" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#93c5fd"/>
+      <stop offset="60%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </radialGradient>
+    <!-- Gold Cross Gradient -->
+    <linearGradient id="gold-cross" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Meadow Background (Field on all 4 edges) -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Subtle Meadow Tonal Variations -->
+  <path d="M 0 0 C 35 12 65 6 100 0 L 100 24 C 70 32 30 22 0 26 Z" fill="#82b55b" opacity="0.4"/>
+  <path d="M 0 72 C 30 65 68 76 100 68 L 100 100 L 0 100 Z" fill="#699944" opacity="0.4"/>
+  <circle cx="20" cy="22" r="16" fill="#88bd60" opacity="0.2"/>
+  <circle cx="80" cy="22" r="16" fill="#88bd60" opacity="0.2"/>
+  <circle cx="18" cy="80" r="16" fill="#63913e" opacity="0.2"/>
+  <circle cx="82" cy="80" r="16" fill="#63913e" opacity="0.2"/>
+
+  <!-- Subtle Meadow Wildflower Tufts -->
+  <circle cx="9" cy="42" r="0.8" fill="#fef08a"/>
+  <circle cx="11" cy="44" r="0.7" fill="#ffffff" opacity="0.9"/>
+  <circle cx="90" cy="38" r="0.8" fill="#fef08a"/>
+  <circle cx="92" cy="40" r="0.7" fill="#ffffff" opacity="0.9"/>
+  <circle cx="12" cy="62" r="0.8" fill="#ffffff" opacity="0.9"/>
+  <circle cx="88" cy="64" r="0.8" fill="#fef08a"/>
+  <circle cx="32" cy="88" r="0.8" fill="#ffffff" opacity="0.9"/>
+  <circle cx="68" cy="88" r="0.8" fill="#fef08a"/>
+
+  <!-- 2. Soft Perimeter Trees & Bushes (Carcassonne Style) -->
+  <!-- Northwest Grove -->
+  <g id="grove-nw">
+    <ellipse cx="16" cy="24" rx="7" ry="3" fill="#304a1b" opacity="0.35"/>
+    <line x1="15" y1="20" x2="15" y2="24" stroke="#422e1b" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="15" cy="18" r="6.5" fill="#365e1b"/>
+    <circle cx="14.2" cy="16.8" r="5.8" fill="#4d7c28"/>
+    <circle cx="13.2" cy="15.2" r="4.2" fill="#7bb342"/>
+    <circle cx="12.8" cy="14.5" r="2" fill="#a3e635" opacity="0.8"/>
+
+    <line x1="22" y1="23" x2="22" y2="26" stroke="#422e1b" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="22" cy="22" r="4.8" fill="#365e1b"/>
+    <circle cx="21.5" cy="21" r="4.2" fill="#4d7c28"/>
+    <circle cx="20.5" cy="19.8" r="3" fill="#7bb342"/>
+
+    <circle cx="9.5" cy="24" r="3.2" fill="#365e1b"/>
+    <circle cx="9" cy="23.2" r="2.5" fill="#598a30"/>
+  </g>
+
+  <!-- Northeast Grove -->
+  <g id="grove-ne">
+    <ellipse cx="84" cy="24" rx="7" ry="3" fill="#304a1b" opacity="0.35"/>
+    <line x1="85" y1="20" x2="85" y2="24" stroke="#422e1b" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="85" cy="18" r="6.5" fill="#365e1b"/>
+    <circle cx="84.2" cy="16.8" r="5.8" fill="#4d7c28"/>
+    <circle cx="83.2" cy="15.2" r="4.2" fill="#7bb342"/>
+    <circle cx="82.8" cy="14.5" r="2" fill="#a3e635" opacity="0.8"/>
+
+    <line x1="78" y1="23" x2="78" y2="26" stroke="#422e1b" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="78" cy="22" r="4.8" fill="#365e1b"/>
+    <circle cx="77.5" cy="21" r="4.2" fill="#4d7c28"/>
+    <circle cx="76.5" cy="19.8" r="3" fill="#7bb342"/>
+
+    <circle cx="90.5" cy="24" r="3.2" fill="#365e1b"/>
+    <circle cx="90" cy="23.2" r="2.5" fill="#598a30"/>
+  </g>
+
+  <!-- Southwest Grove -->
+  <g id="grove-sw">
+    <ellipse cx="16" cy="84" rx="7" ry="3" fill="#304a1b" opacity="0.35"/>
+    <line x1="15" y1="80" x2="15" y2="84" stroke="#422e1b" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="15" cy="78" r="6.5" fill="#365e1b"/>
+    <circle cx="14.2" cy="76.8" r="5.8" fill="#4d7c28"/>
+    <circle cx="13.2" cy="75.2" r="4.2" fill="#7bb342"/>
+    <circle cx="12.8" cy="74.5" r="2" fill="#a3e635" opacity="0.8"/>
+
+    <line x1="23" y1="83" x2="23" y2="86" stroke="#422e1b" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="23" cy="82" r="4.8" fill="#365e1b"/>
+    <circle cx="22.5" cy="81" r="4.2" fill="#4d7c28"/>
+    <circle cx="21.5" cy="79.8" r="3" fill="#7bb342"/>
+
+    <circle cx="9.5" cy="83" r="3.2" fill="#365e1b"/>
+    <circle cx="9" cy="82.2" r="2.5" fill="#598a30"/>
+  </g>
+
+  <!-- Southeast Grove -->
+  <g id="grove-se">
+    <ellipse cx="84" cy="83" rx="7" ry="3" fill="#304a1b" opacity="0.35"/>
+    <line x1="85" y1="79" x2="85" y2="83" stroke="#422e1b" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="85" cy="77" r="6.5" fill="#365e1b"/>
+    <circle cx="84.2" cy="75.8" r="5.8" fill="#4d7c28"/>
+    <circle cx="83.2" cy="74.2" r="4.2" fill="#7bb342"/>
+    <circle cx="82.8" cy="73.5" r="2" fill="#a3e635" opacity="0.8"/>
+
+    <line x1="77" y1="82" x2="77" y2="85" stroke="#422e1b" stroke-width="1.4" stroke-linecap="round"/>
+    <circle cx="77" cy="81" r="4.8" fill="#365e1b"/>
+    <circle cx="76.5" cy="80" r="4.2" fill="#4d7c28"/>
+    <circle cx="75.5" cy="78.8" r="3" fill="#7bb342"/>
+
+    <circle cx="90.5" cy="82" r="3.2" fill="#365e1b"/>
+    <circle cx="90" cy="81.2" r="2.5" fill="#598a30"/>
+  </g>
+
+  <!-- 3. Abbey Footpath & Approach (Stops within meadow) -->
+  <path d="M 48.5 86 Q 51.5 80 48.5 75 Q 48 73 48.5 71 L 51.5 71 Q 52 73 51.5 75 Q 54.5 80 51.5 86 Z" fill="#b8a789" opacity="0.5"/>
+  <ellipse cx="50" cy="84" rx="2" ry="1.1" fill="#c7b697" stroke="#827157" stroke-width="0.4"/>
+  <ellipse cx="49.5" cy="78" rx="1.8" ry="1.1" fill="#c7b697" stroke="#827157" stroke-width="0.4"/>
+  <ellipse cx="50.5" cy="73.5" rx="2" ry="1.2" fill="#c7b697" stroke="#827157" stroke-width="0.4"/>
+
+  <!-- Monastic Cypress Topiaries flanking entrance -->
+  <path d="M 41 66 C 39.5 68.5 39.5 72.5 41 73.5 C 42.5 72.5 42.5 68.5 41 66 Z" fill="#2d5218" stroke="#1d380e" stroke-width="0.5"/>
+  <path d="M 59 66 C 57.5 68.5 57.5 72.5 59 73.5 C 60.5 72.5 60.5 68.5 59 66 Z" fill="#2d5218" stroke="#1d380e" stroke-width="0.5"/>
+
+  <!-- 4. Monastery Cast Ground Shadow -->
+  <polygon points="30,34 46,24 49,14 55,14 58,24 74,32 75,44 73,69 71,73 55,73 54,71.5 46,71.5 45,73 29,73 27,67 27,37" fill="#2c4217" opacity="0.35"/>
+
+  <!-- 5. Inner Cloister Garden Courtyard (Centered at 50, 50) -->
+  <!-- Cloister Ambulatory Flagstone Walkway -->
+  <rect x="35.5" y="39.5" width="29" height="20" fill="#d9cbb0" stroke="#8a785d" stroke-width="0.8" rx="1"/>
+
+  <!-- Courtyard Inner Lawn -->
+  <rect x="39" y="42.5" width="22" height="14" rx="1.5" fill="url(#cloister-grass)" stroke="#4a7327" stroke-width="0.6"/>
+
+  <!-- Four Garden Beds with Herb & Flower Details (Physic Garden) -->
+  <!-- NW Bed -->
+  <circle cx="41.5" cy="44.5" r="0.8" fill="#8b5cf6"/>
+  <circle cx="43.5" cy="44.5" r="0.7" fill="#f43f5e"/>
+  <circle cx="42.5" cy="46" r="0.7" fill="#fbbf24"/>
+  <!-- NE Bed -->
+  <circle cx="56.5" cy="44.5" r="0.8" fill="#f43f5e"/>
+  <circle cx="58.5" cy="44.5" r="0.7" fill="#8b5cf6"/>
+  <circle cx="57.5" cy="46" r="0.7" fill="#fbbf24"/>
+  <!-- SW Bed -->
+  <circle cx="41.5" cy="53.5" r="0.7" fill="#fbbf24"/>
+  <circle cx="43.5" cy="53.5" r="0.8" fill="#8b5cf6"/>
+  <circle cx="42.5" cy="52" r="0.7" fill="#f43f5e"/>
+  <!-- SE Bed -->
+  <circle cx="56.5" cy="53.5" r="0.7" fill="#fbbf24"/>
+  <circle cx="58.5" cy="53.5" r="0.8" fill="#f43f5e"/>
+  <circle cx="57.5" cy="52" r="0.7" fill="#8b5cf6"/>
+
+  <!-- Central Monastery Stone Well / Fountain (Exact center 50, 50) -->
+  <circle cx="50" cy="50" r="3.3" fill="#c9b999" stroke="#735f44" stroke-width="0.6"/>
+  <circle cx="50" cy="50" r="2.6" fill="#ede2cb" stroke="#594833" stroke-width="0.6"/>
+  <circle cx="50" cy="50" r="1.8" fill="url(#water-well)"/>
+  <ellipse cx="49.4" cy="49.5" rx="0.7" ry="0.35" fill="#ffffff" opacity="0.7"/>
+  <path d="M 48.2 50 C 48.2 46.8 51.8 46.8 51.8 50" fill="none" stroke="#2e2419" stroke-width="0.6"/>
+  <circle cx="50" cy="47.2" r="0.4" fill="#d97706"/>
+
+  <!-- Inner Cloister Open Arcade Shadow & Arches -->
+  <!-- North arcade openings looking into chapel south wall -->
+  <rect x="36.5" y="39.5" width="27" height="2" fill="#2b2016"/>
+  <path d="M 38 41.5 V 40 A 1.2 1.2 0 0 1 40.4 40 V 41.5 M 42 41.5 V 40 A 1.2 1.2 0 0 1 44.4 40 V 41.5 M 55.6 41.5 V 40 A 1.2 1.2 0 0 1 58 40 V 41.5 M 59.6 41.5 V 40 A 1.2 1.2 0 0 1 62 40 V 41.5" fill="none" stroke="#ede2cb" stroke-width="0.8"/>
+
+  <!-- 6. Chapel Nave (North Wing) -->
+  <!-- Shaded North/Back Roof Slope -->
+  <polygon points="28,27.5 72,27.5 70,23 30,23" fill="url(#roof-shaded)" stroke="#54140c" stroke-width="0.7"/>
+  <!-- Lit South/Front Roof Slope -->
+  <polygon points="28,27.5 72,27.5 72,35.5 28,35.5" fill="url(#roof-south)" stroke="#5e170e" stroke-width="0.8"/>
+  <!-- Terracotta Tile Ridge Cap -->
+  <line x1="28" y1="27.5" x2="72" y2="27.5" stroke="#f0705d" stroke-width="1.2"/>
+  <line x1="28" y1="28.2" x2="72" y2="28.2" stroke="#611910" stroke-width="0.5"/>
+  <!-- Tile texture ridges on Chapel roof -->
+  <g stroke="#a32b1e" stroke-width="0.5">
+    <line x1="32" y1="27.5" x2="32" y2="35.5"/>
+    <line x1="36" y1="27.5" x2="36" y2="35.5"/>
+    <line x1="40" y1="27.5" x2="40" y2="35.5"/>
+    <line x1="60" y1="27.5" x2="60" y2="35.5"/>
+    <line x1="64" y1="27.5" x2="64" y2="35.5"/>
+    <line x1="68" y1="27.5" x2="68" y2="35.5"/>
+  </g>
+  <line x1="28" y1="31.5" x2="72" y2="31.5" stroke="#f0705d" stroke-width="0.4" opacity="0.5"/>
+
+  <!-- West Gable & East Gable of Chapel -->
+  <polygon points="28,35.5 28,27.5 30,23 31,23 31,35.5" fill="#c9b999" stroke="#594833" stroke-width="0.7"/>
+  <polygon points="72,35.5 72,27.5 70,23 69,23 69,35.5" fill="#b09e7c" stroke="#4d3d29" stroke-width="0.7"/>
+  <!-- Rose Window on East Gable -->
+  <circle cx="70.5" cy="29" r="1.6" fill="#3b5998" stroke="#ede2cb" stroke-width="0.6"/>
+  <circle cx="70.5" cy="29" r="0.5" fill="#facc15"/>
+
+  <!-- Chapel South Clerestory Wall -->
+  <rect x="36" y="35.5" width="28" height="4" fill="url(#wall-lit)" stroke="#69563e" stroke-width="0.7"/>
+  <!-- Arched Clerestory Windows -->
+  <rect x="38.5" y="36.5" width="1.8" height="2.5" rx="0.9" fill="#1c1610" stroke="#ede2cb" stroke-width="0.4"/>
+  <rect x="42.5" y="36.5" width="1.8" height="2.5" rx="0.9" fill="#1c1610" stroke="#ede2cb" stroke-width="0.4"/>
+  <rect x="55.7" y="36.5" width="1.8" height="2.5" rx="0.9" fill="#1c1610" stroke="#ede2cb" stroke-width="0.4"/>
+  <rect x="59.7" y="36.5" width="1.8" height="2.5" rx="0.9" fill="#1c1610" stroke="#ede2cb" stroke-width="0.4"/>
+
+  <!-- 7. Crossing Tower & Belfry (Centered at x=50) -->
+  <rect x="44" y="19.5" width="12" height="12" fill="url(#wall-lit)" stroke="#5e4c35" stroke-width="0.8"/>
+  <!-- Stone Cornice / Corbel Table -->
+  <rect x="43" y="19" width="14" height="1.8" fill="#ede2cb" stroke="#52412c" stroke-width="0.6"/>
+  <line x1="45" y1="20.8" x2="45" y2="21.6" stroke="#52412c" stroke-width="0.9"/>
+  <line x1="47.5" y1="20.8" x2="47.5" y2="21.6" stroke="#52412c" stroke-width="0.9"/>
+  <line x1="50" y1="20.8" x2="50" y2="21.6" stroke="#52412c" stroke-width="0.9"/>
+  <line x1="52.5" y1="20.8" x2="52.5" y2="21.6" stroke="#52412c" stroke-width="0.9"/>
+  <line x1="55" y1="20.8" x2="55" y2="21.6" stroke="#52412c" stroke-width="0.9"/>
+
+  <!-- Double Romanesque Belfry Arches -->
+  <rect x="45.8" y="22.8" width="3.4" height="5.8" rx="1.7" fill="#1c1610" stroke="#69563e" stroke-width="0.6"/>
+  <rect x="50.8" y="22.8" width="3.4" height="5.8" rx="1.7" fill="#1c1610" stroke="#69563e" stroke-width="0.6"/>
+  <!-- Belfry Bells -->
+  <path d="M 46.8 26 C 46.8 24.8 47.5 24.8 47.5 24.8 C 47.5 24.8 48.2 24.8 48.2 26 L 48.6 27.2 L 46.4 27.2 Z" fill="#b45309"/>
+  <path d="M 51.8 26 C 51.8 24.8 52.5 24.8 52.5 24.8 C 52.5 24.8 53.2 24.8 53.2 26 L 53.6 27.2 L 51.4 27.2 Z" fill="#b45309"/>
+
+  <!-- Tower Spire -->
+  <!-- Lit West Facet -->
+  <polygon points="43,19 50,19 50,9.5" fill="#c0392b" stroke="#5e170e" stroke-width="0.7"/>
+  <!-- Shaded East Facet -->
+  <polygon points="50,19 57,19 50,9.5" fill="#882216" stroke="#4a110a" stroke-width="0.7"/>
+  <!-- Hip Ribs -->
+  <line x1="43" y1="19" x2="50" y2="9.5" stroke="#f0705d" stroke-width="0.8"/>
+  <line x1="50" y1="19" x2="50" y2="9.5" stroke="#f89b8d" stroke-width="0.9"/>
+  <line x1="57" y1="19" x2="50" y2="9.5" stroke="#5e170e" stroke-width="0.7"/>
+
+  <!-- 8. Golden Cross Spire (Apex at x=50, y=9.5) -->
+  <!-- Finial Base Sphere -->
+  <circle cx="50" cy="9.2" r="1.3" fill="url(#gold-cross)" stroke="#92400e" stroke-width="0.4"/>
+  <circle cx="49.6" cy="8.8" r="0.4" fill="#ffffff" opacity="0.8"/>
+  <!-- Golden Cross -->
+  <line x1="50" y1="9.2" x2="50" y2="3.2" stroke="#92400e" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="50" y1="9.0" x2="50" y2="3.4" stroke="url(#gold-cross)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="47.5" y1="5.2" x2="52.5" y2="5.2" stroke="#92400e" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="47.7" y1="5.2" x2="52.3" y2="5.2" stroke="url(#gold-cross)" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Golden Cross Terminals -->
+  <circle cx="50" cy="3.2" r="0.75" fill="#fef08a" stroke="#92400e" stroke-width="0.3"/>
+  <circle cx="47.5" cy="5.2" r="0.75" fill="#fef08a" stroke="#92400e" stroke-width="0.3"/>
+  <circle cx="52.5" cy="5.2" r="0.75" fill="#fef08a" stroke="#92400e" stroke-width="0.3"/>
+  <circle cx="50" cy="5.2" r="0.85" fill="#fef08a" stroke="#92400e" stroke-width="0.3"/>
+
+  <!-- 9. Cloister Wings (West & East) -->
+  <!-- West Wing -->
+  <!-- Outer West Wall -->
+  <rect x="28" y="35.5" width="3" height="32.5" fill="url(#wall-side)" stroke="#594833" stroke-width="0.7"/>
+  <!-- Buttresses on West Wall -->
+  <rect x="27.2" y="42" width="1.2" height="2.5" fill="#ede2cb" stroke="#594833" stroke-width="0.4"/>
+  <rect x="27.2" y="54" width="1.2" height="2.5" fill="#ede2cb" stroke="#594833" stroke-width="0.4"/>
+  <!-- West Wing Pitched Roof -->
+  <polygon points="28,35.5 32,35.5 32,61 28,61" fill="#db4a37" stroke="#5e170e" stroke-width="0.6"/>
+  <polygon points="32,35.5 35.5,35.5 35.5,61 32,61" fill="#9e2b1f" stroke="#4a110a" stroke-width="0.6"/>
+  <line x1="32" y1="35.5" x2="32" y2="61" stroke="#f0705d" stroke-width="0.9"/>
+
+  <!-- East Wing -->
+  <!-- Outer East Wall -->
+  <rect x="69" y="35.5" width="3" height="32.5" fill="url(#wall-side)" stroke="#4d3d29" stroke-width="0.7"/>
+  <!-- Buttresses on East Wall -->
+  <rect x="71.6" y="42" width="1.2" height="2.5" fill="#c9b999" stroke="#4d3d29" stroke-width="0.4"/>
+  <rect x="71.6" y="54" width="1.2" height="2.5" fill="#c9b999" stroke="#4d3d29" stroke-width="0.4"/>
+  <!-- East Wing Pitched Roof -->
+  <polygon points="64.5,35.5 68,35.5 68,61 64.5,61" fill="#b53424" stroke="#54140c" stroke-width="0.6"/>
+  <polygon points="68,35.5 72,35.5 72,61 68,61" fill="#801d12" stroke="#420d07" stroke-width="0.6"/>
+  <line x1="68" y1="35.5" x2="68" y2="61" stroke="#d95341" stroke-width="0.9"/>
+
+  <!-- 10. South Wing (Front Facade & Gatehouse) -->
+  <!-- South Wing Pitched Roof -->
+  <polygon points="28,58.5 72,58.5 72,63.5 28,63.5" fill="url(#roof-south)" stroke="#5e170e" stroke-width="0.8"/>
+  <line x1="30" y1="58.5" x2="70" y2="58.5" stroke="#f0705d" stroke-width="1"/>
+  <!-- Tile ribs on south roof -->
+  <g stroke="#a32b1e" stroke-width="0.5">
+    <line x1="34" y1="58.5" x2="34" y2="63.5"/>
+    <line x1="38" y1="58.5" x2="38" y2="63.5"/>
+    <line x1="42" y1="58.5" x2="42" y2="63.5"/>
+    <line x1="58" y1="58.5" x2="58" y2="63.5"/>
+    <line x1="62" y1="58.5" x2="62" y2="63.5"/>
+    <line x1="66" y1="58.5" x2="66" y2="63.5"/>
+  </g>
+
+  <!-- Front South Stone Wall -->
+  <rect x="28" y="63.5" width="44" height="6.5" fill="url(#wall-lit)" stroke="#5e4c35" stroke-width="0.8"/>
+  <line x1="28" y1="66.8" x2="72" y2="66.8" stroke="#baa888" stroke-width="0.5"/>
+
+  <!-- Arched Windows on South Facade -->
+  <rect x="33.5" y="64.8" width="2.5" height="3.8" rx="1.2" fill="#1c1610" stroke="#ede2cb" stroke-width="0.5"/>
+  <rect x="64" y="64.8" width="2.5" height="3.8" rx="1.2" fill="#1c1610" stroke="#ede2cb" stroke-width="0.5"/>
+
+  <!-- 11. Grand Entrance Arch Portal (Centered at x=50, y=60 to 71) -->
+  <!-- Portal Stone Projection -->
+  <rect x="44.5" y="62.2" width="11" height="8" fill="#ede2cb" stroke="#52412c" stroke-width="0.8"/>
+  <!-- Gabled Pediment over Portal -->
+  <polygon points="50,59.8 56.5,62.8 43.5,62.8" fill="#c0392b" stroke="#54140c" stroke-width="0.7"/>
+  <line x1="43.5" y1="62.8" x2="50" y2="59.8" stroke="#f0705d" stroke-width="0.8"/>
+  <line x1="56.5" y1="62.8" x2="50" y2="59.8" stroke="#801d12" stroke-width="0.8"/>
+  <!-- Carved Stone Cross Medallion -->
+  <circle cx="50" cy="61.5" r="1.1" fill="#ede2cb" stroke="#69563e" stroke-width="0.4"/>
+  <path d="M 50 60.7 V 62.3 M 49.2 61.5 H 50.8" stroke="#69563e" stroke-width="0.4"/>
+
+  <!-- Arched Entrance Archway & Voussoirs -->
+  <path d="M 46.2 70.2 V 65.8 A 3.8 3.8 0 0 1 53.8 65.8 V 70.2" fill="none" stroke="#69563e" stroke-width="1.2"/>
+  <!-- Arched Portal Recess -->
+  <path d="M 47 70.2 V 65.8 A 3 3 0 0 1 53 65.8 V 70.2 Z" fill="#211810"/>
+  <!-- Timber Double Gate Doors -->
+  <path d="M 47.3 70.2 V 66 A 2.7 2.7 0 0 1 49.9 64.9 V 70.2 Z" fill="#47321e"/>
+  <path d="M 50.1 70.2 V 64.9 A 2.7 2.7 0 0 1 52.7 66 V 70.2 Z" fill="#3b2918"/>
+  <line x1="50" y1="64.8" x2="50" y2="70.2" stroke="#1f160e" stroke-width="0.5"/>
+  <!-- Iron Strap Hinges -->
+  <line x1="47.3" y1="67" x2="49.5" y2="67" stroke="#1c1917" stroke-width="0.6"/>
+  <line x1="47.3" y1="69" x2="49.5" y2="69" stroke="#1c1917" stroke-width="0.6"/>
+  <line x1="50.5" y1="67" x2="52.7" y2="67" stroke="#1c1917" stroke-width="0.6"/>
+  <line x1="50.5" y1="69" x2="52.7" y2="69" stroke="#1c1917" stroke-width="0.6"/>
+
+  <!-- Entrance Stone Steps -->
+  <rect x="45.2" y="70.2" width="9.6" height="1" rx="0.3" fill="#ede2cb" stroke="#5e4c35" stroke-width="0.5"/>
+  <rect x="44.6" y="71.1" width="10.8" height="1.1" rx="0.3" fill="#d9cbb0" stroke="#5e4c35" stroke-width="0.5"/>
+
+  <!-- 12. Tile Border (Perimeter Frame) -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>

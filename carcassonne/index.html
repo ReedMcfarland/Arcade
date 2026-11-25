@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Carcassonne — Web Tabletop (Rust & Firebase)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cinzel & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Firebase App & Database Compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <!-- Custom Tabletop CSS -->
+  <link rel="stylesheet" href="css/style.css?v=2.6.0" />
+</head>
+<body class="tabletop-bg">
+  <!-- Interactive Board Viewport (Pan & Zoom) -->
+  <div id="board-viewport">
+    <div id="board-stage">
+      <!-- Placed tiles, candidate slots, and meeple hotspots will be injected here -->
+    </div>
+  </div>
+
+  <!-- Top-Left Floating Menu & Player Status Pill -->
+  <div class="fixed top-3 left-3 sm:top-4 sm:left-4 z-40 flex items-center gap-2.5">
+    <div class="relative">
+      <button id="btn-menu-toggle" class="btn-medieval px-3.5 py-2 rounded-xl flex items-center gap-2 font-semibold text-xs sm:text-sm tracking-wide">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <span class="font-medieval tracking-wider hidden sm:inline">Carcassonne</span>
+      </button>
+
+      <!-- Parchment Dropdown Menu -->
+      <div id="menu-dropdown" class="hidden absolute top-12 left-0 w-80 sm:w-96 parchment-panel rounded-2xl p-4 flex flex-col gap-3 z-50">
+        <div class="flex items-center justify-between border-b border-[#c9b38f]/60 pb-2.5">
+          <h2 class="font-medieval font-bold text-base sm:text-lg text-[#2a1b10] flex items-center gap-2">
+            <img src="assets/ui/meeple.svg" class="w-5 h-5 inline-block" alt="Meeple" />
+            Game Controls
+          </h2>
+          <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#3b2716]/10 text-[#3b2716]" id="menu-turn-num">Turn 1</span>
+        </div>
+
+        <!-- Bag & Sound Status Row -->
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="bg-black/5 rounded-xl p-2.5 flex items-center justify-between">
+            <span class="text-[#594636] font-medium">Bag Remaining:</span>
+            <span id="menu-tiles-left" class="font-bold text-[#23170b] text-sm">41</span>
+          </div>
+          <button id="btn-sound" class="bg-black/5 hover:bg-black/10 rounded-xl p-2.5 flex items-center justify-between transition-colors">
+            <span class="text-[#594636] font-medium">Sound:</span>
+            <span id="icon-sound-label" class="font-bold text-green-700">ON</span>
+          </button>
+        </div>
+
+        <!-- Camera Controls -->
+        <div class="flex items-center justify-between bg-black/5 rounded-xl px-3 py-2 text-xs">
+          <span class="text-[#594636] font-medium">Camera Zoom:</span>
+          <div class="flex items-center gap-1.5">
+            <button id="btn-zoom-out" class="w-7 h-7 rounded-lg bg-white/70 hover:bg-white text-lg font-bold flex items-center justify-center border border-[#c9b38f]">-</button>
+            <span id="menu-zoom-label" class="w-12 text-center font-bold">100%</span>
+            <button id="btn-zoom-in" class="w-7 h-7 rounded-lg bg-white/70 hover:bg-white text-lg font-bold flex items-center justify-center border border-[#c9b38f]">+</button>
+            <button id="btn-recenter" class="px-2 py-1 ml-1 rounded-lg bg-white/70 hover:bg-white font-medium border border-[#c9b38f]">Recenter</button>
+          </div>
+        </div>
+
+        <!-- Online Multiplayer Button -->
+        <button id="btn-open-multiplayer" class="btn-medieval w-full py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+          <span id="multiplayer-btn-label">Online Multiplayer (Firebase)</span>
+        </button>
+
+        <!-- Players Scoreboard in Menu -->
+        <div class="border-t border-[#c9b38f]/60 pt-2.5">
+          <h3 class="text-xs font-bold text-[#594636] uppercase tracking-wider mb-2">Scoreboard</h3>
+          <div id="menu-players-list" class="flex flex-col gap-1.5 max-h-36 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- Recent Log -->
+        <div class="border-t border-[#c9b38f]/60 pt-2.5">
+          <h3 class="text-xs font-bold text-[#594636] uppercase tracking-wider mb-1.5">Game Chronicle</h3>
+          <div id="menu-game-log" class="text-xs space-y-1 max-h-28 overflow-y-auto font-mono text-[#423223] pr-1"></div>
+        </div>
+
+        <!-- New Game Button -->
+        <div class="border-t border-[#c9b38f]/60 pt-2 flex gap-2">
+          <button id="btn-new-game" class="btn-medieval flex-1 py-2 rounded-xl font-bold text-xs">New Campaign</button>
+          <button id="btn-finish-now" class="btn-secondary px-3 py-2 rounded-xl font-bold text-xs">End Game</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Player Pill -->
+    <div id="active-player-pill" class="bg-black/60 backdrop-blur-md border border-[#c99738]/50 text-[#f7f1e3] px-3.5 py-1.5 rounded-full flex items-center gap-2.5 shadow-xl">
+      <span id="pill-player-dot" class="w-3.5 h-3.5 rounded-full border border-white/60 bg-red-600 shadow-md"></span>
+      <span id="pill-player-name" class="font-medieval font-bold text-xs sm:text-sm tracking-wide">Player 1</span>
+      <span class="text-white/40 text-xs">|</span>
+      <span id="pill-player-meeples" class="text-xs flex items-center gap-1 font-semibold text-amber-300">
+        <img src="assets/ui/meeple.svg" class="w-3.5 h-3.5 inline-block opacity-90" alt="Meeple" /> 7
+      </span>
+      <span class="text-white/40 text-xs">|</span>
+      <span id="pill-player-score" class="font-bold text-xs sm:text-sm text-yellow-400">0 pts</span>
+    </div>
+
+    <!-- River Phase Badge -->
+    <div id="river-phase-badge" class="hidden bg-blue-950/80 backdrop-blur-md border border-cyan-400/50 text-cyan-200 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-xl font-medieval text-xs tracking-wide">
+      <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></span>
+      <span>River Phase: <strong id="river-remaining-count" class="text-white">11</strong> left</span>
+    </div>
+
+    <!-- Builder Bonus Turn Badge -->
+    <div id="builder-bonus-badge" class="hidden bg-amber-950/85 backdrop-blur-md border border-amber-400/60 text-amber-200 px-3.5 py-1.5 rounded-full flex items-center gap-2 shadow-xl font-medieval text-xs tracking-wide">
+      <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#fbbf24]"></span>
+      <span>Builder Bonus Turn</span>
+    </div>
+  </div>
+
+  <!-- Toast Message Overlay -->
+  <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <!-- Bottom-Left Floating Hand & Turn Control Bar -->
+  <div id="floating-tile-wrap" class="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-2.5">
+    <div class="flex items-end gap-3">
+      <!-- Staged Tile in Hand with Rotation Buttons -->
+      <div id="tile-hand-container" class="relative group">
+        <div id="floating-tile" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl shadow-2xl border-2 border-[#facc15] bg-[#77a851] cursor-grab active:cursor-grabbing overflow-hidden transition-transform duration-150">
+          <!-- Current tile SVG will be injected here -->
+        </div>
+
+        <!-- Rotate CCW & CW Floating Buttons -->
+        <button id="btn-rotate-ccw" title="Rotate Counter-Clockwise" class="btn-medieval absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-xl">
+          ↺
+        </button>
+        <button id="btn-rotate-cw" title="Rotate Clockwise" class="btn-medieval absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-xl">
+          ↻
+        </button>
+      </div>
+
+      <!-- Meeple Supply Tray (shown during PLACE_MEEPLE) -->
+      <div id="meeple-tray" class="hidden parchment-panel rounded-2xl p-2 flex items-center gap-2 shadow-2xl">
+        <!-- Draggable meeple pieces injected by renderHandSlot() -->
+      </div>
+
+      <!-- Action Confirmation Bar -->
+      <div id="floating-action-bar" class="parchment-panel rounded-2xl p-2.5 flex flex-col gap-2 shadow-2xl min-w-[190px]">
+        <div class="px-1">
+          <div id="action-bar-title" class="font-medieval font-bold text-xs text-[#2a1b10] uppercase tracking-wider">Place Tile</div>
+          <div id="action-bar-sub" class="text-[11px] text-[#594636]">Drag to grid or tap slot</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="btn-action-secondary" class="btn-secondary px-3 py-1.5 rounded-xl font-bold text-xs flex-1">Reset</button>
+          <button id="btn-action-primary" class="btn-confirm px-4 py-1.5 rounded-xl font-bold text-xs flex-1 shadow-md">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Right Tile Bag Button -->
+  <button id="tile-bag-btn" class="fixed bottom-4 right-4 z-40 group cursor-pointer focus:outline-none transition-transform active:scale-95">
+    <div class="relative w-20 h-20 sm:w-24 sm:h-24">
+      <img src="assets/ui/tile_bag.svg" class="w-full h-full drop-shadow-2xl group-hover:scale-105 transition-transform" alt="Tile Bag" />
+      <span id="bag-count-badge" class="absolute top-1 right-1 bg-red-600 border-2 border-white text-white font-medieval font-extrabold text-xs sm:text-sm px-2 py-0.5 rounded-full shadow-lg">41</span>
+    </div>
+  </button>
+
+  <!-- Drag Ghost Following Cursor/Pointer -->
+  <div id="drag-ghost" class="hidden"></div>
+
+  <!-- Modal: Tile Bag Catalog Inspector -->
+  <div id="modal-bag" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-2xl max-h-[85vh] flex flex-col p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#c9b38f]/70 pb-3">
+        <div>
+          <h2 class="font-medieval font-bold text-xl text-[#2a1b10] flex items-center gap-2">
+            <img src="assets/ui/tile_bag.svg" class="w-6 h-6 inline-block" alt="Bag" />
+            Tile Bag Catalog
+          </h2>
+          <p id="bag-modal-subtitle" class="text-xs text-[#594636]">Remaining distribution in current campaign</p>
+        </div>
+        <button id="btn-close-bag" class="btn-secondary w-8 h-8 rounded-full font-bold flex items-center justify-center">✕</button>
+      </div>
+      <div id="bag-modal-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 p-2 overflow-y-auto my-3"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Campaign Setup (Players & Rules) -->
+  <div id="modal-setup" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto p-6 shadow-2xl flex flex-col gap-4">
+      <div class="text-center border-b border-[#c9b38f]/60 pb-3">
+        <h2 class="font-medieval font-extrabold text-2xl text-[#2a1b10]">New Campaign</h2>
+        <p class="text-xs text-[#594636] mt-0.5">Configure tabletop players and rules</p>
+      </div>
+
+      <!-- Player Count Selector -->
+      <div>
+        <label class="block text-xs font-bold text-[#594636] uppercase tracking-wider mb-2">Number of Players</label>
+        <div id="setup-count-btns" class="grid grid-cols-5 gap-2">
+          <button data-count="2" class="btn-medieval py-2 rounded-xl font-bold text-sm">2</button>
+          <button data-count="3" class="btn-secondary py-2 rounded-xl font-bold text-sm">3</button>
+          <button data-count="4" class="btn-secondary py-2 rounded-xl font-bold text-sm">4</button>
+          <button data-count="5" class="btn-secondary py-2 rounded-xl font-bold text-sm">5</button>
+          <button data-count="6" class="btn-secondary py-2 rounded-xl font-bold text-sm">6</button>
+        </div>
+      </div>
+
+      <!-- Player Names and Colors -->
+      <div id="setup-player-inputs" class="flex flex-col gap-2.5 max-h-48 overflow-y-auto pr-1"></div>
+
+      <!-- Farmers Enabled Toggle -->
+      <div class="flex items-center justify-between bg-black/5 rounded-xl px-3 py-2.5">
+        <div>
+          <span class="block text-xs font-bold text-[#2a1b10]">Enable Farmers & Fields</span>
+          <span class="text-[11px] text-[#594636]">Meeples score 3 pts per completed city bordering their meadow at game end</span>
+        </div>
+        <input type="checkbox" id="setup-farmers-toggle" checked class="w-5 h-5 accent-amber-600 rounded cursor-pointer" />
+      </div>
+
+      <!-- River Expansion Toggle -->
+      <div class="flex items-center justify-between bg-black/5 rounded-xl px-3 py-2.5">
+        <div>
+          <span class="block text-xs font-bold text-[#2a1b10] flex items-center gap-1.5">
+            <span>The River Expansion</span>
+            <span class="bg-blue-600/20 text-blue-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-blue-600/30">River I</span>
+          </span>
+          <span class="text-[11px] text-[#594636]">12 river tiles (Source to Lake) replace start tile before main deck</span>
+        </div>
+        <input type="checkbox" id="setup-river-toggle" checked class="w-5 h-5 accent-blue-600 rounded cursor-pointer" />
+      </div>
+
+      <!-- Inns & Cathedrals Expansion Toggle -->
+      <div class="flex items-center justify-between bg-black/5 rounded-xl px-3 py-2.5">
+        <div>
+          <span class="block text-xs font-bold text-[#2a1b10] flex items-center gap-1.5">
+            <span>Inns &amp; Cathedrals</span>
+            <span class="bg-amber-600/20 text-amber-900 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-amber-600/30">Exp. 1</span>
+          </span>
+          <span class="text-[11px] text-[#594636]">18 tiles, Big Meeple (2x weight), Inns &amp; Cathedrals, 6th player</span>
+        </div>
+        <input type="checkbox" id="setup-ic-toggle" checked class="w-5 h-5 accent-amber-700 rounded cursor-pointer" />
+      </div>
+
+      <!-- Traders & Builders Expansion Toggle -->
+      <div class="flex items-center justify-between bg-black/5 rounded-xl px-3 py-2.5">
+        <div>
+          <span class="block text-xs font-bold text-[#2a1b10] flex items-center gap-1.5">
+            <span>Traders &amp; Builders</span>
+            <span class="bg-emerald-600/20 text-emerald-900 text-[10px] font-extrabold px-1.5 py-0.5 rounded border border-emerald-600/30">Exp. 2</span>
+          </span>
+          <span class="text-[11px] text-[#594636]">24 tiles, Trade Goods (Wine/Grain/Cloth), Builder &amp; Pig</span>
+        </div>
+        <input type="checkbox" id="setup-tb-toggle" checked class="w-5 h-5 accent-emerald-700 rounded cursor-pointer" />
+      </div>
+
+      <button id="btn-start-game" class="btn-confirm w-full py-3 rounded-xl font-medieval font-bold text-sm shadow-xl mt-1">
+        Begin Tabletop Campaign
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Firebase Online Multiplayer -->
+  <div id="modal-multiplayer" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-md p-6 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-[#c9b38f]/60 pb-3">
+        <h2 class="font-medieval font-extrabold text-xl text-[#2a1b10]">Online Multiplayer</h2>
+        <button id="btn-close-multiplayer" class="btn-secondary w-7 h-7 rounded-full font-bold flex items-center justify-center text-xs">✕</button>
+      </div>
+
+      <!-- Room Host / Join Tabs -->
+      <div class="flex flex-col gap-3">
+        <div class="bg-black/5 rounded-xl p-3 flex flex-col gap-2">
+          <label class="text-xs font-bold text-[#594636] uppercase tracking-wider">Host a Room</label>
+          <p class="text-xs text-[#594636]">Start a new multiplayer game and share the room code with friends.</p>
+          <button id="btn-host-room" class="btn-medieval py-2 rounded-xl font-bold text-xs">Create Room</button>
+        </div>
+
+        <div class="bg-black/5 rounded-xl p-3 flex flex-col gap-2">
+          <label class="text-xs font-bold text-[#594636] uppercase tracking-wider">Join a Room</label>
+          <div class="flex gap-2">
+            <input id="input-room-code" type="text" placeholder="Enter 4-letter Room Code" class="flex-1 bg-white border border-[#c9b38f] rounded-xl px-3 py-1.5 text-xs font-mono uppercase font-bold focus:outline-none focus:ring-2 focus:ring-amber-500" />
+            <button id="btn-join-room" class="btn-confirm px-4 py-1.5 rounded-xl font-bold text-xs">Join</button>
+          </div>
+        </div>
+
+        <!-- Firebase Config Settings Collapsible -->
+        <details class="text-xs bg-black/5 rounded-xl p-3 cursor-pointer">
+          <summary class="font-bold text-[#594636]">Firebase Connection Settings</summary>
+          <p class="text-[11px] text-[#594636] my-2">Paste your Firebase Project config JSON below to connect your own Firebase Realtime Database:</p>
+          <textarea id="firebase-config-input" rows="4" class="w-full bg-white font-mono text-[11px] p-2 rounded-lg border border-[#c9b38f] focus:outline-none" placeholder='{"databaseURL": "https://your-carcassonne-default-rtdb.firebaseio.com"}'></textarea>
+          <button id="btn-save-firebase-config" class="btn-secondary w-full py-1.5 mt-2 rounded-lg font-bold text-xs">Save Firebase Config</button>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Game Over Final Scoreboard -->
+  <div id="modal-gameover" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-lg p-6 shadow-2xl flex flex-col gap-4 text-center">
+      <div class="border-b border-[#c9b38f]/60 pb-3">
+        <h2 class="font-medieval font-extrabold text-3xl text-[#2a1b10]">Campaign Concluded</h2>
+        <p id="gameover-winner-text" class="font-medieval font-bold text-lg text-amber-700 mt-1">Player 1 Triumphs!</p>
+      </div>
+      <div id="gameover-scoreboard" class="flex flex-col gap-2 my-2 text-left"></div>
+      <div class="flex gap-2 mt-2">
+        <button id="btn-gameover-inspect" class="btn-secondary flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm">Inspect Board</button>
+        <button id="btn-play-again" class="btn-confirm flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-xl">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Script (ES Module) -->
+  <script type="module" src="js/app.js?v=2.6.0"></script>
+</body>
+</html>

@@ -1,0 +1,762 @@
+[
+  {
+    "id": "ic_ea",
+    "name": "Inn at the Curve",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ea.png",
+    "edges": ["F", "F", "R", "R"],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [2, 3],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 52.0, "y": 62.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW", "NE", "EN", "ES", "SE", "WN"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 28.0, "y": 22.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 18.0, "y": 82.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_eb",
+    "name": "Inn by the Garden Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_eb.png",
+    "edges": ["F", "R", "F", "R"],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [1, 3],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 60.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW", "NE", "EN", "WN"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 20.0, "y": 22.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["ES", "SE", "SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 20.0, "y": 82.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ec",
+    "name": "Inn by the Straight Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ec.png",
+    "edges": ["F", "R", "F", "R"],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [1, 3],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 58.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW", "NE", "EN", "WN"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 20.0, "y": 20.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["ES", "SE", "SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 78.0, "y": 82.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ed",
+    "name": "Monastery with Two Roads",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ed.png",
+    "edges": ["F", "R", "F", "R"],
+    "features": [
+      {
+        "id": "m0",
+        "type": "monastery",
+        "edges": [],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 50.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 16.0, "y": 68.0 }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [1],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 84.0, "y": 48.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW", "NE", "EN", "WN"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 20.0, "y": 20.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["ES", "SE", "SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 50.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ee",
+    "name": "Twin Curved Roads",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ee.png",
+    "edges": ["R", "R", "R", "R"],
+    "features": [
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [0, 3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 26.0, "y": 32.0 }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [1, 2],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 74.0, "y": 72.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW", "WN"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 16.0, "y": 16.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["NE", "EN", "SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 24.0, "y": 74.0 }
+      },
+      {
+        "id": "f2",
+        "nodes": ["ES", "SE"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 84.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ef",
+    "name": "Corner City with Gate Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ef.png",
+    "edges": ["C", "R", "F", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 28.0, "y": 28.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [1],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 68.0, "y": 60.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["EN"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 82.0, "y": 36.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["ES", "SE", "SW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 46.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_eg",
+    "name": "Corner City",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_eg.png",
+    "edges": ["C", "F", "F", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 28.0, "y": 28.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["EN", "ES", "SE", "SW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 72.0, "y": 72.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_eh",
+    "name": "Fourfold City Square",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_eh.png",
+    "edges": ["C", "C", "C", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 14.0 }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [1],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 86.0, "y": 50.0 }
+      },
+      {
+        "id": "c2",
+        "type": "city",
+        "edges": [2],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 86.0 }
+      },
+      {
+        "id": "c3",
+        "type": "city",
+        "edges": [3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 14.0, "y": 50.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["CENTER"],
+        "adjacent_cities": ["c0", "c1", "c2", "c3"],
+        "hotspot": { "x": 50.0, "y": 50.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ei",
+    "name": "Twin Cities Crossroads",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ei.png",
+    "edges": ["C", "R", "C", "R"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 14.0 }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [2],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 86.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 48.0, "y": 28.0 }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 54.0, "y": 72.0 }
+      },
+      {
+        "id": "r2",
+        "type": "road",
+        "edges": [3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 16.0, "y": 48.0 }
+      },
+      {
+        "id": "r3",
+        "type": "road",
+        "edges": [1],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 84.0, "y": 48.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["WN"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 18.0, "y": 34.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["EN"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 82.0, "y": 34.0 }
+      },
+      {
+        "id": "f2",
+        "nodes": ["ES"],
+        "adjacent_cities": ["c1"],
+        "hotspot": { "x": 82.0, "y": 66.0 }
+      },
+      {
+        "id": "f3",
+        "nodes": ["WS"],
+        "adjacent_cities": ["c1"],
+        "hotspot": { "x": 18.0, "y": 66.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ej",
+    "name": "City Cap with Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ej.png",
+    "edges": ["C", "F", "R", "F"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 14.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [2],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 60.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["SW", "WS", "WN"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 22.0, "y": 55.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["EN", "ES", "SE"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 78.0, "y": 55.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ek",
+    "name": "Cathedral",
+    "count": 2,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ek.png",
+    "edges": ["C", "C", "C", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 1, 2, 3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": true,
+        "hotspot": { "x": 50.0, "y": 50.0 }
+      }
+    ],
+    "fields": []
+  },
+  {
+    "id": "ic_el",
+    "name": "Shielded Corner City with Inn",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_el.png",
+    "edges": ["C", "R", "R", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 3],
+        "shield": true,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 30.0, "y": 30.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [1, 2],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 58.0, "y": 56.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["EN", "SW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 34.0, "y": 68.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["ES", "SE"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 84.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_em",
+    "name": "City Cap with Inn Curve",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_em.png",
+    "edges": ["C", "F", "R", "R"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 14.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [2, 3],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 42.0, "y": 60.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["EN", "ES", "SE", "WN"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 76.0, "y": 52.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["SW", "WS"],
+        "adjacent_cities": [],
+        "hotspot": { "x": 20.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_en",
+    "name": "Corner City with Inn Road",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_en.png",
+    "edges": ["C", "F", "R", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 28.0, "y": 28.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [2],
+        "shield": false,
+        "has_inn": true,
+        "has_cathedral": false,
+        "hotspot": { "x": 54.0, "y": 78.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["EN", "ES", "SE"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 76.0, "y": 52.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["SW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 24.0, "y": 84.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_eo",
+    "name": "Three City Caps",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_eo.png",
+    "edges": ["C", "C", "F", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 14.0 }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [1],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 86.0, "y": 50.0 }
+      },
+      {
+        "id": "c2",
+        "type": "city",
+        "edges": [3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 14.0, "y": 50.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["SE", "SW"],
+        "adjacent_cities": ["c0", "c1", "c2"],
+        "hotspot": { "x": 50.0, "y": 55.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_ep",
+    "name": "Shielded Corner City and Cap",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_ep.png",
+    "edges": ["C", "C", "F", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [0, 1],
+        "shield": true,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 72.0, "y": 28.0 }
+      },
+      {
+        "id": "c1",
+        "type": "city",
+        "edges": [3],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 12.0, "y": 50.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["SE", "SW"],
+        "adjacent_cities": ["c0", "c1"],
+        "hotspot": { "x": 42.0, "y": 65.0 }
+      }
+    ]
+  },
+  {
+    "id": "ic_eq",
+    "name": "Shielded City Bridge with Roads",
+    "count": 1,
+    "is_start": false,
+    "expansion": "inns_cathedrals",
+    "asset": "assets/tiles/ic_eq.png",
+    "edges": ["R", "C", "R", "C"],
+    "features": [
+      {
+        "id": "c0",
+        "type": "city",
+        "edges": [1, 3],
+        "shield": true,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 50.0, "y": 50.0 }
+      },
+      {
+        "id": "r0",
+        "type": "road",
+        "edges": [0],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 48.0, "y": 18.0 }
+      },
+      {
+        "id": "r1",
+        "type": "road",
+        "edges": [2],
+        "shield": false,
+        "has_inn": false,
+        "has_cathedral": false,
+        "hotspot": { "x": 48.0, "y": 84.0 }
+      }
+    ],
+    "fields": [
+      {
+        "id": "f0",
+        "nodes": ["NW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 24.0, "y": 18.0 }
+      },
+      {
+        "id": "f1",
+        "nodes": ["NE"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 76.0, "y": 18.0 }
+      },
+      {
+        "id": "f2",
+        "nodes": ["SE"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 76.0, "y": 84.0 }
+      },
+      {
+        "id": "f3",
+        "nodes": ["SW"],
+        "adjacent_cities": ["c0"],
+        "hotspot": { "x": 24.0, "y": 84.0 }
+      }
+    ]
+  }
+]

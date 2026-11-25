@@ -1,0 +1,528 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for gradients, filters, clip-paths, and reusable assets -->
+  <defs>
+    <!-- City Ground & Roof Gradients -->
+    <linearGradient id="cityGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfa572"/>
+      <stop offset="50%" stop-color="#c78d58"/>
+      <stop offset="100%" stop-color="#b67f4a"/>
+    </linearGradient>
+    <linearGradient id="roofRed1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#cc523e"/>
+      <stop offset="100%" stop-color="#993627"/>
+    </linearGradient>
+    <linearGradient id="roofRed2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ba4837"/>
+      <stop offset="100%" stop-color="#84291c"/>
+    </linearGradient>
+    <linearGradient id="roofRed3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#db614c"/>
+      <stop offset="100%" stop-color="#a63d2e"/>
+    </linearGradient>
+    <linearGradient id="sandstone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dfcfb3"/>
+      <stop offset="100%" stop-color="#c5b291"/>
+    </linearGradient>
+    <linearGradient id="sandstoneWarm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8dcbe"/>
+      <stop offset="100%" stop-color="#ccbba0"/>
+    </linearGradient>
+
+    <!-- Heraldic Shield Gradients & Filters -->
+    <filter id="shieldShadow" x="-20%" y="-15%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2.2" stdDeviation="1.8" flood-color="#140a04" flood-opacity="0.45"/>
+    </filter>
+    <linearGradient id="goldRim" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#fff176"/>
+      <stop offset="15%" stop-color="#fbc02d"/>
+      <stop offset="45%" stop-color="#df9b12"/>
+      <stop offset="75%" stop-color="#b7791f"/>
+      <stop offset="92%" stop-color="#8c5310"/>
+      <stop offset="100%" stop-color="#5a3106"/>
+    </linearGradient>
+    <linearGradient id="goldCross" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="20%" stop-color="#fdd835"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="80%" stop-color="#b45309"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <radialGradient id="azureTopLeft" cx="35%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="85%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+    <radialGradient id="azureBottomRight" cx="65%" cy="65%" r="70%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="85%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </radialGradient>
+    <radialGradient id="argentTopRight" cx="65%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f1f5f9"/>
+      <stop offset="85%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </radialGradient>
+    <radialGradient id="argentBottomLeft" cx="35%" cy="65%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f1f5f9"/>
+      <stop offset="85%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </radialGradient>
+    <linearGradient id="shieldCurvature" x1="25%" y1="10%" x2="75%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="65%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+    <radialGradient id="silverRivet" cx="32%" cy="30%" r="68%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#f8fafc"/>
+      <stop offset="65%" stop-color="#cbd5e1"/>
+      <stop offset="85%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </radialGradient>
+    <clipPath id="fieldClip">
+      <path d="M 15.5 15.5
+               L 84.5 15.5
+               Q 83 17.5 81.5 20.5
+               L 81.5 46
+               C 81.5 66.5, 62.5 80.5, 50 86
+               C 37.5 80.5, 18.5 66.5, 18.5 46
+               L 18.5 20.5
+               Q 17 17.5 15.5 15.5
+               Z"/>
+    </clipPath>
+    <g id="rivet">
+      <circle cx="0.2" cy="0.35" r="1.4" fill="#331c04" opacity="0.55"/>
+      <circle cx="0" cy="0" r="1.35" fill="url(#silverRivet)" stroke="#475569" stroke-width="0.25"/>
+      <circle cx="-0.42" cy="-0.42" r="0.38" fill="#ffffff" opacity="0.95"/>
+    </g>
+  </defs>
+
+  <!-- 1. Meadow Base Layer (North & South meadows) -->
+  <rect width="100" height="100" fill="#77a851"/>
+
+  <!-- Meadow Texture & Hill Shading -->
+  <g opacity="0.4">
+    <!-- North Meadow Hill Variations -->
+    <circle cx="20" cy="6" r="14" fill="#84b85c"/>
+    <circle cx="80" cy="6" r="14" fill="#84b85c"/>
+    <circle cx="50" cy="12" r="11" fill="#80b457"/>
+    <!-- South Meadow Hill Variations -->
+    <circle cx="18" cy="94" r="14" fill="#6a9b44"/>
+    <circle cx="82" cy="94" r="14" fill="#659640"/>
+    <circle cx="50" cy="88" r="11" fill="#6a9b44"/>
+  </g>
+
+  <!-- Tree Groves & Bushes in Meadows -->
+  <!-- Grove North-West: (18, 5) -->
+  <g>
+    <ellipse cx="18" cy="7" rx="7" ry="3" fill="#3c5f21" opacity="0.35"/>
+    <rect x="16" y="5" width="1.5" height="2.5" fill="#4d3826"/>
+    <rect x="20" y="5.5" width="1.3" height="2" fill="#4d3826"/>
+    <circle cx="15" cy="3" r="3.6" fill="#477528"/>
+    <circle cx="21" cy="3.5" r="3.8" fill="#588c34"/>
+    <circle cx="18" cy="1.5" r="4.2" fill="#67a13f"/>
+    <circle cx="17.5" cy="0.8" r="2" fill="#7ebb4d" opacity="0.7"/>
+  </g>
+  <!-- Grove North-East: (82, 5) -->
+  <g>
+    <ellipse cx="82" cy="7" rx="7" ry="3" fill="#3c5f21" opacity="0.35"/>
+    <rect x="80" y="5" width="1.5" height="2.5" fill="#4d3826"/>
+    <rect x="84" y="5.5" width="1.3" height="2" fill="#4d3826"/>
+    <circle cx="79" cy="3.5" r="3.8" fill="#477528"/>
+    <circle cx="85" cy="3" r="3.6" fill="#588c34"/>
+    <circle cx="82" cy="1.5" r="4.2" fill="#67a13f"/>
+    <circle cx="82.5" cy="0.8" r="2" fill="#7ebb4d" opacity="0.7"/>
+  </g>
+  <!-- North Meadow Center Tree & Shrubs -->
+  <circle cx="50" cy="10" r="3.5" fill="#588c34"/>
+  <circle cx="49.5" cy="8.8" r="3" fill="#67a13f"/>
+  <circle cx="49" cy="8" r="1.6" fill="#7ebb4d" opacity="0.7"/>
+  <circle cx="36" cy="12" r="2.2" fill="#588c34"/>
+  <circle cx="35.5" cy="11.4" r="1.8" fill="#67a13f"/>
+  <circle cx="64" cy="12" r="2.2" fill="#588c34"/>
+  <circle cx="64.5" cy="11.4" r="1.8" fill="#67a13f"/>
+
+  <!-- Grove South-West: (18, 95) -->
+  <g>
+    <ellipse cx="18" cy="97" rx="7" ry="3" fill="#3c5f21" opacity="0.35"/>
+    <rect x="16" y="93" width="1.5" height="2.5" fill="#4d3826"/>
+    <rect x="20" y="93.5" width="1.3" height="2" fill="#4d3826"/>
+    <circle cx="15" cy="95.5" r="3.6" fill="#477528"/>
+    <circle cx="21" cy="95" r="3.8" fill="#588c34"/>
+    <circle cx="18" cy="97" r="4.2" fill="#67a13f"/>
+    <circle cx="17.5" cy="97.8" r="2" fill="#7ebb4d" opacity="0.7"/>
+  </g>
+  <!-- Grove South-East: (82, 95) -->
+  <g>
+    <ellipse cx="82" cy="97" rx="7" ry="3" fill="#3c5f21" opacity="0.35"/>
+    <rect x="80" y="93" width="1.5" height="2.5" fill="#4d3826"/>
+    <rect x="84" y="93.5" width="1.3" height="2" fill="#4d3826"/>
+    <circle cx="79" cy="95" r="3.8" fill="#477528"/>
+    <circle cx="85" cy="95.5" r="3.6" fill="#588c34"/>
+    <circle cx="82" cy="97" r="4.2" fill="#67a13f"/>
+    <circle cx="82.5" cy="97.8" r="2" fill="#7ebb4d" opacity="0.7"/>
+  </g>
+  <!-- South Meadow Center Tree & Shrubs -->
+  <circle cx="50" cy="90" r="3.5" fill="#588c34"/>
+  <circle cx="49.5" cy="91.2" r="3" fill="#67a13f"/>
+  <circle cx="49" cy="92" r="1.6" fill="#7ebb4d" opacity="0.7"/>
+  <circle cx="36" cy="88" r="2.2" fill="#588c34"/>
+  <circle cx="35.5" cy="88.6" r="1.8" fill="#67a13f"/>
+  <circle cx="64" cy="88" r="2.2" fill="#588c34"/>
+  <circle cx="64.5" cy="88.6" r="1.8" fill="#67a13f"/>
+
+  <!-- Grass Tufts in Meadow Sections -->
+  <g stroke="#48752c" stroke-width="1.1" stroke-linecap="round" fill="none">
+    <!-- North Meadow Tufts -->
+    <path d="M 28 12 L 27 9.5 M 28 12 L 28.5 9 M 28 12 L 30 10"/>
+    <path d="M 50 17 L 49 14.5 M 50 17 L 50.5 14 M 50 17 L 52 15"/>
+    <path d="M 72 12 L 71 9.5 M 72 12 L 72.5 9 M 72 12 L 74 10"/>
+    <!-- South Meadow Tufts -->
+    <path d="M 28 88 L 27 85.5 M 28 88 L 28.5 85 M 28 88 L 30 86"/>
+    <path d="M 50 83 L 49 80.5 M 50 83 L 50.5 80 M 50 83 L 52 81"/>
+    <path d="M 72 88 L 71 85.5 M 72 88 L 72.5 85 M 72 88 L 74 86"/>
+  </g>
+
+  <!-- Wildflowers in Meadow -->
+  <g fill="#fef08a" opacity="0.85">
+    <circle cx="26" cy="13" r="0.9"/>
+    <circle cx="43" cy="16" r="0.9"/>
+    <circle cx="57" cy="16" r="0.9"/>
+    <circle cx="74" cy="13" r="0.9"/>
+    <circle cx="26" cy="87" r="0.9"/>
+    <circle cx="43" cy="84" r="0.9"/>
+    <circle cx="57" cy="84" r="0.9"/>
+    <circle cx="74" cy="87" r="0.9"/>
+  </g>
+  <g fill="#ffffff" opacity="0.75">
+    <circle cx="31" cy="11" r="0.8"/>
+    <circle cx="69" cy="11" r="0.8"/>
+    <circle cx="31" cy="89" r="0.8"/>
+    <circle cx="69" cy="89" r="0.8"/>
+  </g>
+
+  <!-- 2. City Wall Drop Shadows on Meadow -->
+  <path d="M 0 6.5 Q 50 46.5 100 6.5" fill="none" stroke="#364e1e" stroke-width="4.5" opacity="0.32"/>
+  <path d="M 0 93.5 Q 50 53.5 100 93.5" fill="none" stroke="#364e1e" stroke-width="4.5" opacity="0.35"/>
+
+  <!-- 3. Fortified City Bridge Ground Layer -->
+  <!-- Continuous bridge pavement from West edge to East edge -->
+  <path d="M 0 8 Q 50 48 100 8 L 100 92 Q 50 52 0 92 Z" fill="url(#cityGround)"/>
+
+  <!-- Plaza Cobblestone Street Texture Arcs -->
+  <path d="M 0 20 Q 50 49 100 20" fill="none" stroke="#b07944" stroke-width="0.7" stroke-dasharray="3 3.5" opacity="0.42"/>
+  <path d="M 0 32 Q 50 50 100 32" fill="none" stroke="#b07944" stroke-width="0.7" stroke-dasharray="3.5 4" opacity="0.35"/>
+  <path d="M 0 68 Q 50 50 100 68" fill="none" stroke="#b07944" stroke-width="0.7" stroke-dasharray="3.5 4" opacity="0.35"/>
+  <path d="M 0 80 Q 50 51 100 80" fill="none" stroke="#b07944" stroke-width="0.7" stroke-dasharray="3 3.5" opacity="0.42"/>
+
+  <!-- Central Circular Heraldic Plaza / Medallion -->
+  <g>
+    <!-- Outer Plaza Ring -->
+    <circle cx="50" cy="50" r="18" fill="#d19a64" opacity="0.45"/>
+    <circle cx="50" cy="50" r="18" fill="none" stroke="#a36e3c" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.6"/>
+    <!-- Middle Ring -->
+    <circle cx="50" cy="50" r="15" fill="#e0aa75" opacity="0.35"/>
+    <circle cx="50" cy="50" r="15" fill="none" stroke="#8f5c2e" stroke-width="0.7" stroke-dasharray="3 2" opacity="0.5"/>
+    <!-- Radiating Flagstone Spokes (bounded inside r=18) -->
+    <g stroke="#aa713c" stroke-width="0.6" opacity="0.4">
+      <line x1="32" y1="50" x2="68" y2="50"/>
+      <line x1="50" y1="32" x2="50" y2="68"/>
+      <line x1="37.3" y1="37.3" x2="62.7" y2="62.7"/>
+      <line x1="37.3" y1="62.7" x2="62.7" y2="37.3"/>
+    </g>
+  </g>
+
+
+
+  <!-- 4. Medieval City Buildings (Inside City Walls) -->
+  <!-- WEST QUARTER BUILDINGS -->
+  <!-- Building W1: West-North Timber Townhouse (x: 8..23, y: 24..35) -->
+  <g id="building-wn">
+    <rect x="9" y="27" width="15" height="9" rx="1" fill="#2a1b10" opacity="0.18"/>
+    <rect x="8.5" y="26" width="14" height="9" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <path d="M 14 35 L 14 31 Q 15.5 30 17 31 L 17 35 Z" fill="#3a271a"/>
+    <line x1="8.5" y1="29.5" x2="22.5" y2="29.5" stroke="#715438" stroke-width="0.6"/>
+    <rect x="7.5" y="23.5" width="16" height="7.5" rx="1.2" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="7.5" y1="27.2" x2="23.5" y2="27.2" stroke="#e36b57" stroke-width="0.7"/>
+    <rect x="10.5" y="21.5" width="2" height="3" fill="#a83f30" stroke="#5e2a1e" stroke-width="0.6"/>
+  </g>
+
+  <!-- Building W2: West-North Small Cottage (x: 23..34, y: 28..38) -->
+  <g id="cottage-wn">
+    <rect x="23.5" y="30.5" width="10.5" height="8" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <rect x="22.5" y="28.5" width="12.5" height="7" rx="1.1" fill="url(#roofRed2)" stroke="#5e2a1e" stroke-width="0.9"/>
+    <line x1="22.5" y1="32" x2="35" y2="32" stroke="#db6350" stroke-width="0.6"/>
+    <rect x="27.5" y="34.5" width="2.2" height="4" fill="#3a271a"/>
+  </g>
+
+  <!-- Building W3: West-South Workshop & Tavern (x: 8..23, y: 64..75) -->
+  <g id="building-ws">
+    <rect x="9" y="65" width="15" height="10" rx="1" fill="#2a1b10" opacity="0.18"/>
+    <rect x="8.5" y="64" width="14" height="9" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <path d="M 13 68 L 13 64.5 Q 14.5 63.5 16 64.5 L 16 68 Z" fill="#3a271a"/>
+    <rect x="18" y="65.5" width="2.4" height="2.4" rx="0.3" fill="#ffe082" stroke="#594636" stroke-width="0.5"/>
+    <rect x="7.5" y="68" width="16" height="7.5" rx="1.2" fill="url(#roofRed3)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="7.5" y1="71.7" x2="23.5" y2="71.7" stroke="#f07965" stroke-width="0.7"/>
+    <rect x="10.5" y="74.5" width="2.2" height="3" fill="#9e3627" stroke="#5e2a1e" stroke-width="0.6"/>
+  </g>
+
+  <!-- Building W4: West-South Cottage (x: 23..34, y: 61..71) -->
+  <g id="cottage-ws">
+    <rect x="23.5" y="60.5" width="10.5" height="8" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <rect x="27.5" y="61.5" width="2.2" height="3.5" fill="#3a271a"/>
+    <rect x="22.5" y="63.5" width="12.5" height="7" rx="1.1" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="0.9"/>
+    <line x1="22.5" y1="67" x2="35" y2="67" stroke="#e36b57" stroke-width="0.6"/>
+  </g>
+
+  <!-- EAST QUARTER BUILDINGS -->
+  <!-- Building E1: East-North Townhouse (x: 77..92, y: 24..35) -->
+  <g id="building-en">
+    <rect x="76" y="27" width="15" height="9" rx="1" fill="#2a1b10" opacity="0.18"/>
+    <rect x="77.5" y="26" width="14" height="9" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <rect x="83.5" y="30.5" width="2.2" height="4.5" rx="0.4" fill="#3a271a"/>
+    <line x1="77.5" y1="29.5" x2="91.5" y2="29.5" stroke="#715438" stroke-width="0.6"/>
+    <rect x="76.5" y="23.5" width="16" height="7.5" rx="1.2" fill="url(#roofRed3)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="76.5" y1="27.2" x2="92.5" y2="27.2" stroke="#f07965" stroke-width="0.7"/>
+    <rect x="87.5" y="21.5" width="2" height="3" fill="#a83f30" stroke="#5e2a1e" stroke-width="0.6"/>
+  </g>
+
+  <!-- Building E2: East-North Small Cottage (x: 66..77, y: 28..38) -->
+  <g id="cottage-en">
+    <rect x="66" y="30.5" width="10.5" height="8" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <rect x="65" y="28.5" width="12.5" height="7" rx="1.1" fill="url(#roofRed1)" stroke="#5e2a1e" stroke-width="0.9"/>
+    <line x1="65" y1="32" x2="77.5" y2="32" stroke="#e36b57" stroke-width="0.6"/>
+    <rect x="70.5" y="34.5" width="2.2" height="4" fill="#3a271a"/>
+  </g>
+
+  <!-- Building E3: East-South Guildhall (x: 77..92, y: 64..75) -->
+  <g id="building-es">
+    <rect x="76" y="65" width="15" height="10" rx="1" fill="#2a1b10" opacity="0.18"/>
+    <rect x="77.5" y="64" width="14" height="9" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <path d="M 84 68 L 84 64.5 Q 85.5 63.5 87 64.5 L 87 68 Z" fill="#3a271a"/>
+    <rect x="79.5" y="65.5" width="2.4" height="2.4" rx="0.3" fill="#ffe082" stroke="#594636" stroke-width="0.5"/>
+    <rect x="76.5" y="68" width="16" height="7.5" rx="1.2" fill="url(#roofRed2)" stroke="#5e2a1e" stroke-width="1"/>
+    <line x1="76.5" y1="71.7" x2="92.5" y2="71.7" stroke="#db6350" stroke-width="0.7"/>
+    <rect x="87.5" y="74.5" width="2.2" height="3" fill="#9e3627" stroke="#5e2a1e" stroke-width="0.6"/>
+  </g>
+
+  <!-- Building E4: East-South Cottage (x: 66..77, y: 61..71) -->
+  <g id="cottage-es">
+    <rect x="66" y="60.5" width="10.5" height="8" rx="0.8" fill="url(#sandstone)" stroke="#594636" stroke-width="0.8"/>
+    <rect x="70.5" y="61.5" width="2.2" height="3.5" fill="#3a271a"/>
+    <rect x="65" y="63.5" width="12.5" height="7" rx="1.1" fill="url(#roofRed3)" stroke="#5e2a1e" stroke-width="0.9"/>
+    <line x1="65" y1="67" x2="77.5" y2="67" stroke="#f07965" stroke-width="0.6"/>
+  </g>
+
+  <!-- 5. Fortified Stone City Walls & Battlements -->
+  <!-- NORTH CITY WALL -->
+  <!-- Base Stone Wall Stroke -->
+  <path d="M 0 8 Q 50 48 100 8" fill="none" stroke="#594636" stroke-width="5" stroke-linecap="butt"/>
+  <!-- Wall Walkway Course -->
+  <path d="M 0 8 Q 50 48 100 8" fill="none" stroke="#9e8d79" stroke-width="2.6" stroke-linecap="butt"/>
+  <!-- Battlements / Merlons (outer facing towards north meadow) -->
+  <path d="M 0 6.8 Q 50 46.8 100 6.8" fill="none" stroke="#594636" stroke-width="2.6" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+  <!-- Merlon Highlights -->
+  <path d="M 0 5.9 Q 50 45.9 100 5.9" fill="none" stroke="#ded5c4" stroke-width="1.1" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+  <!-- Wall Base Pavement Shadow (interior) -->
+  <path d="M 0 10.2 Q 50 50.2 100 10.2" fill="none" stroke="#3e2a1c" stroke-width="1.6" opacity="0.25"/>
+
+  <!-- SOUTH CITY WALL -->
+  <!-- Base Stone Wall Stroke -->
+  <path d="M 0 92 Q 50 52 100 92" fill="none" stroke="#594636" stroke-width="5" stroke-linecap="butt"/>
+  <!-- Wall Walkway Course -->
+  <path d="M 0 92 Q 50 52 100 92" fill="none" stroke="#9e8d79" stroke-width="2.6" stroke-linecap="butt"/>
+  <!-- Battlements / Merlons (outer facing towards south meadow) -->
+  <path d="M 0 93.2 Q 50 53.2 100 93.2" fill="none" stroke="#594636" stroke-width="2.6" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+  <!-- Merlon Highlights -->
+  <path d="M 0 94.1 Q 50 54.1 100 94.1" fill="none" stroke="#ded5c4" stroke-width="1.1" stroke-dasharray="3.2 2.2" stroke-linecap="butt"/>
+  <!-- Wall Base Pavement Shadow (interior) -->
+  <path d="M 0 89.8 Q 50 49.8 100 89.8" fill="none" stroke="#3e2a1c" stroke-width="1.6" opacity="0.25"/>
+
+  <!-- Fortification Turrets & Bastions -->
+  <!-- Four Corner Bastions at tile boundary connections -->
+  <circle cx="2" cy="8" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="2" cy="8" r="1.4" fill="#3a271a"/>
+  <circle cx="98" cy="8" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="98" cy="8" r="1.4" fill="#3a271a"/>
+  <circle cx="2" cy="92" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="2" cy="92" r="1.4" fill="#3a271a"/>
+  <circle cx="98" cy="92" r="3.2" fill="#9e8d79" stroke="#594636" stroke-width="1.2"/>
+  <circle cx="98" cy="92" r="1.4" fill="#3a271a"/>
+
+  <!-- Mid-Wall Flanking Watchtowers (Bridge Fortifications) -->
+  <circle cx="27" cy="22" r="3.1" fill="#9e8d79" stroke="#594636" stroke-width="1.1"/>
+  <circle cx="27" cy="22" r="1.3" fill="#3a271a"/>
+  <line x1="27" y1="22" x2="27" y2="17" stroke="#4a3525" stroke-width="0.7"/>
+  <polygon points="27,17 31,18.5 27,20" fill="#dc2626"/>
+
+  <circle cx="73" cy="22" r="3.1" fill="#9e8d79" stroke="#594636" stroke-width="1.1"/>
+  <circle cx="73" cy="22" r="1.3" fill="#3a271a"/>
+  <line x1="73" y1="22" x2="73" y2="17" stroke="#4a3525" stroke-width="0.7"/>
+  <polygon points="73,17 77,18.5 73,20" fill="#dc2626"/>
+
+  <circle cx="27" cy="78" r="3.1" fill="#9e8d79" stroke="#594636" stroke-width="1.1"/>
+  <circle cx="27" cy="78" r="1.3" fill="#3a271a"/>
+  <line x1="27" y1="78" x2="27" y2="83" stroke="#4a3525" stroke-width="0.7"/>
+  <polygon points="27,80 31,81.5 27,83" fill="#dc2626"/>
+
+  <circle cx="73" cy="78" r="3.1" fill="#9e8d79" stroke="#594636" stroke-width="1.1"/>
+  <circle cx="73" cy="78" r="1.3" fill="#3a271a"/>
+  <line x1="73" y1="78" x2="73" y2="83" stroke="#4a3525" stroke-width="0.7"/>
+  <polygon points="73,80 77,81.5 73,83" fill="#dc2626"/>
+
+  <!-- 6. Prominent Central Heraldic Shield (Coat-of-Arms) -->
+  <!-- Scaled and centered at (x=50, y=50) -->
+  <g id="heraldic-shield" transform="translate(50, 50) scale(0.32) translate(-50, -52)" filter="url(#shieldShadow)">
+    <!-- Outer Golden Heater Shield Frame -->
+    <path id="outerRim"
+          d="M 10 10
+             L 90 10
+             Q 88.5 12.5 87 16
+             L 87 46
+             C 87 70, 65 86, 50 94
+             C 35 86, 13 70, 13 46
+             L 13 16
+             Q 11.5 12.5 10 10
+             Z"
+          fill="url(#goldRim)"
+          stroke="#5a3106"
+          stroke-width="0.8"
+          stroke-linejoin="round"/>
+
+    <!-- Rim Top Glazed Edge Highlight -->
+    <path d="M 12 10.5 L 88 10.5" stroke="#fff9c4" stroke-width="0.8" stroke-linecap="round"/>
+    <!-- Rim Left Flank Glazed Highlight -->
+    <path d="M 10 10 Q 11.5 12.5 13 16 L 13 46" stroke="#fff176" stroke-width="0.6" fill="none" opacity="0.75"/>
+
+    <!-- Inner Shield Field (Clipped) -->
+    <g clip-path="url(#fieldClip)">
+      <!-- 4 Heraldic Quarters -->
+      <!-- Q1 (Dexter Chief / Top-Left): Azure -->
+      <rect x="10" y="10" width="40" height="37" fill="url(#azureTopLeft)"/>
+      <!-- Q2 (Sinister Chief / Top-Right): Argent -->
+      <rect x="50" y="10" width="40" height="37" fill="url(#argentTopRight)"/>
+      <!-- Q3 (Dexter Base / Bottom-Left): Argent -->
+      <rect x="10" y="47" width="40" height="45" fill="url(#argentBottomLeft)"/>
+      <!-- Q4 (Sinister Base / Bottom-Right): Azure -->
+      <rect x="50" y="47" width="40" height="45" fill="url(#azureBottomRight)"/>
+
+      <!-- Azure Heraldic Diapering (Faint Stars) -->
+      <g stroke="#ffffff" stroke-opacity="0.14" stroke-width="0.55" fill="none" stroke-linecap="round">
+        <!-- Q1 diapering -->
+        <path d="M 23 23 L 27 27 M 27 23 L 23 27 M 36 23 L 40 27 M 40 23 L 36 27 M 29.5 35 L 33.5 39 M 33.5 35 L 29.5 39"/>
+        <circle cx="25" cy="25" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="38" cy="25" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="31.5" cy="37" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <!-- Q4 diapering -->
+        <path d="M 60 60 L 64 64 M 64 60 L 60 64 M 73 60 L 77 64 M 77 60 L 73 64 M 66.5 72 L 70.5 76 M 70.5 72 L 66.5 76"/>
+        <circle cx="62" cy="62" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="75" cy="62" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+        <circle cx="68.5" cy="74" r="0.8" fill="#ffffff" fill-opacity="0.18" stroke="none"/>
+      </g>
+
+      <!-- Argent Heraldic Ermine Flecks -->
+      <g fill="#64748b" fill-opacity="0.18" stroke="none">
+        <!-- Q2 flecks -->
+        <circle cx="65" cy="26" r="0.85"/>
+        <path d="M 64.3 27.4 L 65 26.5 L 65.7 27.4 L 65 29 Z"/>
+        <circle cx="77" cy="32" r="0.85"/>
+        <path d="M 76.3 33.4 L 77 32.5 L 77.7 33.4 L 77 35 Z"/>
+        <circle cx="60" cy="38" r="0.85"/>
+        <path d="M 59.3 39.4 L 60 38.5 L 60.7 39.4 L 60 41 Z"/>
+        <!-- Q3 flecks -->
+        <circle cx="30" cy="58" r="0.85"/>
+        <path d="M 29.3 59.4 L 30 58.5 L 30.7 59.4 L 30 61 Z"/>
+        <circle cx="42" cy="65" r="0.85"/>
+        <path d="M 41.3 66.4 L 42 65.5 L 42.7 66.4 L 42 68 Z"/>
+        <circle cx="34" cy="74" r="0.85"/>
+        <path d="M 33.3 75.4 L 34 74.5 L 34.7 75.4 L 34 77 Z"/>
+      </g>
+
+      <!-- Raised Heraldic Gold Cross dividing the Quarters -->
+      <path d="M 46.4 12 H 53.6 V 43.4 H 86 V 50.6 H 53.6 V 90 H 46.4 V 50.6 H 14 V 43.4 H 46.4 Z"
+            fill="#2a1202" opacity="0.35"/>
+      <path d="M 47 12 H 53 V 44 H 86 V 50 H 53 V 90 H 47 V 50 H 14 V 44 H 47 Z"
+            fill="url(#goldCross)"
+            stroke="#713f12"
+            stroke-width="0.6"
+            stroke-linejoin="round"/>
+
+      <!-- Cross 3D Bevel Highlights -->
+      <line x1="47.4" y1="13" x2="47.4" y2="88" stroke="#fff9c4" stroke-width="0.5" opacity="0.85"/>
+      <line x1="15" y1="44.4" x2="85" y2="44.4" stroke="#fff9c4" stroke-width="0.5" opacity="0.85"/>
+      <line x1="50" y1="13" x2="50" y2="88" stroke="#fef08a" stroke-width="0.6" stroke-linecap="round"/>
+      <line x1="16" y1="47" x2="84" y2="47" stroke="#fef08a" stroke-width="0.6" stroke-linecap="round"/>
+      <line x1="15" y1="49.6" x2="85" y2="49.6" stroke="#5a2b06" stroke-width="0.5" opacity="0.85"/>
+      <line x1="52.6" y1="14" x2="52.6" y2="87" stroke="#5a2b06" stroke-width="0.5" opacity="0.85"/>
+
+      <!-- Surface Curved Convexity Sheen Overlay -->
+      <path d="M 15.5 15.5
+               L 84.5 15.5
+               Q 83 17.5 81.5 20.5
+               L 81.5 46
+               C 81.5 66.5, 62.5 80.5, 50 86
+               C 37.5 80.5, 18.5 66.5, 18.5 46
+               L 18.5 20.5
+               Z"
+            fill="url(#shieldCurvature)"/>
+    </g>
+
+    <!-- Inner Field Perimeter Inset Groove -->
+    <path d="M 15.5 15.5
+             L 84.5 15.5
+             Q 83 17.5 81.5 20.5
+             L 81.5 46
+             C 81.5 66.5, 62.5 80.5, 50 86
+             C 37.5 80.5, 18.5 66.5, 18.5 46
+             L 18.5 20.5
+             Q 17 17.5 15.5 15.5
+             Z"
+          fill="none"
+          stroke="#522904"
+          stroke-width="0.9"/>
+    <path d="M 16 16.3 L 84 16.3" stroke="#261201" stroke-width="0.45" opacity="0.65"/>
+
+    <!-- Central Ornamental Boss / Medallion at Cross Intersection -->
+    <circle cx="50.2" cy="47.4" r="3.8" fill="#261201" opacity="0.45"/>
+    <circle cx="50" cy="47" r="3.4" fill="url(#goldRim)" stroke="#713f12" stroke-width="0.55"/>
+    <circle cx="50" cy="47" r="2.6" fill="none" stroke="#fff9c4" stroke-width="0.4"/>
+    <use href="#rivet" x="50" y="47"/>
+
+    <!-- Perimeter Silver Studs / Rivets along the Gold Rim -->
+    <!-- Top Row Rivets -->
+    <use href="#rivet" x="19.5"  y="12.8"/>
+    <use href="#rivet" x="34.75" y="12.8"/>
+    <use href="#rivet" x="50"    y="12.8"/>
+    <use href="#rivet" x="65.25" y="12.8"/>
+    <use href="#rivet" x="80.5"  y="12.8"/>
+
+    <!-- Right Flank Rivets -->
+    <use href="#rivet" x="84.25" y="24.5"/>
+    <use href="#rivet" x="84.25" y="35.2"/>
+    <use href="#rivet" x="84.25" y="46.0"/>
+
+    <!-- Left Flank Rivets -->
+    <use href="#rivet" x="15.75" y="24.5"/>
+    <use href="#rivet" x="15.75" y="35.2"/>
+    <use href="#rivet" x="15.75" y="46.0"/>
+
+    <!-- Curved Lower Edge Rivets -->
+    <use href="#rivet" x="81.3" y="60.3"/>
+    <use href="#rivet" x="73.4" y="72.6"/>
+    <use href="#rivet" x="62.5" y="82.4"/>
+    <use href="#rivet" x="18.7" y="60.3"/>
+    <use href="#rivet" x="26.6" y="72.6"/>
+    <use href="#rivet" x="37.5" y="82.4"/>
+
+    <!-- Bottom Tip Rivet -->
+    <use href="#rivet" x="50" y="90"/>
+  </g>
+
+  <!-- 7. Clean Perimeter Border -->
+  <rect x="0.5" y="0.5" width="99" height="99" fill="none" stroke="rgba(35,24,15,0.3)" stroke-width="1" rx="2"/>
+</svg>
