@@ -89,8 +89,9 @@
           <div id="menu-game-log" class="text-xs space-y-1 max-h-28 overflow-y-auto font-mono text-[#423223] pr-1"></div>
         </div>
 
-        <!-- New Game Button -->
+        <!-- New Game / Main Menu Buttons -->
         <div class="border-t border-[#c9b38f]/60 pt-2 flex gap-2">
+          <button id="btn-main-menu" class="btn-secondary px-3 py-2 rounded-xl font-bold text-xs">Main Menu</button>
           <button id="btn-new-game" class="btn-medieval flex-1 py-2 rounded-xl font-bold text-xs">New Campaign</button>
           <button id="btn-finish-now" class="btn-secondary px-3 py-2 rounded-xl font-bold text-xs">End Game</button>
         </div>
@@ -190,12 +191,64 @@
     </div>
   </div>
 
+  <!-- Modal: Landing Menu -->
+  <div id="modal-landing" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-md max-h-[92vh] overflow-y-auto p-6 shadow-2xl flex flex-col gap-5">
+      <div class="text-center border-b border-[#c9b38f]/60 pb-4">
+        <div class="flex items-center justify-center gap-2.5 mb-1">
+          <img src="assets/ui/meeple.svg" class="w-8 h-8 drop-shadow" alt="Carcassonne" />
+          <h1 class="font-medieval font-extrabold text-3xl text-[#2a1b10] tracking-wide">Carcassonne</h1>
+        </div>
+        <p class="text-xs text-[#594636]">Base Game • River I • Inns &amp; Cathedrals • Traders &amp; Builders</p>
+      </div>
+
+      <!-- Mode Selection Cards -->
+      <div class="flex flex-col gap-3">
+        <button id="btn-landing-local" class="bg-black/5 hover:bg-black/10 border border-[#c9b38f] rounded-2xl p-4 text-left transition-all flex items-center gap-4 group">
+          <div class="w-11 h-11 rounded-xl bg-[#3b2716] text-amber-200 flex items-center justify-center flex-shrink-0 shadow group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medieval font-bold text-base text-[#2a1b10]">Local Pass &amp; Play</div>
+            <div class="text-xs text-[#594636]">2–6 players on one screen, pick expansions &amp; names</div>
+          </div>
+          <span class="text-[#594636] font-bold text-lg">›</span>
+        </button>
+
+        <button id="btn-landing-multiplayer" class="bg-black/5 hover:bg-black/10 border border-[#c9b38f] rounded-2xl p-4 text-left transition-all flex items-center gap-4 group">
+          <div class="w-11 h-11 rounded-xl bg-amber-700 text-amber-100 flex items-center justify-center flex-shrink-0 shadow group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="font-medieval font-bold text-base text-[#2a1b10]">Online Multiplayer</div>
+            <div class="text-xs text-[#594636]">Host a room or join friends with a 4-letter code</div>
+          </div>
+          <span class="text-[#594636] font-bold text-lg">›</span>
+        </button>
+      </div>
+
+      <div class="border-t border-[#c9b38f]/60 pt-3 flex flex-col gap-2">
+        <button id="btn-landing-quick" class="btn-confirm w-full py-2.5 rounded-xl font-medieval font-bold text-sm shadow-lg">
+          Quick Start (2 Players • All Expansions)
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: Campaign Setup (Players & Rules) -->
   <div id="modal-setup" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
     <div class="parchment-panel rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto p-6 shadow-2xl flex flex-col gap-4">
-      <div class="text-center border-b border-[#c9b38f]/60 pb-3">
-        <h2 class="font-medieval font-extrabold text-2xl text-[#2a1b10]">New Campaign</h2>
-        <p class="text-xs text-[#594636] mt-0.5">Configure tabletop players and rules</p>
+      <div class="flex items-center justify-between border-b border-[#c9b38f]/60 pb-3">
+        <button id="btn-setup-back" class="btn-secondary px-2.5 py-1 rounded-lg font-bold text-xs">← Back</button>
+        <div class="text-center flex-1">
+          <h2 class="font-medieval font-extrabold text-xl text-[#2a1b10]">Local Campaign</h2>
+          <p class="text-[11px] text-[#594636]">Configure players &amp; expansions</p>
+        </div>
+        <div class="w-12"></div>
       </div>
 
       <!-- Player Count Selector -->
@@ -266,24 +319,49 @@
 
   <!-- Modal: Firebase Online Multiplayer -->
   <div id="modal-multiplayer" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="parchment-panel rounded-2xl w-full max-w-md p-6 shadow-2xl flex flex-col gap-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto p-6 shadow-2xl flex flex-col gap-4">
       <div class="flex items-center justify-between border-b border-[#c9b38f]/60 pb-3">
+        <button id="btn-multiplayer-back" class="btn-secondary px-2.5 py-1 rounded-lg font-bold text-xs">← Back</button>
         <h2 class="font-medieval font-extrabold text-xl text-[#2a1b10]">Online Multiplayer</h2>
         <button id="btn-close-multiplayer" class="btn-secondary w-7 h-7 rounded-full font-bold flex items-center justify-center text-xs">✕</button>
+      </div>
+
+      <!-- Player Name -->
+      <div class="bg-black/5 rounded-xl p-3 flex flex-col gap-1.5">
+        <label for="mp-player-name" class="text-xs font-bold text-[#594636] uppercase tracking-wider">Your Display Name</label>
+        <input id="mp-player-name" type="text" maxlength="20" placeholder="Enter your name" class="bg-white border border-[#c9b38f] rounded-xl px-3 py-1.5 text-sm font-bold text-[#2a1b10] focus:outline-none focus:ring-2 focus:ring-amber-500" />
       </div>
 
       <!-- Room Host / Join Tabs -->
       <div class="flex flex-col gap-3">
         <div class="bg-black/5 rounded-xl p-3 flex flex-col gap-2">
           <label class="text-xs font-bold text-[#594636] uppercase tracking-wider">Host a Room</label>
-          <p class="text-xs text-[#594636]">Start a new multiplayer game and share the room code with friends.</p>
-          <button id="btn-host-room" class="btn-medieval py-2 rounded-xl font-bold text-xs">Create Room</button>
+          <p class="text-[11px] text-[#594636]">Choose expansions and open a lobby for friends to join.</p>
+          <div class="grid grid-cols-2 gap-1.5 text-xs">
+            <label class="flex items-center gap-1.5 bg-white/60 rounded-lg px-2 py-1.5 cursor-pointer">
+              <input type="checkbox" id="mp-farmers-toggle" checked class="accent-amber-600 rounded" />
+              <span class="font-semibold text-[#2a1b10]">Farmers</span>
+            </label>
+            <label class="flex items-center gap-1.5 bg-white/60 rounded-lg px-2 py-1.5 cursor-pointer">
+              <input type="checkbox" id="mp-river-toggle" checked class="accent-blue-600 rounded" />
+              <span class="font-semibold text-[#2a1b10]">River I</span>
+            </label>
+            <label class="flex items-center gap-1.5 bg-white/60 rounded-lg px-2 py-1.5 cursor-pointer">
+              <input type="checkbox" id="mp-ic-toggle" checked class="accent-amber-700 rounded" />
+              <span class="font-semibold text-[#2a1b10]">Inns &amp; Cath.</span>
+            </label>
+            <label class="flex items-center gap-1.5 bg-white/60 rounded-lg px-2 py-1.5 cursor-pointer">
+              <input type="checkbox" id="mp-tb-toggle" checked class="accent-emerald-700 rounded" />
+              <span class="font-semibold text-[#2a1b10]">Traders &amp; Bld.</span>
+            </label>
+          </div>
+          <button id="btn-host-room" class="btn-medieval py-2 rounded-xl font-bold text-xs mt-1">Create Room &amp; Open Lobby</button>
         </div>
 
         <div class="bg-black/5 rounded-xl p-3 flex flex-col gap-2">
           <label class="text-xs font-bold text-[#594636] uppercase tracking-wider">Join a Room</label>
           <div class="flex gap-2">
-            <input id="input-room-code" type="text" placeholder="Enter 4-letter Room Code" class="flex-1 bg-white border border-[#c9b38f] rounded-xl px-3 py-1.5 text-xs font-mono uppercase font-bold focus:outline-none focus:ring-2 focus:ring-amber-500" />
+            <input id="input-room-code" type="text" maxlength="6" placeholder="Enter 4-letter Room Code" class="flex-1 bg-white border border-[#c9b38f] rounded-xl px-3 py-1.5 text-xs font-mono uppercase font-bold focus:outline-none focus:ring-2 focus:ring-amber-500" />
             <button id="btn-join-room" class="btn-confirm px-4 py-1.5 rounded-xl font-bold text-xs">Join</button>
           </div>
         </div>
@@ -295,6 +373,42 @@
           <textarea id="firebase-config-input" rows="4" class="w-full bg-white font-mono text-[11px] p-2 rounded-lg border border-[#c9b38f] focus:outline-none" placeholder='{"databaseURL": "https://your-carcassonne-default-rtdb.firebaseio.com"}'></textarea>
           <button id="btn-save-firebase-config" class="btn-secondary w-full py-1.5 mt-2 rounded-lg font-bold text-xs">Save Firebase Config</button>
         </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Online Room Lobby -->
+  <div id="modal-lobby" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="parchment-panel rounded-2xl w-full max-w-md p-6 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-[#c9b38f]/60 pb-3">
+        <div>
+          <h2 class="font-medieval font-extrabold text-xl text-[#2a1b10]">Room Lobby</h2>
+          <p class="text-[11px] text-[#594636]">Share the code so friends can join</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="lobby-room-code" class="font-mono font-extrabold text-lg tracking-widest bg-[#2a1b10] text-amber-300 px-3 py-1 rounded-xl shadow">----</span>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 bg-black/5 rounded-xl px-3 py-2">
+        <span class="text-xs text-[#594636] font-medium truncate">Invite friends with room code or link</span>
+        <button id="btn-copy-invite" class="btn-secondary px-3 py-1 rounded-lg font-bold text-xs flex-shrink-0">Copy Link</button>
+      </div>
+
+      <div id="lobby-expansions" class="flex flex-wrap gap-1.5 text-[11px]"></div>
+
+      <div>
+        <h3 class="text-xs font-bold text-[#594636] uppercase tracking-wider mb-2">Players in Lobby (<span id="lobby-player-count">1</span>/6)</h3>
+        <div id="lobby-players-list" class="flex flex-col gap-2 max-h-52 overflow-y-auto pr-1"></div>
+      </div>
+
+      <div id="lobby-guest-wait" class="hidden bg-amber-900/10 border border-amber-700/30 rounded-xl p-3 text-center text-xs font-semibold text-[#594636]">
+        Waiting for the Host to start the match...
+      </div>
+
+      <div class="flex gap-2 pt-1">
+        <button id="btn-lobby-leave" class="btn-secondary px-4 py-2.5 rounded-xl font-bold text-xs">Leave Room</button>
+        <button id="btn-lobby-start" class="btn-confirm flex-1 py-2.5 rounded-xl font-medieval font-bold text-sm shadow-xl">Start Match</button>
       </div>
     </div>
   </div>
