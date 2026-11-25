@@ -16,7 +16,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Custom Tabletop CSS -->
-  <link rel="stylesheet" href="css/style.css?v=2.6.0" />
+  <link rel="stylesheet" href="css/style.css?v=2.7.0" />
 </head>
 <body class="tabletop-bg">
   <!-- Interactive Board Viewport (Pan & Zoom) -->
@@ -395,6 +395,12 @@
         <button id="btn-copy-invite" class="btn-secondary px-3 py-1 rounded-lg font-bold text-xs flex-shrink-0">Copy Link</button>
       </div>
 
+      <div class="flex items-center gap-2 bg-black/5 rounded-xl px-3 py-2">
+        <label for="lobby-my-name" class="text-xs font-bold text-[#594636] whitespace-nowrap">Your Name:</label>
+        <input id="lobby-my-name" type="text" maxlength="20" placeholder="Enter your name" class="flex-1 bg-white border border-[#c9b38f] rounded-lg px-2.5 py-1 text-xs font-bold text-[#2a1b10] focus:outline-none focus:ring-2 focus:ring-amber-500" />
+        <button id="btn-lobby-save-name" class="btn-secondary px-2.5 py-1 rounded-lg font-bold text-xs flex-shrink-0">Save</button>
+      </div>
+
       <div id="lobby-expansions" class="flex flex-wrap gap-1.5 text-[11px]"></div>
 
       <div>
@@ -429,6 +435,6 @@
   </div>
 
   <!-- Main Application Script (ES Module) -->
-  <script type="module" src="js/app.js?v=2.6.0"></script>
+  <script type="module" src="js/app.js?v=2.7.0"></script>
 </body>
 </html>

@@ -181,6 +181,15 @@ export async function joinRoom(roomId, playerName, playerColors) {
   };
 }
 
+export async function updatePlayerName(newName) {
+  if (!firebaseDb || !currentRoomId || !myPlayerId) return;
+  const trimmed = (newName || '').trim();
+  if (!trimmed) return;
+  const roomRef = firebaseDb.ref(`carcassonne_rooms/${currentRoomId}`);
+  await roomRef.child(`players/${myPlayerId}/name`).set(trimmed);
+  await roomRef.child('last_updated').set(Date.now());
+}
+
 export async function startRoomGame(stateJson) {
   if (!firebaseDb || !currentRoomId || !isHost) return;
   const roomRef = firebaseDb.ref(`carcassonne_rooms/${currentRoomId}`);
