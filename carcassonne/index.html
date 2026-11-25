@@ -16,7 +16,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <!-- Custom Tabletop CSS -->
-  <link rel="stylesheet" href="css/style.css?v=2.7.0" />
+  <link rel="stylesheet" href="css/style.css?v=2.8.0" />
 </head>
 <body class="tabletop-bg">
   <!-- Interactive Board Viewport (Pan & Zoom) -->
@@ -27,7 +27,7 @@
   </div>
 
   <!-- Top-Left Floating Menu & Player Status Pill -->
-  <div class="fixed top-3 left-3 sm:top-4 sm:left-4 z-40 flex items-center gap-2.5">
+  <div class="fixed top-3 left-3 right-3 sm:right-auto sm:top-4 sm:left-4 z-40 flex flex-wrap items-center gap-2 sm:gap-2.5 pointer-events-none [&>*]:pointer-events-auto">
     <div class="relative">
       <button id="btn-menu-toggle" class="btn-medieval px-3.5 py-2 rounded-xl flex items-center gap-2 font-semibold text-xs sm:text-sm tracking-wide">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -127,11 +127,11 @@
   <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
 
   <!-- Bottom-Left Floating Hand & Turn Control Bar -->
-  <div id="floating-tile-wrap" class="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-2.5">
-    <div class="flex items-end gap-3">
+  <div id="floating-tile-wrap" class="fixed bottom-3 left-3 right-24 sm:right-auto sm:bottom-4 sm:left-4 z-40 flex flex-col items-start gap-2">
+    <div class="flex flex-col sm:flex-row items-start sm:items-end gap-2 sm:gap-3 w-full sm:w-auto">
       <!-- Staged Tile in Hand with Rotation Buttons -->
-      <div id="tile-hand-container" class="relative group">
-        <div id="floating-tile" class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl shadow-2xl border-2 border-[#facc15] bg-[#77a851] cursor-grab active:cursor-grabbing overflow-hidden transition-transform duration-150">
+      <div id="tile-hand-container" class="relative group flex-shrink-0">
+        <div id="floating-tile" class="w-20 h-20 sm:w-28 sm:h-28 rounded-xl shadow-2xl border-2 border-[#facc15] bg-[#77a851] cursor-grab active:cursor-grabbing overflow-hidden transition-transform duration-150">
           <!-- Current tile SVG will be injected here -->
         </div>
 
@@ -145,12 +145,12 @@
       </div>
 
       <!-- Meeple Supply Tray (shown during PLACE_MEEPLE) -->
-      <div id="meeple-tray" class="hidden parchment-panel rounded-2xl p-2 flex items-center gap-2 shadow-2xl">
+      <div id="meeple-tray" class="hidden parchment-panel rounded-2xl p-1.5 sm:p-2 flex flex-wrap items-center gap-1.5 sm:gap-2 shadow-2xl max-w-full">
         <!-- Draggable meeple pieces injected by renderHandSlot() -->
       </div>
 
       <!-- Action Confirmation Bar -->
-      <div id="floating-action-bar" class="parchment-panel rounded-2xl p-2.5 flex flex-col gap-2 shadow-2xl min-w-[190px]">
+      <div id="floating-action-bar" class="parchment-panel rounded-2xl p-2 sm:p-2.5 flex flex-col gap-1.5 sm:gap-2 shadow-2xl w-full sm:w-auto sm:min-w-[190px] max-w-[260px] sm:max-w-none">
         <div class="px-1">
           <div id="action-bar-title" class="font-medieval font-bold text-xs text-[#2a1b10] uppercase tracking-wider">Place Tile</div>
           <div id="action-bar-sub" class="text-[11px] text-[#594636]">Drag to grid or tap slot</div>
@@ -435,6 +435,6 @@
   </div>
 
   <!-- Main Application Script (ES Module) -->
-  <script type="module" src="js/app.js?v=2.7.0"></script>
+  <script type="module" src="js/app.js?v=2.8.0"></script>
 </body>
 </html>
