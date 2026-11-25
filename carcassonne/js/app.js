@@ -1,5 +1,5 @@
-import initWasm, { CarcassonneEngineWasm } from '../pkg/carcassonne_engine.js?v=2.7.0';
-import { playSound, isSoundEnabled, setSoundEnabled } from './audio.js?v=2.7.0';
+import initWasm, { CarcassonneEngineWasm } from '../pkg/carcassonne_engine.js?v=2.8.0';
+import { playSound, isSoundEnabled, setSoundEnabled } from './audio.js?v=2.8.0';
 import {
   initFirebase,
   getSavedFirebaseConfig,
@@ -15,7 +15,7 @@ import {
   getCurrentRoomId,
   getMyPlayerId,
   checkIsHost
-} from './firebase-sync.js?v=2.7.0';
+} from './firebase-sync.js?v=2.8.0';
 
 const TILE_SIZE = 100;
 const DRAG_THRESHOLD = 8;
@@ -697,19 +697,14 @@ function renderHandSlot() {
   if (btnRotateCcw) btnRotateCcw.disabled = !myTurn;
 
   if (currentGameState.phase === 'PLACE_TILE' && currentGameState.current_tile_type_id) {
-    if (tileHandContainer) tileHandContainer.classList.remove('hidden');
     if (meepleTray) {
       meepleTray.classList.add('hidden');
       meepleTray.innerHTML = '';
     }
 
-    const def = tileCatalog[currentGameState.current_tile_type_id];
-    floatingTile.innerHTML = `<img src="${def.asset}" draggable="false" class="w-full h-full pointer-events-none select-none object-cover" style="transform: rotate(${uiState.currentRotation * 90}deg)" alt="${def.name}" />`;
-    floatingTile.style.cursor = myTurn ? 'grab' : 'not-allowed';
-    floatingTile.title = myTurn ? 'Drag tile to board or tap to rotate' : `Waiting for ${activePlayer ? activePlayer.name : 'opponent'}`;
-
     if (!myTurn) {
-      floatingTile.style.opacity = '0.6';
+      if (tileHandContainer) tileHandContainer.classList.add('hidden');
+      floatingTile.innerHTML = '';
       floatingTile.onpointerdown = null;
       actionTitle.textContent = `${activePlayer ? activePlayer.name : 'Opponent'}'s Turn`;
       actionTitle.className = 'font-medieval font-bold text-xs text-amber-900 uppercase tracking-wider';
@@ -720,6 +715,13 @@ function renderHandSlot() {
       btnSecondary.disabled = true;
       return;
     }
+
+    if (tileHandContainer) tileHandContainer.classList.remove('hidden');
+
+    const def = tileCatalog[currentGameState.current_tile_type_id];
+    floatingTile.innerHTML = `<img src="${def.asset}" draggable="false" class="w-full h-full pointer-events-none select-none object-cover" style="transform: rotate(${uiState.currentRotation * 90}deg)" alt="${def.name}" />`;
+    floatingTile.style.cursor = 'grab';
+    floatingTile.title = 'Drag tile to board or tap to rotate';
 
     if (uiState.tileDrag.active && uiState.tileDrag.moved && uiState.tileDrag.source === 'hand') {
       floatingTile.style.opacity = '0.35';
@@ -797,7 +799,7 @@ function renderHandSlot() {
           const item = document.createElement('div');
           const isStaged = uiState.pendingMeepleFeatureId && uiState.pendingMeepleKind === piece.kind;
           const isDraggingThis = uiState.meepleDrag.active && uiState.meepleDrag.moved && uiState.meepleDrag.kind === piece.kind;
-          item.className = `meeple-tray-item relative flex flex-col items-center justify-center w-14 h-16 rounded-xl bg-black/5 border border-[#c9b38f]/70 ${piece.available ? 'cursor-grab active:cursor-grabbing hover:bg-black/10' : 'disabled opacity-35 cursor-not-allowed'}`;
+          item.className = `meeple-tray-item relative flex flex-col items-center justify-center w-12 h-14 sm:w-14 sm:h-16 rounded-xl bg-black/5 border border-[#c9b38f]/70 ${piece.available ? 'cursor-grab active:cursor-grabbing hover:bg-black/10' : 'disabled opacity-35 cursor-not-allowed'}`;
           item.style.opacity = (isStaged || isDraggingThis) ? '0.35' : (piece.available ? '1' : '0.35');
           item.title = piece.available ? `Drag ${piece.label} onto tile` : `No ${piece.label} remaining`;
 
@@ -1070,6 +1072,7 @@ function setupEventListeners() {
   // Action buttons
   document.getElementById('btn-action-primary').addEventListener('click', confirmTurnAction);
   document.getElementById('btn-action-secondary').addEventListener('click', () => {
+    if (!isMyTurn()) return;
     uiState.pendingPlacement = null;
     uiState.pendingMeepleFeatureId = null;
     uiState.pendingMeepleKind = 'normal';
