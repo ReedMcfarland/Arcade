@@ -44,6 +44,8 @@ jobs:
           cp -r carcassonne/js dist/carcassonne/
           cp -r carcassonne/assets dist/carcassonne/
           cp -r carcassonne/pkg dist/carcassonne/
+          # Remove wasm-pack's .gitignore so peaceiris/actions-gh-pages includes pkg/
+          rm -f dist/carcassonne/pkg/.gitignore
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
