@@ -6,11 +6,13 @@ import {
   saveFirebaseConfig,
   createRoom,
   joinRoom,
+  startRoomGame,
   listenToRoom,
   broadcastState,
   leaveRoom,
   isInOnlineRoom,
   getCurrentRoomId,
+  getMyPlayerId,
   checkIsHost
 } from './firebase-sync.js';
 
@@ -147,8 +149,38 @@ function updateDragGhostPosition(clientX, clientY) {
   dragGhost.style.transform = `translate(${clientX - ghostSize / 2}px, ${clientY - ghostSize / 2}px)`;
 }
 
+function isMyTurn() {
+  if (!currentGameState) return false;
+  if (!isInOnlineRoom()) return true;
+  const currentPlayer = currentGameState.players[currentGameState.current_player_index];
+  if (!currentPlayer) return false;
+  const myId = getMyPlayerId() || window.myCurrentPlayerId;
+  return myId === currentPlayer.id;
+}
+
+function getSavedPlayerName() {
+  try {
+    return localStorage.getItem('carcassonne_player_name') || '';
+  } catch {
+    return '';
+  }
+}
+
+function savePlayerName(name) {
+  try {
+    if (name) localStorage.setItem('carcassonne_player_name', name);
+  } catch {
+    // ignore
+  }
+}
+
 function startTilePointerInteraction(e, source) {
   if (!currentGameState || currentGameState.phase !== 'PLACE_TILE' || !currentGameState.current_tile_type_id) return;
+  if (!isMyTurn()) {
+    const active = currentGameState.players[currentGameState.current_player_index];
+    showToast(`It is ${active ? active.name : 'another player'}'s turn!`, 'warn');
+    return;
+  }
   if (e.button !== undefined && e.button !== 0) return;
   e.stopPropagation();
   e.preventDefault();
@@ -215,6 +247,11 @@ function findNearestMeepleSpot(clientX, clientY, kind = 'normal') {
 
 function startMeeplePointerInteraction(e, source, kind = 'normal') {
   if (!currentGameState || currentGameState.phase !== 'PLACE_MEEPLE') return;
+  if (!isMyTurn()) {
+    const active = currentGameState.players[currentGameState.current_player_index];
+    showToast(`It is ${active ? active.name : 'another player'}'s turn!`, 'warn');
+    return;
+  }
   if (e.button !== undefined && e.button !== 0) return;
   e.stopPropagation();
   e.preventDefault();
@@ -327,15 +364,23 @@ async function main() {
 
   setupEventListeners();
   initSetupModal();
+  initLandingMenu();
+
+  const mpNameInput = document.getElementById('mp-player-name');
+  if (mpNameInput) {
+    mpNameInput.value = getSavedPlayerName() || '';
+  }
 
   // Check for ?room=XYZ in URL
   const urlParams = new URLSearchParams(window.location.search);
   const roomParam = urlParams.get('room');
   if (roomParam) {
-    promptJoinRoomFromUrl(roomParam.toUpperCase());
+    const codeInput = document.getElementById('input-room-code');
+    if (codeInput) codeInput.value = roomParam.toUpperCase();
+    document.getElementById('modal-landing').classList.add('hidden');
+    document.getElementById('modal-multiplayer').classList.remove('hidden');
   } else {
-    // Start local campaign with all enabled expansions by default
-    startNewLocalGame(DEFAULT_PLAYERS, true, true, true, true);
+    document.getElementById('modal-landing').classList.remove('hidden');
   }
 }
 
@@ -515,6 +560,11 @@ function renderBoard() {
 }
 
 function stagePendingTile(x, y) {
+  if (!isMyTurn()) {
+    const active = currentGameState.players[currentGameState.current_player_index];
+    showToast(`It is ${active ? active.name : 'another player'}'s turn!`, 'warn');
+    return;
+  }
   if (getBoardTile(currentGameState, `${x},${y}`)) {
     showToast('This position is already occupied', 'warn');
     return;
@@ -525,6 +575,7 @@ function stagePendingTile(x, y) {
 }
 
 function rotateTile(direction) {
+  if (!isMyTurn()) return;
   playSound('rotate');
   if (direction === 'cw') {
     uiState.currentRotation = (uiState.currentRotation + 1) % 4;
@@ -540,13 +591,10 @@ function confirmTurnAction() {
   if (!currentGameState) return;
 
   // In online room, check if it is our turn
-  if (isInOnlineRoom()) {
+  if (!isMyTurn()) {
     const currentPlayer = currentGameState.players[currentGameState.current_player_index];
-    const myId = (window.myCurrentPlayerId || currentPlayer.id);
-    if (myId !== currentPlayer.id) {
-      showToast(`It is ${currentPlayer.name}'s turn!`, 'warn');
-      return;
-    }
+    showToast(`It is ${currentPlayer ? currentPlayer.name : 'another player'}'s turn!`, 'warn');
+    return;
   }
 
   if (currentGameState.phase === 'PLACE_TILE') {
@@ -625,8 +673,9 @@ function confirmTurnAction() {
 }
 
 function broadcastIfOnline() {
-  if (isInOnlineRoom()) {
-    broadcastState(currentGameState);
+  if (isInOnlineRoom() && wasmEngine) {
+    const stateJson = wasmEngine.serialize_state();
+    broadcastState(stateJson);
   }
 }
 
@@ -638,6 +687,13 @@ function renderHandSlot() {
   const actionSub = document.getElementById('action-bar-sub');
   const btnPrimary = document.getElementById('btn-action-primary');
   const btnSecondary = document.getElementById('btn-action-secondary');
+  const btnRotateCw = document.getElementById('btn-rotate-cw');
+  const btnRotateCcw = document.getElementById('btn-rotate-ccw');
+
+  const myTurn = isMyTurn();
+  const activePlayer = currentGameState.players[currentGameState.current_player_index];
+  if (btnRotateCw) btnRotateCw.disabled = !myTurn;
+  if (btnRotateCcw) btnRotateCcw.disabled = !myTurn;
 
   if (currentGameState.phase === 'PLACE_TILE' && currentGameState.current_tile_type_id) {
     if (tileHandContainer) tileHandContainer.classList.remove('hidden');
@@ -648,8 +704,21 @@ function renderHandSlot() {
 
     const def = tileCatalog[currentGameState.current_tile_type_id];
     floatingTile.innerHTML = `<img src="${def.asset}" draggable="false" class="w-full h-full pointer-events-none select-none object-cover" style="transform: rotate(${uiState.currentRotation * 90}deg)" alt="${def.name}" />`;
-    floatingTile.style.cursor = 'grab';
-    floatingTile.title = 'Drag tile to board or tap to rotate';
+    floatingTile.style.cursor = myTurn ? 'grab' : 'not-allowed';
+    floatingTile.title = myTurn ? 'Drag tile to board or tap to rotate' : `Waiting for ${activePlayer ? activePlayer.name : 'opponent'}`;
+
+    if (!myTurn) {
+      floatingTile.style.opacity = '0.6';
+      floatingTile.onpointerdown = null;
+      actionTitle.textContent = `${activePlayer ? activePlayer.name : 'Opponent'}'s Turn`;
+      actionTitle.className = 'font-medieval font-bold text-xs text-amber-900 uppercase tracking-wider';
+      actionSub.textContent = 'Waiting for tile placement...';
+      btnPrimary.textContent = 'Waiting...';
+      btnSecondary.textContent = 'Reset';
+      btnPrimary.disabled = true;
+      btnSecondary.disabled = true;
+      return;
+    }
 
     if (uiState.tileDrag.active && uiState.tileDrag.moved && uiState.tileDrag.source === 'hand') {
       floatingTile.style.opacity = '0.35';
@@ -681,6 +750,22 @@ function renderHandSlot() {
 
     if (currentGameState.phase === 'PLACE_MEEPLE') {
       if (tileHandContainer) tileHandContainer.classList.add('hidden');
+
+      if (!myTurn) {
+        if (meepleTray) {
+          meepleTray.classList.add('hidden');
+          meepleTray.innerHTML = '';
+        }
+        actionTitle.textContent = `${activePlayer ? activePlayer.name : 'Opponent'}'s Turn`;
+        actionTitle.className = 'font-medieval font-bold text-xs text-amber-900 uppercase tracking-wider';
+        actionSub.textContent = 'Waiting for meeple placement...';
+        btnPrimary.textContent = 'Waiting...';
+        btnSecondary.textContent = 'Clear';
+        btnPrimary.disabled = true;
+        btnSecondary.disabled = true;
+        return;
+      }
+
       if (meepleTray) {
         meepleTray.classList.remove('hidden');
         meepleTray.innerHTML = '';
@@ -1170,7 +1255,7 @@ function setupEventListeners() {
       uiState.isDraggingBoard = false;
       boardViewport.classList.remove('dragging');
 
-      if (dist < 6 && currentGameState) {
+      if (dist < 6 && currentGameState && isMyTurn()) {
         if (currentGameState.phase === 'PLACE_TILE' && currentGameState.current_tile_type_id) {
           const cell = getGridCellFromPointer(clientX, clientY);
           if (!getBoardTile(currentGameState, `${cell.x},${cell.y}`)) {
@@ -1209,9 +1294,29 @@ function setupEventListeners() {
   }, { passive: false });
 
   // Modals & Menu Buttons
+  document.getElementById('btn-main-menu').addEventListener('click', async () => {
+    menuDropdown.classList.add('hidden');
+    if (isInOnlineRoom()) {
+      await leaveRoom();
+      updateMultiplayerButtonLabel();
+    }
+    document.getElementById('modal-lobby').classList.add('hidden');
+    document.getElementById('modal-setup').classList.add('hidden');
+    document.getElementById('modal-multiplayer').classList.add('hidden');
+    document.getElementById('modal-gameover').classList.add('hidden');
+    document.getElementById('modal-landing').classList.remove('hidden');
+  });
+
   document.getElementById('btn-new-game').addEventListener('click', () => {
     menuDropdown.classList.add('hidden');
     document.getElementById('modal-setup').classList.remove('hidden');
+  });
+
+  document.getElementById('btn-setup-back').addEventListener('click', () => {
+    document.getElementById('modal-setup').classList.add('hidden');
+    if (!currentGameState) {
+      document.getElementById('modal-landing').classList.remove('hidden');
+    }
   });
 
   document.getElementById('btn-finish-now').addEventListener('click', () => {
@@ -1219,6 +1324,7 @@ function setupEventListeners() {
     if (wasmEngine) {
       wasmEngine.trigger_game_over();
       currentGameState = wasmEngine.get_state();
+      broadcastIfOnline();
       showGameOverModal();
     }
   });
@@ -1234,6 +1340,15 @@ function setupEventListeners() {
   });
   document.getElementById('btn-close-multiplayer').addEventListener('click', () => {
     document.getElementById('modal-multiplayer').classList.add('hidden');
+    if (!currentGameState && !isInOnlineRoom()) {
+      document.getElementById('modal-landing').classList.remove('hidden');
+    }
+  });
+  document.getElementById('btn-multiplayer-back').addEventListener('click', () => {
+    document.getElementById('modal-multiplayer').classList.add('hidden');
+    if (!currentGameState && !isInOnlineRoom()) {
+      document.getElementById('modal-landing').classList.remove('hidden');
+    }
   });
 
   document.getElementById('btn-save-firebase-config').addEventListener('click', () => {
@@ -1250,6 +1365,28 @@ function setupEventListeners() {
 
   document.getElementById('btn-host-room').addEventListener('click', handleHostRoom);
   document.getElementById('btn-join-room').addEventListener('click', handleJoinRoom);
+  document.getElementById('btn-lobby-start').addEventListener('click', handleStartOnlineMatch);
+  document.getElementById('btn-lobby-leave').addEventListener('click', async () => {
+    await leaveRoom();
+    latestRoomData = null;
+    updateMultiplayerButtonLabel();
+    document.getElementById('modal-lobby').classList.add('hidden');
+    if (!currentGameState) {
+      document.getElementById('modal-landing').classList.remove('hidden');
+    }
+    showToast('Left multiplayer room', 'info');
+  });
+  document.getElementById('btn-copy-invite').addEventListener('click', async () => {
+    const code = getCurrentRoomId();
+    if (!code) return;
+    const url = `${window.location.origin}${window.location.pathname}?room=${code}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      showToast(`Invite link copied for Room ${code}!`, 'score');
+    } catch {
+      showToast(`Share Room Code: ${code}`, 'info');
+    }
+  });
 
   document.getElementById('btn-gameover-inspect').addEventListener('click', () => {
     document.getElementById('modal-gameover').classList.add('hidden');
@@ -1352,42 +1489,217 @@ function initSetupModal() {
   });
 }
 
+let latestRoomData = null;
+let onlineMatchStarted = false;
+
+function initLandingMenu() {
+  const landingModal = document.getElementById('modal-landing');
+  if (!landingModal) return;
+
+  document.getElementById('btn-landing-local').addEventListener('click', () => {
+    landingModal.classList.add('hidden');
+    document.getElementById('modal-setup').classList.remove('hidden');
+  });
+
+  document.getElementById('btn-landing-multiplayer').addEventListener('click', () => {
+    landingModal.classList.add('hidden');
+    document.getElementById('modal-multiplayer').classList.remove('hidden');
+  });
+
+  document.getElementById('btn-landing-quick').addEventListener('click', () => {
+    landingModal.classList.add('hidden');
+    startNewLocalGame(DEFAULT_PLAYERS, true, true, true, true);
+  });
+}
+
+function getMultiplayerExpansions() {
+  return {
+    farmers: document.getElementById('mp-farmers-toggle')?.checked ?? true,
+    river: document.getElementById('mp-river-toggle')?.checked ?? true,
+    innsCathedrals: document.getElementById('mp-ic-toggle')?.checked ?? true,
+    tradersBuilders: document.getElementById('mp-tb-toggle')?.checked ?? true
+  };
+}
+
+function renderLobbyModal(roomData) {
+  const codeEl = document.getElementById('lobby-room-code');
+  const expEl = document.getElementById('lobby-expansions');
+  const listEl = document.getElementById('lobby-players-list');
+  const countEl = document.getElementById('lobby-player-count');
+  const startBtn = document.getElementById('btn-lobby-start');
+  const guestWait = document.getElementById('lobby-guest-wait');
+
+  if (codeEl) codeEl.textContent = getCurrentRoomId() || '----';
+
+  if (expEl && roomData.expansions) {
+    const exp = roomData.expansions;
+    const badges = [];
+    if (exp.farmers) badges.push('<span class="px-2 py-0.5 rounded-full bg-amber-700/15 text-amber-900 font-semibold">Farmers</span>');
+    if (exp.river) badges.push('<span class="px-2 py-0.5 rounded-full bg-blue-600/15 text-blue-900 font-semibold">River I</span>');
+    if (exp.innsCathedrals) badges.push('<span class="px-2 py-0.5 rounded-full bg-amber-600/15 text-amber-900 font-semibold">Inns &amp; Cathedrals</span>');
+    if (exp.tradersBuilders) badges.push('<span class="px-2 py-0.5 rounded-full bg-emerald-600/15 text-emerald-900 font-semibold">Traders &amp; Builders</span>');
+    if (badges.length === 0) badges.push('<span class="px-2 py-0.5 rounded-full bg-black/10 text-[#594636] font-semibold">Base Game Only</span>');
+    expEl.innerHTML = badges.join('');
+  }
+
+  const players = Object.values(roomData.players || {}).sort((a, b) => (a.joined_at || 0) - (b.joined_at || 0));
+  if (countEl) countEl.textContent = String(players.length);
+
+  const myId = getMyPlayerId() || window.myCurrentPlayerId;
+  if (listEl) {
+    listEl.innerHTML = '';
+    for (const p of players) {
+      const isMe = p.id === myId;
+      const isRoomHost = p.id === roomData.host_id;
+      const row = document.createElement('div');
+      row.className = 'flex items-center justify-between bg-black/5 rounded-xl px-3 py-2';
+      row.innerHTML = `
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span class="w-4 h-4 rounded-full border-2 border-white shadow flex-shrink-0" style="background-color: ${p.hex}"></span>
+          <span class="font-bold text-xs text-[#2a1b10] truncate">${p.name}</span>
+          ${isRoomHost ? '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-700/20 text-amber-900">Host</span>' : ''}
+          ${isMe ? '<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-700/20 text-emerald-900">You</span>' : ''}
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full ${p.connected ? 'bg-green-500' : 'bg-gray-400'}" title="${p.connected ? 'Connected' : 'Disconnected'}"></span>
+      `;
+      listEl.appendChild(row);
+    }
+  }
+
+  const amHost = checkIsHost();
+  if (startBtn) {
+    startBtn.classList.toggle('hidden', !amHost);
+    startBtn.disabled = players.length < 1;
+    startBtn.textContent = players.length < 2 ? 'Start Match (Solo / Waiting)' : `Start Match (${players.length} Players)`;
+  }
+  if (guestWait) {
+    guestWait.classList.toggle('hidden', amHost);
+  }
+}
+
+function handleRoomUpdate(roomData) {
+  if (!roomData) {
+    // Room was deleted by host
+    leaveRoom();
+    latestRoomData = null;
+    onlineMatchStarted = false;
+    updateMultiplayerButtonLabel();
+    document.getElementById('modal-lobby').classList.add('hidden');
+    if (!currentGameState) {
+      document.getElementById('modal-landing').classList.remove('hidden');
+    }
+    showToast('Room was closed by the host.', 'warn');
+    return;
+  }
+
+  latestRoomData = roomData;
+
+  if (roomData.status === 'lobby') {
+    onlineMatchStarted = false;
+    document.getElementById('modal-lobby').classList.remove('hidden');
+    renderLobbyModal(roomData);
+    return;
+  }
+
+  if (roomData.status === 'playing' && roomData.state_json) {
+    document.getElementById('modal-lobby').classList.add('hidden');
+    if (!wasmEngine) {
+      const exp = roomData.expansions || {};
+      wasmEngine = new CarcassonneEngineWasm(
+        JSON.stringify(tileCatalogList),
+        JSON.stringify(DEFAULT_PLAYERS),
+        exp.farmers ?? true,
+        exp.river ?? true,
+        exp.innsCathedrals ?? true,
+        exp.tradersBuilders ?? true
+      );
+    }
+
+    uiState.pendingPlacement = null;
+    uiState.pendingMeepleFeatureId = null;
+    uiState.pendingMeepleKind = 'normal';
+
+    wasmEngine.import_state(roomData.state_json);
+    currentGameState = wasmEngine.get_state();
+
+    if (!onlineMatchStarted) {
+      onlineMatchStarted = true;
+      recenterBoard();
+      showToast('Multiplayer match started!', 'score');
+    }
+
+    if (currentGameState.phase === 'GAME_OVER') {
+      showGameOverModal();
+    }
+    renderAll();
+  }
+}
+
+async function handleStartOnlineMatch() {
+  if (!checkIsHost() || !latestRoomData) return;
+  try {
+    const rawPlayers = Object.values(latestRoomData.players || {})
+      .filter((p) => p && p.connected !== false)
+      .sort((a, b) => (a.joined_at || 0) - (b.joined_at || 0))
+      .slice(0, 6);
+
+    if (rawPlayers.length === 0) {
+      showToast('No players in lobby!', 'warn');
+      return;
+    }
+
+    const players = rawPlayers.map((p) => ({
+      id: p.id,
+      name: p.name,
+      color_key: p.color_key,
+      hex: p.hex,
+      score: 0,
+      meeples: 7
+    }));
+
+    const exp = latestRoomData.expansions || getMultiplayerExpansions();
+    wasmEngine = new CarcassonneEngineWasm(
+      JSON.stringify(tileCatalogList),
+      JSON.stringify(players),
+      exp.farmers ?? true,
+      exp.river ?? true,
+      exp.innsCathedrals ?? true,
+      exp.tradersBuilders ?? true
+    );
+
+    const stateJson = wasmEngine.serialize_state();
+    await startRoomGame(stateJson);
+  } catch (err) {
+    showToast(err.message || 'Failed to start match', 'warn');
+  }
+}
+
 async function handleHostRoom() {
   try {
     const roomId = Math.random().toString(36).substring(2, 6).toUpperCase();
-    const farmersEnabled = document.getElementById('setup-farmers-toggle').checked;
-    const riverToggle = document.getElementById('setup-river-toggle');
-    const riverEnabled = riverToggle ? riverToggle.checked : true;
-    const icToggle = document.getElementById('setup-ic-toggle');
-    const innsCathedralsEnabled = icToggle ? icToggle.checked : true;
-    const tbToggle = document.getElementById('setup-tb-toggle');
-    const tradersBuildersEnabled = tbToggle ? tbToggle.checked : true;
-    const playerConfig = { id: 'p_0', name: 'Host Player', color_key: 'red', hex: '#dc2626', score: 0, meeples: 7 };
+    const nameInput = document.getElementById('mp-player-name');
+    const playerName = (nameInput?.value.trim()) || 'Host';
+    savePlayerName(playerName);
 
-    wasmEngine = new CarcassonneEngineWasm(
-      JSON.stringify(tileCatalogList),
-      JSON.stringify([playerConfig]),
-      farmersEnabled,
-      riverEnabled,
-      innsCathedralsEnabled,
-      tradersBuildersEnabled
-    );
-    currentGameState = wasmEngine.get_state();
+    const expansions = getMultiplayerExpansions();
+    const firstColor = PLAYER_COLORS[0];
+    const hostPlayer = {
+      id: `p_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 6)}`,
+      name: playerName,
+      color_key: firstColor.key,
+      hex: firstColor.hex
+    };
 
-    await createRoom(roomId, currentGameState, playerConfig);
-    window.myCurrentPlayerId = playerConfig.id;
+    onlineMatchStarted = false;
+    await createRoom(roomId, hostPlayer, expansions);
+    window.myCurrentPlayerId = hostPlayer.id;
 
-    listenToRoom((remoteState) => {
-      wasmEngine.import_state(JSON.stringify(remoteState));
-      currentGameState = wasmEngine.get_state();
-      renderAll();
-    }, (players) => {
-      showToast(`Room players updated (${Object.keys(players).length})`, 'info');
-    });
+    listenToRoom(handleRoomUpdate);
 
     document.getElementById('modal-multiplayer').classList.add('hidden');
+    document.getElementById('modal-landing').classList.add('hidden');
     updateMultiplayerButtonLabel();
-    showToast(`Hosting Room ${roomId}! Share code with friends.`, 'score');
+    showToast(`Room ${roomId} created!`, 'score');
   } catch (err) {
     showToast(err.message, 'warn');
   }
@@ -1402,50 +1714,22 @@ async function handleJoinRoom() {
   await connectToRoom(code);
 }
 
-async function promptJoinRoomFromUrl(roomId) {
-  await connectToRoom(roomId);
-}
-
 async function connectToRoom(roomId) {
   try {
-    const playerConfig = {
-      id: `p_${Date.now().toString(36)}`,
-      name: `Player ${Math.floor(Math.random() * 900 + 100)}`,
-      color_key: 'blue',
-      hex: '#2563eb',
-      score: 0,
-      meeples: 7
-    };
+    const nameInput = document.getElementById('mp-player-name');
+    const playerName = (nameInput?.value.trim()) || `Player ${Math.floor(Math.random() * 900 + 100)}`;
+    savePlayerName(playerName);
 
-    const roomData = await joinRoom(roomId, playerConfig);
-    window.myCurrentPlayerId = playerConfig.id;
+    onlineMatchStarted = false;
+    const { playerId } = await joinRoom(roomId, playerName, PLAYER_COLORS);
+    window.myCurrentPlayerId = playerId;
 
-    const farmersEnabled = true;
-    wasmEngine = new CarcassonneEngineWasm(
-      JSON.stringify(tileCatalogList),
-      JSON.stringify([playerConfig]),
-      farmersEnabled,
-      true,
-      true,
-      true
-    );
-
-    if (roomData.state_json) {
-      wasmEngine.import_state(roomData.state_json);
-      currentGameState = wasmEngine.get_state();
-    }
-
-    listenToRoom((remoteState) => {
-      wasmEngine.import_state(JSON.stringify(remoteState));
-      currentGameState = wasmEngine.get_state();
-      renderAll();
-    });
+    listenToRoom(handleRoomUpdate);
 
     document.getElementById('modal-multiplayer').classList.add('hidden');
+    document.getElementById('modal-landing').classList.add('hidden');
     updateMultiplayerButtonLabel();
-    recenterBoard();
-    renderAll();
-    showToast(`Connected to Room ${roomId}!`, 'score');
+    showToast(`Joined Room ${roomId}!`, 'score');
   } catch (err) {
     showToast(err.message, 'warn');
   }
